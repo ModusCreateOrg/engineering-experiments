@@ -1,0 +1,27 @@
+const { GraphQLString, GraphQLInt, GraphQLObjectType, GraphQLList } = require("graphql");
+const Star = require('./Star');
+
+const Galaxy = new GraphQLObjectType({
+  name: "Galaxy",
+  description: "Galaxy object type",
+  fields: {
+    id: {
+      type: GraphQLInt,
+      resolve: (obj) => obj.id,
+    },
+    name: {
+      type: GraphQLString,
+      resolve: (obj) => {
+          return obj.name;
+        }
+    },
+    stars: {
+        type: new GraphQLList(Star),
+        resolve: (obj) => {
+            return obj.stars;
+        }
+    }
+  },
+});
+
+module.exports = Galaxy;
