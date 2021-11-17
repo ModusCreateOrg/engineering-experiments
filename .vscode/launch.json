@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+     {
+      "name": "Launch Serverless Offline",
+      "type": "node",
+      "request": "launch",
+      "program": "C:\\Users\\rafaelmw\\Documents\\modus\\git\\js-coe-experiments\\jscoe-91-serverless-node-app\\serverless-framework\\zipper-file-async\\node_modules\\serverless\\bin\\serverless",
+      "runtimeExecutable": "node",
+      "args": ["offline", "start"],
+      "windows": {
+        "program": "C:\\Users\\rafaelmw\\Documents\\modus\\git\\js-coe-experiments\\jscoe-91-serverless-node-app\\serverless-framework\\zipper-file-async\\node_modules\\serverless\\bin\\serverless"
+      }
+    }
+    ]
+   }

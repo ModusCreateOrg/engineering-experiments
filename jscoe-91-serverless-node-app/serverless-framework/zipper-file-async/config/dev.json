@@ -1,0 +1,7 @@
+{
+    "ENV": "development",
+    "AWS_ACCESS_KEY_ID": "S3RVER",
+    "AWS_SECRET_ACCESS_KEY": "S3RVER",
+    "BUCKET": "modusland",
+    "FILES_ZIPPED_TABLE": "ZIPPED"
+}
