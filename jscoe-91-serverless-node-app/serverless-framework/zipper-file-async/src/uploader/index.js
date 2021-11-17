@@ -14,7 +14,7 @@ class Uploader {
     const keyToSave = Buffer.from(filename, 'ascii').toString()
 
     try {
-      await this.S3.putObject({
+      const dataPutObject = await this.S3.putObject({
         Bucket: 'modusland',
         Key: `unziped/${keyToSave}`,
         ACL: 'public-read',

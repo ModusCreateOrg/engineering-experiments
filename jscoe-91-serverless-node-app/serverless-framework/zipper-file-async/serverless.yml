@@ -30,6 +30,13 @@ functions:
               - Arn
           batchSize: 1
           maximumBatchingWindow: 60
+  listZipped:
+    role: UploadRole
+    handler: src/index.listZipped
+    events:
+      - http:
+          path: list
+          method: get
 
 plugins:
   - serverless-s3-local

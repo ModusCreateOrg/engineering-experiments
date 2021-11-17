@@ -17,15 +17,17 @@ class Zipper {
         const file = await this.getObjectS3(`unziped/${keyS3File}`);
         const zippedFile = await ZipHelper.zip(keyS3File, file.Body);
         await this.putObjectS3(zippedFile);
-        await this.saveZipped(keyS3FileZipped);
+        await this.saveZipped(keyS3File);
     }
 
-    async saveZipped(keyS3FileZipped) {
+    async saveZipped(keyS3File) {
+        const linkToDownload = `https://${BUCKET}.s3.amazonaws.com/zip/${keyS3File}`
         const params = {
             TableName: FILES_TABLE,
             Item: {
                 id: randomUUID(),
-                filename: keyS3FileZipped,
+                filename: keyS3File,
+                link: linkToDownload,
                 createdAt: new Date().toISOString()
             }
         }
