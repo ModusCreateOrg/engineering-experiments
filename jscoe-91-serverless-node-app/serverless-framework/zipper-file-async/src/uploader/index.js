@@ -14,14 +14,14 @@ class Uploader {
     const keyToSave = Buffer.from(filename, 'ascii').toString()
 
     try {
-      const dataPutObject = await this.S3.putObject({
+      await this.S3.putObject({
         Bucket: 'modusland',
         Key: `unziped/${keyToSave}`,
         ACL: 'public-read',
         Body: data
       }).promise()
 
-      const QueueName = 'ZipFile'
+      const QueueName = 'ZipFile' //Turn into a variable to distinguish between envs
       const MessageBody = keyToSave
       const { QueueUrl } = await this.sqs.getQueueUrl({ QueueName }).promise()
       await this.sqs.sendMessage({ QueueUrl, MessageBody }).promise()

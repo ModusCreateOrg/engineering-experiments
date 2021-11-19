@@ -1,12 +1,14 @@
 const AWS = require('aws-sdk');
 const FILES_TABLE = process.env.FILES_ZIPPED_TABLE;
-const dynamoDbClient = new AWS.DynamoDB.DocumentClient();
 
 class ApiList {
+    constructor() {
+        this.ddb = new AWS.DynamoDB.DocumentClient();
+    }
 
     async handle(event, context) {
         try {
-            const data = await dynamoDbClient.scan(this.configureParams(event)).promise()
+            const data = await this.ddb.scan(this.configureParams(event)).promise()
             return {
                 statusCode: 200,
                 body: JSON.stringify(data.Items)

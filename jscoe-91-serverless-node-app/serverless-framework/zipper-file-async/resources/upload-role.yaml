@@ -1,0 +1,54 @@
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - lambda.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: myPolicyName
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - logs:CreateLogGroup
+                  - logs:CreateLogStream
+                  - logs:PutLogEvents
+                Resource:
+                  - "Fn::Join":
+                      - ":"
+                      - - "arn:aws:logs"
+                        - Ref: "AWS::Region"
+                        - Ref: "AWS::AccountId"
+                        - "log-group:/aws/lambda/*:*:*"
+              - Effect: Allow
+                Action:
+                  - s3:*
+                Resource:
+                  Fn::Join:
+                    - ""
+                    - - "arn:aws:s3:::modusland"
+                      - "/*"
+              - Effect: Allow
+                Action:
+                  - dynamodb:Query
+                  - dynamodb:Scan
+                  - dynamodb:GetItem
+                  - dynamodb:PutItem
+                  - dynamodb:UpdateItem
+                  - dynamodb:DeleteItem
+                Resource:
+                  - Fn::GetAtt: [FilesTable, Arn]
+              - Effect: Allow
+                Action:
+                  - execute-api:Invoke
+                  - execute-api:ManageConnections
+                Resource:
+                  - "Fn::Join":
+                      - ":"
+                      - - "arn:aws:execute-api"
+                        - Ref: "AWS::Region"
+                        - Ref: "AWS::AccountId"
+                        - Ref: WebsocketsApi

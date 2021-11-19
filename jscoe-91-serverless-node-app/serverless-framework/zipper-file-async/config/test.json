@@ -1,7 +1,0 @@
-{
-    "ENV": "test",
-    "AWS_ACCESS_KEY_ID_DEPLOY": "XXX",
-    "AWS_SECRET_ACCESS_KEY_DEPLOY": "XXX",
-    "BUCKET": "modusland",
-    "FILES_ZIPPED_TABLE": "ZIPPED"
-}

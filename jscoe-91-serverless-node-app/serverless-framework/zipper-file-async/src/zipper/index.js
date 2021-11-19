@@ -1,15 +1,17 @@
 const { randomUUID } = require('crypto');
 const AWS = require('aws-sdk');
 const ZipHelper = require('./zipHelper');
+const WebSocketClient = require('./webSocketClient')
 
 const FILES_TABLE = process.env.FILES_ZIPPED_TABLE;
 const BUCKET = process.env.BUCKET;
-const dynamoDbClient = new AWS.DynamoDB.DocumentClient();
 
 class Zipper {
     constructor() {
         this.S3 = new AWS.S3();
         this.sqs = new AWS.SQS();
+        this.ddb = new AWS.DynamoDB.DocumentClient();
+        this.wsClient = new WebSocketClient()
     }
 
     async handle(event) {
@@ -18,10 +20,11 @@ class Zipper {
         const zippedFile = await ZipHelper.zip(keyS3File, file.Body);
         await this.putObjectS3(zippedFile);
         await this.saveZipped(keyS3File);
+        await this.wsClient.send(event)
     }
 
     async saveZipped(keyS3File) {
-        const linkToDownload = `https://${BUCKET}.s3.amazonaws.com/zip/${keyS3File}`
+        const linkToDownload = `https://${BUCKET}.s3.amazonaws.com/zip/${keyS3File}.gz`
         const params = {
             TableName: FILES_TABLE,
             Item: {
@@ -33,7 +36,7 @@ class Zipper {
         }
 
         try {
-            await dynamoDbClient.put(params).promise();
+            await this.ddb.put(params).promise();
         } catch (err) {
             console.log(`Error to put data into DynamoDB ${JSON.stringify(params)}`)
             throw err;
