@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="index.css" rel="stylesheet" type="text/css">
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+
+<body>
+
+  <div id="app">
+    <task-list :tasks="tasks"></task-list>
+  </div>
+
+  <template id="task-list">
+    <section class="tasks">
+      <h1>
+        Tasks
+      </h1>
+      <div class="tasks__new">
+        <input type="text" v-model="newTask" @keyup.enter="addTask" placeholder="New task">
+        <span>
+          <button @click="addTask" class="button">
+            Add
+          </button>
+        </span>
+      </div>
+      <div class="tasks__clear pull-right">
+        <button class="button warning small" @click="clearCompleted">
+          Clear Completed
+        </button>
+        <button class="button alert small" @click="clearAll">
+          Clear All
+        </button>
+      </div>
+      <transition-group name="fade" tag="ul" class="tasks__list no-bullet">
+        <task-item v-for="(task, index) in tasks" @remove="removeTask(index)" @complete="completeTask(task)"
+            :task="task" :key="task"/>
+      </transition-group>
+    </section>
+
+  </template>
+  <template id="task-item">
+    <div>
+      <li class="tasks__item">
+      <button :class="className" @click.self="$emit('complete')">
+        {{ task.title }}
+      </button>
+      <button class="tasks__item__remove button alert pull-right" @click.self="$emit('remove')">
+        X
+      </button>
+      </li>
+    </div>
+  </template>
+
+  <script>
+    Vue.component('task-item', {
+      template: '#task-item',
+      props: ['task'],
+      computed: {
+        className() {
+          console.log("baksbhj")
+          let classes = ['tasks__item__toggle'];
+          if (this.task.completed) {
+            classes.push('tasks__item__toggle--completed');
+          }
+          return classes.join(' ');
+        }
+      }
+    });
+    Vue.component('task-list', {
+      template: '#task-list',
+      props: {
+        tasks: {
+          default: []
+        }
+      },
+      data() {
+        return {
+          newTask: ''
+        };
+      },
+      methods: {
+        addTask() {
+          if (this.newTask) {
+            this.tasks.push({
+              title: this.newTask,
+              completed: false
+            });
+            this.newTask = '';
+          }
+        },
+        clearCompleted() {
+          this.tasks = this.tasks.filter(this.inProgress);
+        },
+        clearAll() {
+          this.tasks = [];
+        },
+        completeTask(task) {
+          task.completed = !task.completed;
+        },
+        removeTask(index) {
+          this.tasks.splice(index, 1);
+        },
+      },
+      
+    });
+
+    new Vue({
+      el: '#app',
+      data: {
+        tasks: [{
+            title: 'Make todo list',
+            completed: true
+          },
+          {
+            title: 'Go skydiving',
+            completed: false
+          }
+        ]
+      }
+    });
+    
+  </script>
+
+</body>
+
+</html>
