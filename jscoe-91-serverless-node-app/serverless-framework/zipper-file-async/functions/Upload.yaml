@@ -1,0 +1,31 @@
+handler: src/index.uploader
+events:
+  - http: 
+      path: save
+      method: post
+
+iamRoleStatements:
+  - Effect: Allow
+    Action:
+      - logs:CreateLogGroup
+      - logs:CreateLogStream
+      - logs:PutLogEvents
+    Resource:
+      Fn::Sub:
+        - arn:aws:logs:${Region}:${AccountId}:log-group:/aws/lambda/*:*:*
+        - { Region: !Ref AWS::Region, AccountId: !Ref AWS::AccountId }
+  - Effect: Allow
+    Action:
+      - s3:PutObject
+      - s3:PutObjectAcl
+    Resource:
+        - arn:aws:s3:::modusland/*
+  - Effect: Allow
+    Action:
+      - sqs:SendMessage
+      - sqs:SetQueueAttributes
+      - sqs:GetQueueUrl
+    Resource:
+      Fn::GetAtt:
+        - ZipFileQueue
+        - Arn

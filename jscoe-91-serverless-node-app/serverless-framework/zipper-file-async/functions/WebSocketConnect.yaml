@@ -1,0 +1,4 @@
+handler: src/index.onConnect
+events:
+  - websocket:
+      route: $connect

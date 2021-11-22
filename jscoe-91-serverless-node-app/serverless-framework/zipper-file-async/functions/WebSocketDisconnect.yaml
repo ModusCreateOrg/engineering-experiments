@@ -1,0 +1,4 @@
+handler: src/index.onDisconnect
+events:
+  - websocket:
+      route: $disconnect

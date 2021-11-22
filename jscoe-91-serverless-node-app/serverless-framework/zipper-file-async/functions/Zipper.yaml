@@ -1,0 +1,58 @@
+role: UploadRole
+handler: src/index.zipper
+environment:
+  WS_URL:
+    Fn::Sub:
+      - "https://${ApiId}.execute-api.${self:provider.region}.amazonaws.com/${self:provider.stage}"
+      - { ApiId: !Ref WebsocketsApi }
+events:
+  - sqs:
+      arn:
+        Fn::GetAtt:
+          - ZipFileQueue
+          - Arn
+      batchSize: 1
+      maximumBatchingWindow: 60
+
+iamRoleStatements:
+  - Effect: Allow
+    Action:
+      - logs:CreateLogGroup
+      - logs:CreateLogStream
+      - logs:PutLogEvents
+    Resource:
+      Fn::Sub:
+        - arn:aws:logs:${Region}:${AccountId}:log-group:/aws/lambda/*:*:*
+        - { Region: !Ref AWS::Region, AccountId: !Ref AWS::AccountId }
+  - Effect: Allow
+    Action:
+      - s3:PutObject
+      - s3:PutObjectAcl
+      - S3:GetObject
+    Resource:
+        - arn:aws:s3:::modusland/*
+  - Effect: Allow
+    Action:
+      - sqs:ReceiveMessage
+    Resource:
+      Fn::GetAtt:
+        - ZipFileQueue
+        - Arn
+  - Effect: Allow
+    Action:
+      - dynamodb:PutItem
+    Resource:
+      - Fn::GetAtt: [FilesTable, Arn]
+  - Effect: Allow
+    Action:
+      - dynamodb:Scan
+    Resource:
+      - Fn::GetAtt: [ConnectionsWebsocketTable, Arn]
+  - Effect: Allow
+    Action:
+      - execute-api:Invoke
+      - execute-api:ManageConnections
+    Resource:
+      Fn::Sub:
+        - "arn:aws:execute-api:${Region}:${AccountId}:${WebSocketId}/*"
+        - { Region: !Ref AWS::Region, AccountId: !Ref AWS::AccountId, WebSocketId: !Ref WebsocketsApi }

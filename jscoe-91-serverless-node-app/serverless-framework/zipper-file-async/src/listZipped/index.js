@@ -1,14 +1,12 @@
 const AWS = require('aws-sdk');
 const FILES_TABLE = process.env.FILES_ZIPPED_TABLE;
+const ddb = new AWS.DynamoDB.DocumentClient();
 
 class ApiList {
-    constructor() {
-        this.ddb = new AWS.DynamoDB.DocumentClient();
-    }
 
-    async handle(event, context) {
+    async handle(event) {
         try {
-            const data = await this.ddb.scan(this.configureParams(event)).promise()
+            const data = await ddb.scan(this.configureParams(event)).promise()
             return {
                 statusCode: 200,
                 body: JSON.stringify(data.Items)
@@ -21,6 +19,7 @@ class ApiList {
 
     configureParams(event) {
         const { limit, lastEvaluatedKey } = event.queryStringParameters
+
         const params = {
             TableName: FILES_TABLE,
             Limit: limit

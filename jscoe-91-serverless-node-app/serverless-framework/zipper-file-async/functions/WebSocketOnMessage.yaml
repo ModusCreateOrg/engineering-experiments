@@ -1,0 +1,4 @@
+handler: src/index.onMessage
+events:
+  - websocket:
+      route: onMessage

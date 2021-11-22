@@ -1,4 +1,3 @@
-WS_URL: ${self:custom.${self:custom.stage}.WS_URL}
 ENV: "test"
 BUCKET: "modusland"
 FILES_ZIPPED_TABLE: "ZIPPED_${self:provider.stage}"

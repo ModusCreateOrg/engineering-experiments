@@ -14,13 +14,14 @@ class Uploader {
     const keyToSave = Buffer.from(filename, 'ascii').toString()
 
     try {
+      console.log(`Before put object`)
       await this.S3.putObject({
         Bucket: 'modusland',
         Key: `unziped/${keyToSave}`,
         ACL: 'public-read',
         Body: data
       }).promise()
-
+      
       const QueueName = 'ZipFile' //Turn into a variable to distinguish between envs
       const MessageBody = keyToSave
       const { QueueUrl } = await this.sqs.getQueueUrl({ QueueName }).promise()
@@ -33,7 +34,7 @@ class Uploader {
     } catch (err) {
       return {
         statusCode: 500,
-        body: JSON.stringify({ message: err.message })
+        body: JSON.stringify({ message: err.stack })
       }
     }
   }

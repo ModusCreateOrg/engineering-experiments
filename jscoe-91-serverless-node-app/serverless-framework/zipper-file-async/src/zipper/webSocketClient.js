@@ -27,7 +27,6 @@ module.exports = class WebSocketClient {
 
         const postCalls = connectionData.Items.map(async ({ connectionId }) => {
             try {
-                console.log('sending message to ', connectionId)
                 await apigwManagementApi.postToConnection({ ConnectionId: connectionId, Data: postData }).promise();
             } catch (err) {
                 console.log(JSON.stringify(err))
