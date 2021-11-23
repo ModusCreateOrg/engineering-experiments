@@ -2,3 +2,10 @@ handler: src/index.onDisconnect
 events:
   - websocket:
       route: $disconnect
+
+iamRoleStatements:
+  - Effect: Allow
+    Action:
+      - dynamodb:DeleteItem
+    Resource:
+      - Fn::GetAtt: [ConnectionsWebsocketTable, Arn]      

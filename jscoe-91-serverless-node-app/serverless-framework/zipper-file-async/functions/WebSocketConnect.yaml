@@ -2,3 +2,10 @@ handler: src/index.onConnect
 events:
   - websocket:
       route: $connect
+
+iamRoleStatements:
+  - Effect: Allow
+    Action:
+      - dynamodb:PutItem
+    Resource:
+      - Fn::GetAtt: [ConnectionsWebsocketTable, Arn]

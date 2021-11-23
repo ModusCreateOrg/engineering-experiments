@@ -8,6 +8,7 @@ class OnMessage {
     }
 
     async handle(event) {
+        console.log(`oN HANDLER`)
         let connectionData;
 
         try {

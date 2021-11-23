@@ -1,4 +1,3 @@
-role: UploadRole
 handler: src/index.zipper
 environment:
   WS_URL:
