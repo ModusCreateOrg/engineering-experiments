@@ -61,8 +61,11 @@ const FavButton: React.FC = () => {
       <animated.span style={clickAnimation}>
         <FiStar size={24} fill={isFav ? '#ffba08' : 'white'} />
       </animated.span>
-      {circlesAnimation.map((style) => (
-        <Circle style={triggerCirclesAnimation ? style : {}} />
+      {circlesAnimation.map((style, index) => (
+        <Circle
+          key={`Circle-${index}`}
+          style={triggerCirclesAnimation ? style : {}}
+        />
       ))}
     </Container>
   );

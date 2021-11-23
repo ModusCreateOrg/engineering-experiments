@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { animated, useSpring } from 'react-spring';
 import { FiChevronDown } from 'react-icons/fi';
 
-import { IPokemon } from '../../App';
+import { IPokemon } from '../../pages/Pokedex';
 import FavButton from '../FavButton';
 
 import { Container, CardHeading } from './styles';
@@ -50,15 +50,19 @@ const Card: React.FC<CardProps> = ({ pokemonData }) => {
     setOpen((prev) => !prev);
   }, []);
 
-  const handleHover = useCallback(() => {
-    setTriggerSize((prev) => !prev);
+  const handleMouseEnter = useCallback(() => {
+    setTriggerSize(true);
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    setTriggerSize(false);
   }, []);
 
   return (
     <Container
       style={sizeAnimation}
-      onMouseEnter={handleHover}
-      onMouseLeave={handleHover}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
       <FavButton />
       <img src={image} alt={name} />

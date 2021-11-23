@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { mediaQueries } from './constants/mediaQueries';
+import { mediaQueries } from '../../constants/mediaQueries';
 
 export const Container = styled.main`
   height: 100%;
