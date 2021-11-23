@@ -1,8 +1,8 @@
 const AWS = require('aws-sdk');
 
 class OnDisconnect {
-    constructor() {
-        this.ddb = new AWS.DynamoDB.DocumentClient();
+    constructor({repository}) {
+        this.repository = repository;
     }
 
     async handle(event) {
@@ -14,7 +14,7 @@ class OnDisconnect {
         };
 
         try {
-            await this.ddb.delete(deleteParams).promise();
+            await this.repository.delete(deleteParams).promise();
         } catch (err) {
             return { statusCode: 500, body: 'Failed to disconnect: ' + JSON.stringify(err) };
         }
@@ -23,5 +23,6 @@ class OnDisconnect {
     }
 }
 
-const onDisconnect = new OnDisconnect();
+const ddb = new AWS.DynamoDB.DocumentClient();
+const onDisconnect = new OnDisconnect({repository: ddb});
 module.exports.handle = onDisconnect.handle.bind(onDisconnect);

@@ -1,5 +1,8 @@
 const AWS = require('aws-sdk');
-const parseMultipart = require('parse-multipart')
+const parseMultipart = require('parse-multipart');
+
+const BUCKET = process.env.BUCKET;
+const QUEUE_ZIP_FILE = process.env.QUEUE_ZIP_FILE;
 
 class Uploader {
   constructor() {
@@ -8,24 +11,21 @@ class Uploader {
   }
 
   async handle(event) {
-    const boundary = parseMultipart.getBoundary(event.headers['content-type'])
-    const parts = parseMultipart.Parse(Buffer.from(event.body, 'base64'), boundary);
-    const [{ filename, data }] = parts
-    const keyToSave = Buffer.from(filename, 'ascii').toString()
+
+    const { filename, data } = this.extractFile(event)
 
     try {
-      console.log(`Before put object`)
       await this.S3.putObject({
-        Bucket: 'modusland',
-        Key: `unziped/${keyToSave}`,
+        Bucket: BUCKET,
+        Key: `unziped/${filename}`,
         ACL: 'public-read',
         Body: data
-      }).promise()
-      
-      const QueueName = 'ZipFile' //Turn into a variable to distinguish between envs
-      const MessageBody = keyToSave
-      const { QueueUrl } = await this.sqs.getQueueUrl({ QueueName }).promise()
-      await this.sqs.sendMessage({ QueueUrl, MessageBody }).promise()
+      }).promise();
+
+      const QueueName = QUEUE_ZIP_FILE;
+      const MessageBody = keyToSave;
+      const { QueueUrl } = await this.sqs.getQueueUrl({ QueueName }).promise();
+      await this.sqs.sendMessage({ QueueUrl, MessageBody }).promise();
 
       return {
         statusCode: 200,
@@ -36,6 +36,18 @@ class Uploader {
         statusCode: 500,
         body: JSON.stringify({ message: err.stack })
       }
+    }
+  }
+
+  extractFile(event) {
+    const boundary = parseMultipart.getBoundary(event.headers['content-type'])
+    const parts = parseMultipart.Parse(Buffer.from(event.body, 'base64'), boundary);
+    const [{ filename, data }] = parts
+    const keyToSave = Buffer.from(filename, 'ascii').toString()
+
+    return {
+      filename: keyToSave,
+      data
     }
   }
 }

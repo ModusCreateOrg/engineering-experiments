@@ -26,7 +26,9 @@ Properties:
             Action:
               - s3:*
             Resource:
-                - "arn:aws:s3:::modusland/*"
+              !Sub
+                - "arn:aws:s3:::${BucketName}/*"
+                - {BucketName: !Ref ModuslandBucket}
           - Effect: Allow
             Action:
               - sqs:*

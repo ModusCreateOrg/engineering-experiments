@@ -2,13 +2,12 @@ const AWS = require('aws-sdk');
 
 const { CONNECTIONS_WEBSOCKET_TABLE } = process.env;
 
-class OnMessage {
+module.exports = class WebSocketClient {
     constructor() {
         this.ddb = new AWS.DynamoDB.DocumentClient();
     }
 
-    async handle(event) {
-        console.log(`oN HANDLER`)
+    async send() {
         let connectionData;
 
         try {
@@ -18,16 +17,14 @@ class OnMessage {
         }
 
         const apigwManagementApi = new AWS.ApiGatewayManagementApi({
-            endpoint: event.requestContext.domainName + '/' + event.requestContext.stage
+            endpoint: process.env.WS_URL
         });
 
-        const postData = JSON.stringify(JSON.parse(event.body).data);
-
+        const postData = JSON.stringify({message: "Uploaded file was zipped"});
         const postCalls = connectionData.Items.map(async ({ connectionId }) => {
             try {
                 await apigwManagementApi.postToConnection({ ConnectionId: connectionId, Data: postData }).promise();
             } catch (err) {
-                console.log(`error `, JSON.stringify(err))
                 if (err.statusCode === 410) {
                     console.log(`Found stale connection, deleting ${connectionId}`);
                     await this.ddb.delete({ TableName: CONNECTIONS_WEBSOCKET_TABLE, Key: { connectionId } }).promise();
@@ -42,9 +39,6 @@ class OnMessage {
         } catch (err) {
             return { statusCode: 500, body: err.stack };
         }
-
         return { statusCode: 200, body: 'Data sent.' };
     }
 }
-const onMessage = new OnMessage()
-module.exports.handle = onMessage.handle.bind(onMessage);

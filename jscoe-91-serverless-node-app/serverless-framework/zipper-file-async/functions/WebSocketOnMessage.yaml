@@ -3,6 +3,10 @@ events:
   - websocket:
       route: onMessage
 
+package:
+  patterns:
+    - src/websocket/onMessage.handle
+
 iamRoleStatements:
   - Effect: Allow
     Action:

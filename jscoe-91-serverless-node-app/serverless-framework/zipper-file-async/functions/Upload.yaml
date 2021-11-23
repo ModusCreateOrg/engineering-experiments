@@ -1,8 +1,12 @@
-handler: src/index.uploader
+handler: src/uploader/index.handle
 events:
   - http: 
-      path: save
+      path: file/save
       method: post
+
+package:
+  patterns:
+    - src/uploader/index.js
 
 iamRoleStatements:
   - Effect: Allow
@@ -19,7 +23,9 @@ iamRoleStatements:
       - s3:PutObject
       - s3:PutObjectAcl
     Resource:
-        - arn:aws:s3:::modusland/*
+      !Sub
+        - "arn:aws:s3:::${BucketName}/*"
+        - {BucketName: !Ref ModuslandBucket}
   - Effect: Allow
     Action:
       - sqs:SendMessage

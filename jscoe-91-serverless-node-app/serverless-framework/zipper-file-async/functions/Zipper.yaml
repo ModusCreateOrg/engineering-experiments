@@ -29,7 +29,9 @@ iamRoleStatements:
       - s3:PutObjectAcl
       - S3:GetObject
     Resource:
-        - arn:aws:s3:::modusland/*
+      !Sub
+        - "arn:aws:s3:::${BucketName}/*"
+        - {BucketName: !Ref ModuslandBucket}
   - Effect: Allow
     Action:
       - sqs:ReceiveMessage

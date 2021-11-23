@@ -7,10 +7,10 @@ Done - Break configs into files and just import them into serverless.yml;
 
 Done - Remove wildcards of policies about resources, specifying which resource should be given that permission;
 
-Doing - Use `serverless-iam-roles-per-function` for create one role per function, applying the principle of least priviliged access.
+Done - Use `serverless-iam-roles-per-function` for create one role per function, applying the principle of least priviliged access.
 
 ReadMore about hash x range fields dynamoDB;
-Packaging and deploy functions isolated on of another;
+DONE - Packaging and deploy functions isolated on of another;
 Add webpack to reduce size of bundle and increase the cold start;
 
 //Annotations
@@ -35,3 +35,8 @@ to the events from AWS Services
 serverless generate-event --type aws:sqs
 
 DynamoDB is aligned with the values of Serverless applications: automatic scaling according to your application load, pay-per-what-you-use pricing, easy to get started with, and no servers to manage. This makes DynamoDB a very popular choice for Serverless applications running in AWS.
+
+To test websocket, install wscat.
+Run wscat -c wss://${endpoint}
+
+atached to terminal type: {"action": "onMessage", "data": { "nome": "rafa"}}

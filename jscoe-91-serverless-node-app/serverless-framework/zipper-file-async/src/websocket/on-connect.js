@@ -1,11 +1,11 @@
 const AWS = require('aws-sdk');
 
 class OnConnect {
-    constructor() {
-        this.ddb = new AWS.DynamoDB.DocumentClient();
+    constructor({repository}) {
+        this.repository = repository
     }
 
-    async handle(event, context, cb) {
+    async handle(event) {
         const putParams = {
             TableName: process.env.CONNECTIONS_WEBSOCKET_TABLE,
             Item: {
@@ -14,9 +14,8 @@ class OnConnect {
         };
 
         try {
-            await this.ddb.put(putParams).promise();
+            await this.repository.put(putParams).promise();
         } catch (err) {
-            console.log(err.stack)
             return { statusCode: 500, body: 'Failed to connect: ' + JSON.stringify(err) };
         }
 
@@ -24,5 +23,6 @@ class OnConnect {
     }
 }
 
-const onConnect = new OnConnect();
+const ddb = new AWS.DynamoDB.DocumentClient();
+const onConnect = new OnConnect({repository: ddb});
 module.exports.handle = onConnect.handle.bind(onConnect);

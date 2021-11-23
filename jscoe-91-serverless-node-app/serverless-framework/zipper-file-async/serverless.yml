@@ -21,6 +21,15 @@ functions:
   websocketDisconnect: ${file('./functions/WebSocketDisconnect.yaml')}
   websocketOnMessage: ${file('./functions/WebSocketOnMessage.yaml')}
 
+package:
+  individually: true
+  patterns:
+    - '!functions/**'
+    - '!config/**'
+    - '!resources/**'
+    - '!mocks/**'
+    - '!src/**'
+  
 plugins:
   - serverless-iam-roles-per-function
   - serverless-offline

@@ -1,8 +1,12 @@
 handler: src/index.listZipped
 events:
   - http:
-      path: list
+      path: file/list
       method: get
+
+package:
+  patterns:
+    - src/listzipped/index.handle
 
 iamRoleStatements:
   - Effect: Allow

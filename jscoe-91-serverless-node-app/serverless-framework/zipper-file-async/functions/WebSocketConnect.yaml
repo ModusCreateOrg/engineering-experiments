@@ -3,6 +3,10 @@ events:
   - websocket:
       route: $connect
 
+package:
+  patterns:
+    - src/websocket/onConnect.handle
+
 iamRoleStatements:
   - Effect: Allow
     Action:

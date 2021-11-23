@@ -3,6 +3,10 @@ events:
   - websocket:
       route: $disconnect
 
+package:
+  patterns:
+    - src/websocket/onDisconnect.handle
+
 iamRoleStatements:
   - Effect: Allow
     Action:

@@ -1,6 +1,7 @@
 const { createGzip } = require('zlib');
 const { promisify } = require('util');
 const { pipeline, Writable } = require('stream');
+
 const pipe = promisify(pipeline);
 
 module.exports = class ZipperHelper {
