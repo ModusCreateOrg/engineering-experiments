@@ -3,15 +3,14 @@ import { animated } from 'react-spring';
 
 import { colors } from '../../constants/colors';
 
-interface ContainerProps {
+interface LinkProps {
   buttonDisabled: boolean;
 }
 
-export const Container = styled.main<ContainerProps>`
+export const Container = styled.main`
+  position: absolute;
+  width: 100vw;
   height: 100vh;
-  width: 100%;
-  max-width: 50rem;
-  margin: 0 auto;
 
   display: flex;
   flex-direction: column;
@@ -23,14 +22,6 @@ export const Container = styled.main<ContainerProps>`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-  }
-
-  > button {
-    cursor: ${(props) => (props.buttonDisabled ? 'auto' : 'pointer')};
-
-    a {
-      cursor: ${(props) => (props.buttonDisabled ? 'auto' : 'pointer')};
-    }
   }
 `;
 
@@ -49,15 +40,16 @@ export const ProgressBar = styled.div`
   }
 `;
 
-export const Button = styled(animated.button)`
-  border: 2px solid ${colors.primary};
-  padding: 0.75rem 1.5rem;
-  background: transparent;
-  font-weight: 600;
-  border-radius: 1.5rem;
-
+export const Button = styled(animated.div)<LinkProps>`
   > a {
     text-decoration: none;
     color: ${colors.primary};
+    border: 2px solid ${colors.primary};
+    padding: 0.75rem 1.5rem;
+    background: transparent;
+    font-weight: 600;
+    border-radius: 1.5rem;
+
+    cursor: ${(props) => (props.buttonDisabled ? 'auto' : 'pointer')};
   }
 `;

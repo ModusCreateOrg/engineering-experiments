@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { animated, useSpring } from 'react-spring';
 import { FiChevronDown } from 'react-icons/fi';
 
-import { IPokemon } from '../../pages/Pokedex';
+import { IPokemon } from '../../App';
 import FavButton from '../FavButton';
 
 import { Container, CardHeading } from './styles';

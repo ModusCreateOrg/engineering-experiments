@@ -40,7 +40,7 @@ const Start: React.FC = () => {
   useChain([progressAnimationRef, buttonAnimationRef]);
 
   return (
-    <Container buttonDisabled={disabled}>
+    <Container>
       <div>
         <animated.h2>
           {number.to((n) => `${String(n.toFixed(0)).padStart(2, '0')}%`)}
@@ -49,8 +49,8 @@ const Start: React.FC = () => {
           <animated.div style={progressAnimation} />
         </ProgressBar>
       </div>
-      <Button style={buttonAnimation} disabled={disabled}>
-        <Link to="test" hidden={disabled}>
+      <Button style={buttonAnimation} buttonDisabled={disabled}>
+        <Link to="pokedex" hidden={disabled}>
           Start Pokedex
         </Link>
       </Button>
