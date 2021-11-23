@@ -5,27 +5,23 @@ const BUCKET = process.env.BUCKET;
 const QUEUE_ZIP_FILE = process.env.QUEUE_ZIP_FILE;
 
 class Uploader {
-  constructor() {
-    this.S3 = new AWS.S3();
-    this.sqs = new AWS.SQS();
+  constructor({ s3, sqs }) {
+    this.s3 = s3;
+    this.sqs = sqs;
   }
 
   async handle(event) {
-
-    const { filename, data } = this.extractFile(event)
-
     try {
-      await this.S3.putObject({
+      const { filename, data } = this.extractFile(event)
+
+      await this.s3.putObject({
         Bucket: BUCKET,
         Key: `unziped/${filename}`,
         ACL: 'public-read',
         Body: data
       }).promise();
 
-      const QueueName = QUEUE_ZIP_FILE;
-      const MessageBody = keyToSave;
-      const { QueueUrl } = await this.sqs.getQueueUrl({ QueueName }).promise();
-      await this.sqs.sendMessage({ QueueUrl, MessageBody }).promise();
+      this.notifyUpload(filename)
 
       return {
         statusCode: 200,
@@ -50,7 +46,14 @@ class Uploader {
       data
     }
   }
+
+  notifyUpload({ filename }) {
+    const { QueueUrl } = await this.sqs.getQueueUrl({ QueueName: QUEUE_ZIP_FILE }).promise();
+    await this.sqs.sendMessage({ QueueUrl, MessageBody: filename }).promise();
+  }
 }
 
-const uploader = new Uploader()
+const s3 = new AWS.S3();
+const sqs = new AWS.SQS();
+const uploader = new Uploader({ s3, sqs })
 module.exports.handle = uploader.handle.bind(uploader)
