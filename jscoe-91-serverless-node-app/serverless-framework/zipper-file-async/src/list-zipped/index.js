@@ -1,12 +1,15 @@
 const AWS = require('aws-sdk');
 const FILES_TABLE = process.env.FILES_ZIPPED_TABLE;
-const ddb = new AWS.DynamoDB.DocumentClient();
 
 class ApiList {
 
+    constructor({ repository }) {
+        this.repository = repository;
+    }
+
     async handle(event) {
         try {
-            const data = await ddb.scan(this.configureParams(event)).promise()
+            const data = await this.repository.scan(this.configureParams(event)).promise()
             return {
                 statusCode: 200,
                 body: JSON.stringify(data.Items)
@@ -33,5 +36,6 @@ class ApiList {
     }
 }
 
-const apiList = new ApiList()
+const ddb = new AWS.DynamoDB.DocumentClient();
+const apiList = new ApiList({ repository: ddb })
 module.exports.handle = apiList.handle.bind(apiList)

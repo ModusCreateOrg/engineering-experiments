@@ -7,11 +7,12 @@ const FILES_TABLE = process.env.FILES_ZIPPED_TABLE;
 const BUCKET = process.env.BUCKET;
 
 class Zipper {
-    constructor() {
-        this.S3 = new AWS.S3();
-        this.sqs = new AWS.SQS();
-        this.ddb = new AWS.DynamoDB.DocumentClient();
-        this.wsClient = new WebSocketClient()
+
+    constructor({ s3, sqs, repository, wsClient }) {
+        this.S3 = s3;
+        this.sqs = sqs;
+        this.repository = repository;
+        this.wsClient = wsClient
     }
 
     async handle(event) {
@@ -36,7 +37,7 @@ class Zipper {
         }
 
         try {
-            await this.ddb.put(params).promise();
+            await this.repository.put(params).promise();
         } catch (err) {
             console.log(`Error to put data into DynamoDB ${JSON.stringify(params)}`)
             throw err;
@@ -60,5 +61,9 @@ class Zipper {
     }
 }
 
-const zipper = new Zipper();
+const s3 = new AWS.S3()
+const sqs = new AWS.SQS()
+const ddb = new AWS.DynamoDB().DocumentClient();
+const wsClient = new WebSocketClient({ repository: ddb });
+const zipper = new Zipper({ s3, sqs, repository: ddb, wsClient });
 module.exports.handle = zipper.handle.bind(zipper);

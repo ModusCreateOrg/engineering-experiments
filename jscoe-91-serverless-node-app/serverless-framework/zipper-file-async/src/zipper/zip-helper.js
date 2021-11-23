@@ -5,7 +5,6 @@ const { pipeline, Writable } = require('stream');
 const pipe = promisify(pipeline);
 
 module.exports = class ZipperHelper {
-    constructor() { }
 
     static async zip(keyS3File, file) {
         try {
