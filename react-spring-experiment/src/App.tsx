@@ -10,6 +10,7 @@ import Pokedex from './pages/Pokedex';
 
 export interface IPokemon {
   id: string;
+  formattedId: string;
   name: string;
   image: string;
 }
@@ -31,7 +32,8 @@ const App: React.FC = () => {
             img.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.entry_number}.png`;
 
             return {
-              id: formatId(pokemon.entry_number),
+              id: pokemon.entry_number,
+              formattedId: formatId(pokemon.entry_number),
               name: captalizeFirstLetter(pokemon.pokemon_species.name),
               image: img.src,
             };

@@ -41,3 +41,17 @@ export const CardHeading = styled.div`
     font-weight: 600;
   }
 `;
+
+export const Content = styled(animated.div)`
+  overflow: hidden;
+  padding-top: 0.5rem;
+
+  > h3 {
+    margin-top: 0.75rem;
+  }
+
+  > p {
+    color: ${colors.neutral.dark};
+    margin-top: 0.5rem;
+  }
+`;

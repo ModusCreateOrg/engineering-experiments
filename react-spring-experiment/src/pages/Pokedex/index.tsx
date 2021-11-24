@@ -14,7 +14,7 @@ const Pokedex: React.FC<PokedexProps> = ({ pokemons }) => {
     <Container>
       <PokemonGrid>
         {pokemons.map((pokemon) => (
-          <Card pokemonData={pokemon} key={pokemon.id} />
+          <Card pokemonData={pokemon} key={pokemon.formattedId} />
         ))}
       </PokemonGrid>
     </Container>
