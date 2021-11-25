@@ -1,11 +1,11 @@
-handler: src/index.onConnect
+handler: src/websocket/onconnect.handle
 events:
   - websocket:
       route: $connect
 
 package:
   patterns:
-    - src/websocket/onConnect.handle
+    - src/websocket/onconnect.js
 
 iamRoleStatements:
   - Effect: Allow

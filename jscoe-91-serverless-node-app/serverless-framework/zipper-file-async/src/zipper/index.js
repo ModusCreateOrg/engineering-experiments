@@ -1,7 +1,7 @@
 const { randomUUID } = require('crypto');
 const AWS = require('aws-sdk');
-const ZipHelper = require('./zipHelper');
-const WebSocketClient = require('./webSocketClient')
+const ZipHelper = require('./zip-helper');
+const WebSocketClient = require('./websocket-client')
 
 const FILES_TABLE = process.env.FILES_ZIPPED_TABLE;
 const BUCKET = process.env.BUCKET;
@@ -63,7 +63,7 @@ class Zipper {
 
 const s3 = new AWS.S3()
 const sqs = new AWS.SQS()
-const ddb = new AWS.DynamoDB().DocumentClient();
+const ddb = new AWS.DynamoDB.DocumentClient();
 const wsClient = new WebSocketClient({ repository: ddb });
 const zipper = new Zipper({ s3, sqs, repository: ddb, wsClient });
 module.exports.handle = zipper.handle.bind(zipper);

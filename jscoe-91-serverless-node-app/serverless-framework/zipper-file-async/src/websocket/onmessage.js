@@ -8,7 +8,6 @@ class OnMessage {
     }
 
     async handle(event) {
-        console.log(event)
         try {
             let connectionData = await this.findConnections();
             const postCalls = this.postMessages(event, connectionData.Items);
@@ -36,7 +35,6 @@ class OnMessage {
                 try {
                     await apigwManagementApi.postToConnection({ ConnectionId: connectionId, Data: message }).promise();
                 } catch (err) {
-                    console.log(`error `, JSON.stringify(err))
                     if (err.statusCode === 410) {
                         console.log(`Found stale connection, deleting ${connectionId}`);
                         await this.repository.delete({ TableName: CONNECTIONS_WEBSOCKET_TABLE, Key: { connectionId } }).promise();
@@ -48,6 +46,6 @@ class OnMessage {
     }
 
 }
-const ddb = new AWS.DynamoDB.DocumentClient()
-const onMessage = new OnMessage({ repository: ddb })
+const ddb = new AWS.DynamoDB.DocumentClient();
+const onMessage = new OnMessage({ repository: ddb });
 module.exports.handle = onMessage.handle.bind(onMessage);

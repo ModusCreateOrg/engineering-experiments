@@ -1,11 +1,11 @@
-handler: src/index.onDisconnect
+handler: src/websocket/ondisconnect.handle
 events:
   - websocket:
       route: $disconnect
 
 package:
   patterns:
-    - src/websocket/onDisconnect.handle
+    - src/websocket/ondisconnect.js
 
 iamRoleStatements:
   - Effect: Allow

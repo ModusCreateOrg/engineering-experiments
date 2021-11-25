@@ -1,4 +1,4 @@
-handler: src/index.zipper
+handler: src/zipper/index.handle
 environment:
   WS_URL:
     Fn::Sub:
@@ -12,6 +12,10 @@ events:
           - Arn
       batchSize: 1
       maximumBatchingWindow: 60
+
+package:
+  patterns:
+    - src/zipper/*.js
 
 iamRoleStatements:
   - Effect: Allow

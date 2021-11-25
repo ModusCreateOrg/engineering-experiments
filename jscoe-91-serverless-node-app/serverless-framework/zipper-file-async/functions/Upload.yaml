@@ -3,6 +3,7 @@ events:
   - http: 
       path: file/save
       method: post
+timeout: 20
 
 package:
   patterns:

@@ -11,6 +11,8 @@ class Uploader {
   }
 
   async handle(event) {
+    console.log('Size');
+    console.log(JSON.stringify(event.body.length));
     try {
       const { filename, data } = this.extractFile(event)
 
@@ -21,13 +23,14 @@ class Uploader {
         Body: data
       }).promise();
 
-      this.notifyUpload(filename)
+      await this.notifyUpload({ filename })
 
       return {
         statusCode: 200,
         body: JSON.stringify({ message: 'Uploaded with successful!' })
       }
     } catch (err) {
+      console.log(err.stack)
       return {
         statusCode: 500,
         body: JSON.stringify({ message: err.stack })
@@ -47,9 +50,11 @@ class Uploader {
     }
   }
 
-  notifyUpload({ filename }) {
+  async notifyUpload({ filename }) {
+    console.log(`Queu ${QUEUE_ZIP_FILE}`)
     const { QueueUrl } = await this.sqs.getQueueUrl({ QueueName: QUEUE_ZIP_FILE }).promise();
     await this.sqs.sendMessage({ QueueUrl, MessageBody: filename }).promise();
+    console.log('Messge sent')
   }
 }
 

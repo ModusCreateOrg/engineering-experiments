@@ -1,18 +1,6 @@
 TODO
 --
 
-Done - Change Fn::Join for Fn::Sub (gain readability)
-
-Done - Break configs into files and just import them into serverless.yml;
-
-Done - Remove wildcards of policies about resources, specifying which resource should be given that permission;
-
-Done - Use `serverless-iam-roles-per-function` for create one role per function, applying the principle of least priviliged access.
-
-ReadMore about hash x range fields dynamoDB;
-DONE - Packaging and deploy functions isolated on of another;
-Add webpack to reduce size of bundle and increase the cold start;
-
 //Annotations
 To show logs of executions at your terminal
 sls logs --stage=test -f zipper -t 

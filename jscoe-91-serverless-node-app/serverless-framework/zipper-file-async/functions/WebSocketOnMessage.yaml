@@ -1,11 +1,11 @@
-handler: src/index.onMessage
+handler: src/websocket/onmessage.handle
 events:
   - websocket:
       route: onMessage
 
 package:
   patterns:
-    - src/websocket/onMessage.handle
+    - src/websocket/onmessage.js
 
 iamRoleStatements:
   - Effect: Allow

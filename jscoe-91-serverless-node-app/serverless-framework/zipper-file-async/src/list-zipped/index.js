@@ -1,5 +1,6 @@
 const AWS = require('aws-sdk');
 const FILES_TABLE = process.env.FILES_ZIPPED_TABLE;
+const LIMIT_DEFAULT = 10;
 
 class ApiList {
 
@@ -21,15 +22,19 @@ class ApiList {
     }
 
     configureParams(event) {
-        const { limit, lastEvaluatedKey } = event.queryStringParameters
-
         const params = {
             TableName: FILES_TABLE,
-            Limit: limit
+            Limit: LIMIT_DEFAULT
         }
-
-        if (lastEvaluatedKey) {
-            params.ExclusiveStartKey = { id: lastEvaluatedKey }
+        
+        if(event.queryStringParameters) {
+            if (event.queryStringParameters.limit) {
+                params.Limit = event.queryStringParameters.limit;
+            }
+            
+            if (event.queryStringParameters.lastEvaluatedKey) {
+                params.ExclusiveStartKey = { id: lastEvaluatedKey }
+            }
         }
 
         return params

@@ -1,4 +1,4 @@
-handler: src/index.listZipped
+handler: src/list-zipped/index.handle
 events:
   - http:
       path: file/list
@@ -6,7 +6,7 @@ events:
 
 package:
   patterns:
-    - src/listzipped/index.handle
+    - src/list-zipped/index.js
 
 iamRoleStatements:
   - Effect: Allow
