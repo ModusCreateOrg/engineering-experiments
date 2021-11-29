@@ -7,6 +7,7 @@
     "dev": "webpack serve --mode development",
     "build": "webpack --mode production",
     "lint": "eslint ./src --cache && echo \"No linting errors\"",
+    "fakeapi": "json-server ./src/api/db.json",
     "lint:fix": "eslint ./src --fix"
   },
   "devDependencies": {
@@ -17,6 +18,7 @@
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.2.1",
     "clean-webpack-plugin": "^3.0.0",
+    "dotenv-webpack": "^7.0.3",
     "eslint": "7.13.0",
     "eslint-config-airbnb": "18.2.1",
     "eslint-config-prettier": "^6.15.0",
@@ -36,6 +38,7 @@
   "dependencies": {
     "bootstrap": "^5.1.3",
     "css-loader": "^6.5.1",
+    "json-server": "^0.17.0",
     "react": "^18.0.0-beta-fdc1d617a-20211118",
     "react-dom": "^18.0.0-beta-fdc1d617a-20211118",
     "react-hot-loader": "^4.13.0",
