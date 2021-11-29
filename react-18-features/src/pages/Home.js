@@ -14,7 +14,7 @@ const Home = () => (
           Batching Feature <Link to="/batching">Click Here</Link>
         </li>
         <li>
-          Suspense Feature <Link to="/suspense">Click Here</Link>
+          Suspense and Lazy Load Feature <Link to="/suspense">Click Here</Link>
         </li>
       </ol>
     </main>
