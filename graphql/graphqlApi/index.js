@@ -27,6 +27,7 @@ app.use(
     })
 );
 
+// huge volume of response
 app.get('/galaxystars', async(req, res) => {
     const galaxyList = await getGalaxiesAndStars(pgPool);
       if(galaxyList) {
@@ -36,6 +37,7 @@ app.get('/galaxystars', async(req, res) => {
       }
 });
 
+// async vs sync call comparison
 app.get('/ninjas', async(req, res) => {
   const { limit, async} = req.query;
   const ninjas = await setAndSendNinjas(async === 'true', limit);

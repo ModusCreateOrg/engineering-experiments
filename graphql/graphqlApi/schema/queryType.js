@@ -17,6 +17,7 @@ const {
     name: "RootQueryType",
     description: "This holds all the query APIs",
     fields: {
+      // async  vs sync call comparison
       ninjas: {
           type: new GraphQLList(NinjaType),
           description: "This is to get ninjas",
@@ -33,6 +34,7 @@ const {
             return setAndSendNinjas(async, limit);
           }
       },
+      // huge volume of response
       galaxystars: {
         type: new GraphQLList(Galaxy),
         description: 'List of galaxies with start details',

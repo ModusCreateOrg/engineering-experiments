@@ -1,7 +1,9 @@
 # Graphql Vs Rest Api Comparison
-1) This is to show comparision between Rest vs Graphql. If we are fetching nested and high volume of data by single request then Rest is better choice than graphql as Graphql has to do type checking for full response before sending it to client.
+1) This is to show that async call inside graphql request caused delay in sending response than sync call. It also shows that graphql  call are costly in terms of response time with respect to rest calls if internal logic depends heavily on async calls.
 
-2) This is to show that async call inside graphql request caused delay in sending response than sync call. It also shows that graphql  call are costly in terms of response time with respect to rest calls if internal logic depends heavily on async calls.
+2) This is to show comparision between Rest vs Graphql. If we are fetching nested and high volume of data by single request then Rest is better choice than graphql as Graphql has to do type checking for full response before sending it to client.
+
+
 
 
 ## PreRequisite
