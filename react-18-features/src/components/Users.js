@@ -1,9 +1,9 @@
 import db from 'api/db.json'
 
-const Comments = () => {
+const Users = () => {
   return (
     <>
-      <h3>Comments</h3>
+      <h3>Users</h3>
       <ol>
         {db.users.map((user) => (
           <li key={user}>
@@ -15,4 +15,4 @@ const Comments = () => {
   )
 }
 
-export default Comments
+export default Users

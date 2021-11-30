@@ -16,6 +16,10 @@ const Home = () => (
         <li>
           Suspense and Lazy Load Feature <Link to="/suspense">Click Here</Link>
         </li>
+        <li>
+          Suspense in Action with React Relay
+          <Link to="/relay">Click Here</Link>
+        </li>
       </ol>
     </main>
   </>

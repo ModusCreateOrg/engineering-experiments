@@ -15,7 +15,7 @@ const Batching = () => {
   }, [numberState, switchState])
   return (
     <>
-      <main className="p-3">
+      <main className="p-3 container">
         <h2>Batching</h2>
         <div>
           <div className="flex mb-4">

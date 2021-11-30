@@ -1,13 +1,13 @@
 import {Suspense as ReactSuspense, lazy} from 'react'
 import FallBack from 'components/FallBack'
-// import Comments from 'components/Comments'
+// import Users from 'components/Users'
 import wait from 'waait'
 
-const Comments = lazy(async () => {
+const Users = lazy(async () => {
   // mock some latency
   await wait(2000)
   // show when component has loaded
-  return import('../components/Comments')
+  return import('../components/Users')
 })
 
 const Suspense = () => {
@@ -17,7 +17,7 @@ const Suspense = () => {
         <h1 className="text-center mb-4">Suspense and Lazy Load</h1>
 
         <ReactSuspense fallback={<FallBack />}>
-          <Comments />
+          <Users />
         </ReactSuspense>
       </main>
     </>
