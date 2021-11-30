@@ -19,6 +19,7 @@ const About = () => {
         <Script
           src="https://kit.fontawesome.com/888acd4b49.js"
           crossOrigin="anonymous"
+          strategy="lazyOnload"
         ></Script>
       </Box>
     </CryptoPageLayout>
