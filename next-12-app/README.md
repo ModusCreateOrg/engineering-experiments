@@ -16,6 +16,6 @@ Go to this [Link](https://cors-anywhere.herokuapp.com/corsdemo) and request acce
 
 ## Environment Variables
 An .env.local file needs to be setup 
-Inside, it must contain these two links:
-NEXT_PUBLIC_API_KEY=coinranking9720426bb55994bb22fc2c318f3098549abe67935ea697e5
-NEXT_PUBLIC_API_URL=https://cors-anywhere.herokuapp.com/https://api.coinranking.com/v2
+Inside, it must contain these two links:      
+NEXT_PUBLIC_API_KEY=coinranking9720426bb55994bb22fc2c318f3098549abe67935ea697e5      
+NEXT_PUBLIC_API_URL=https://cors-anywhere.herokuapp.com/https://api.coinranking.com/v2         
