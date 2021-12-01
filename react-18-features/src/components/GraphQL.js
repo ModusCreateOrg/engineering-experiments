@@ -1,45 +1,48 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react-hooks/exhaustive-deps */
-import fetchGraphQL from 'api/fetchGraphQLData'
-import {useEffect, useState} from 'react'
+import {Suspense} from 'react'
+import {
+  RelayEnvironmentProvider,
+  loadQuery,
+  usePreloadedQuery,
+} from 'react-relay/hooks'
+import RelayEnvironment from 'api/relayEnvironment'
+import {graphql} from 'react-relay'
+import FallBack from 'components/FallBack'
 
-const GraphQL = () => {
-  // We'll load the name of a repository, initially setting it to null
-  const [name, setName] = useState(null)
-
-  // When the component mounts we'll fetch a repository name
-  useEffect(() => {
-    let isMounted = true
-    fetchGraphQL(`
-      query RepositoryNameQuery {
-        # feel free to change owner/name here
-        repository(owner: "facebook" name: "relay") {
-          name
-        }
-      }
-    `)
-      .then((response) => {
-        // Avoid updating state if the component unmounted before the fetch completes
-        if (!isMounted) {
-          return
-        }
-        const {data} = response
-        setName(data.repository.name)
-      })
-      .catch((error) => {
-        console.error(error)
-      })
-
-    return () => {
-      isMounted = false
+const RepositoryNameQuery = graphql`
+  query GraphQLQuery {
+    repository(owner: "facebook", name: "relay") {
+      name
     }
-  }, [fetchGraphQL])
+  }
+`
 
-  // Render "Loading" until the query completes
+// Immediately load the query as our app starts. For a real app, we'd move this
+// into our routing configuration, preloading data as we transition to new routes.
+const preloadedQuery = loadQuery(RelayEnvironment, RepositoryNameQuery, {
+  /* query variables */
+})
+
+const GraphQL = ({preloadedQuery: preQuery}) => {
+  // We'll load the name of a repository, initially setting it to null
+  const data = usePreloadedQuery(RepositoryNameQuery, preQuery)
   return (
     <div>
-      <p>{name != null ? `Repository: ${name}` : 'Loading'}</p>
+      <h1>Simple Query Data by GraphQL</h1>
+      <p className="text-center">{data.repository.name}</p>
     </div>
   )
 }
 
-export default GraphQL
+const GraphQLRoot = () => {
+  return (
+    <RelayEnvironmentProvider environment={RelayEnvironment}>
+      <Suspense fallback={FallBack}>
+        <GraphQL preloadedQuery={preloadedQuery} />
+      </Suspense>
+    </RelayEnvironmentProvider>
+  )
+}
+
+export default GraphQLRoot
