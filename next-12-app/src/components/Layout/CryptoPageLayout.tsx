@@ -10,6 +10,9 @@ import {
 import Head from 'next/head'
 import Link from 'next/link'
 
+import { useRouter } from "next/router";
+
+
 type CryptoPageProps = ChildrenProps & { title: string | undefined }
 
 const navlinks = [
@@ -32,6 +35,11 @@ const navlinks = [
 ]
 
 const CryptoPageLayout = ({ children, title }: CryptoPageProps) => {
+
+  const router = useRouter();
+
+  console.log(router.pathname)
+
   return (
     <>
       <Head>
@@ -63,7 +71,7 @@ const CryptoPageLayout = ({ children, title }: CryptoPageProps) => {
             <Flex>
               {navlinks.map((value) => (
                 <Link passHref href={value.path} key={value.heading}>
-                  <ChakraLink padding="10px">{value.heading}</ChakraLink>
+                  <ChakraLink color={router.pathname === value.path ? 'blue.300' : '' }  padding="10px">{value.heading}</ChakraLink>
                 </Link>
               ))}
             </Flex>
