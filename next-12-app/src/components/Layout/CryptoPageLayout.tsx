@@ -14,13 +14,21 @@ type CryptoPageProps = ChildrenProps & { title: string | undefined }
 
 const navlinks = [
   {
-    heading: 'Home',
+    heading: 'Crypto Home',
     path: '/Cryptos/Home',
   },
   {
     heading: 'About',
     path: '/Cryptos/About',
   },
+  {
+    heading: 'Optimizations Page',
+    path: '/Optimizations',
+  },
+  {
+    heading: 'Default Home Page',
+    path: '/'
+  }
 ]
 
 const CryptoPageLayout = ({ children, title }: CryptoPageProps) => {
