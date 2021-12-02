@@ -1,0 +1,15 @@
+handler: src/websocket/onconnect.handle
+events:
+  - websocket:
+      route: $connect
+
+package:
+  patterns:
+    - src/websocket/onconnect.js
+
+iamRoleStatements:
+  - Effect: Allow
+    Action:
+      - dynamodb:PutItem
+    Resource:
+      - Fn::GetAtt: [ConnectionsWebsocketTable, Arn]
