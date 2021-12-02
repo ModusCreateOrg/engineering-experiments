@@ -1,0 +1,46 @@
+type Order {
+  id: ID!
+  code: String
+  createdAt: String
+  location: Location
+  locationId: String
+  customer: Customer
+  customerId: String
+}
+
+type Location {
+  id: ID!
+  orders: [Order!]!
+}
+
+type Customer {
+  id: ID!
+  orders: [Order!]!
+}
+
+input CreateOrderInput {
+  code: String!
+  locationId: String!
+  customerId: String!
+}
+
+input UpdateOrderInput {
+  id: ID!
+  code: String
+  locationId: String
+  customerId: String
+}
+
+input DeleteOrderInput {
+  id: ID!
+}
+
+type Query {
+  order(id: ID!): Order!
+}
+
+type Mutation {
+  createOrder(input: CreateOrderInput!): Order
+  updateOrder(input: UpdateOrderInput!): Order
+  deleteOrder(id: ID!): Order
+}
