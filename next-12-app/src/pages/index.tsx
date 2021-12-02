@@ -3,6 +3,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import { Text, Box } from '@chakra-ui/react'
 import TextBoxOne from 'components/TextBox/TextBoxOne'
+import Link from 'next/link';
 
 const Home: NextPage = () => {
   return (
@@ -24,10 +25,14 @@ const Home: NextPage = () => {
         Welcome to Next JS!
       </Text>
       <TextBoxOne
-        text={`At the bottom, we have a navbar using Next Link. A page route can be
-        created by creating the file that has the name as the path. For example,
-        Images path is "/Images" and the page component is Images.tsx.`}
+        text={`At the bottom, we have a small menu using Next Link. A page route can be
+        created by creating the file that has the name as the path.`}
       />
+      <Text mb="20px">
+        <Link href={'https://nextjs.org/docs/api-reference/next/link'}>    
+            <a target="_blank">Click here more info about Next Link! </a>
+        </Link>
+      </Text>
       <MenuBar />
     </Box>
   )

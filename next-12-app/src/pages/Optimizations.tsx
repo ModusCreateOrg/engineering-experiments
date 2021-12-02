@@ -5,6 +5,7 @@ import TextBoxOne from 'components/TextBox/TextBoxOne'
 import Head from 'next/head'
 import ImageTwo from '../../public/images/image-two.jpeg'
 import ImageThree from '../../public/images/image-three.jpeg'
+import Link from 'next/link'
 
 import Image from 'next/image'
 
@@ -39,9 +40,19 @@ const Images = () => {
           <TextBoxOne text="Every page can have it's own css or <Head> for SEO and load optimization. Here we will give this page a new layout compare to the home page." />
           <TextBoxOne text="NextJS will automically inline font CSS at build time. This also improves load time. Here we declared a font unique only to this page." />
         </Flex>
+        <Text textAlign="center" mb="20px">
+        <Link href={'https://nextjs.org/docs/api-reference/next/head'}>    
+            <a target="_blank">Click here more info about Next Head </a>
+        </Link>
+        </Text>
         <Text as="h2" fontSize="30px" mb="20px" textAlign="center">
           {' '}
           Proritize Image Loading Example with Local Files
+        </Text>
+        <Text textAlign="center" mb="20px">
+        <Link href={'https://nextjs.org/docs/basic-features/image-optimization'}>    
+            <a target="_blank">Click here more info about Next Image Optimization </a>
+        </Link>
         </Text>
         <HStack justifyContent="center" spacing="10">
           <ImageCard>
