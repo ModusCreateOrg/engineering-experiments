@@ -1,0 +1,11 @@
+import style from './Navbar.module.css'
+
+export default function Navbar() {
+    return (
+        <div>
+            
+        </div>
+    )
+}
+
+Remmber to create module.css file.
