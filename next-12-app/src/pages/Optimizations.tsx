@@ -42,7 +42,7 @@ const Images = () => {
         </Flex>
         <Text textAlign="center" mb="20px">
         <Link href={'https://nextjs.org/docs/api-reference/next/head'}>    
-            <a target="_blank">Click here more info about Next Head </a>
+            <a target="_blank">Click here for more info about Next Head </a>
         </Link>
         </Text>
         <Text as="h2" fontSize="30px" mb="20px" textAlign="center">
@@ -51,7 +51,7 @@ const Images = () => {
         </Text>
         <Text textAlign="center" mb="20px">
         <Link href={'https://nextjs.org/docs/basic-features/image-optimization'}>    
-            <a target="_blank">Click here more info about Next Image Optimization </a>
+            <a target="_blank">Click here for more info about Next Image Optimization </a>
         </Link>
         </Text>
         <HStack justifyContent="center" spacing="10">
