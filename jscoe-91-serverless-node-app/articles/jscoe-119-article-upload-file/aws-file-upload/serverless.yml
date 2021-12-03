@@ -18,14 +18,14 @@ functions:
       - http: POST /file/upload
     role: UploadRole
     environment:
-      BUCKET: modusland
+      BUCKET: modusland${opt:stage, 'dev'}
 
 resources:
   Resources:
     ModuslandBucket:
       Type: AWS::S3::Bucket
       Properties:
-        BucketName: modusland
+        BucketName: modusland${opt:stage, 'dev'}
     UploadRole:
       Type: AWS::IAM::Role
       Properties:
