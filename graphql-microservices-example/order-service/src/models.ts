@@ -1,4 +1,4 @@
-import { Directive, Field, ObjectType } from '@nestjs/graphql';
+import { Directive, Field, ID, ObjectType } from '@nestjs/graphql';
 import {
   Column,
   CreateDateColumn,
@@ -11,6 +11,7 @@ export namespace OrderModel {
   @Directive('@extends')
   @Directive('@key(fields: "id")')
   export class Location {
+    @Field((type) => ID)
     @Directive('@external')
     id: string;
 
@@ -22,6 +23,7 @@ export namespace OrderModel {
   @Directive('@extends')
   @Directive('@key(fields: "id")')
   export class Customer {
+    @Field((type) => ID)
     @Directive('@external')
     id: string;
 
@@ -32,12 +34,15 @@ export namespace OrderModel {
   // main order table
   @ObjectType()
   @Directive('@key(fields: "id")')
-  @Entity()
+  @Entity("Order")
   export class Order {
+    @Field((type) => ID)
     @PrimaryGeneratedColumn('uuid')
     public id: string;
+    @Field()
     @Column('text')
     public code: string;
+    @Field()
     @CreateDateColumn()
     public createdAt: Date;
 
