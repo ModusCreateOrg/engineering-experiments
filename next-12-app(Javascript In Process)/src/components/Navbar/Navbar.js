@@ -20,11 +20,6 @@ export default function Navbar() {
                             <a className="text-decoration-none text-light">About Us</a>
                         </Link>
                     </li>
-                    <li className="p-2">
-                        <Link href="/blog/hello-world">
-                            <a className="text-decoration-none text-light">Buy/Sell</a>
-                        </Link>
-                    </li>
                 </ul>
             </div>
         </header>

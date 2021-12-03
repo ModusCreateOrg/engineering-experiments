@@ -1,7 +1,6 @@
 import Navbar from 'components/Navbar/Navbar'
 import CryptoIntro from 'components/CryptoIntro/CryptoIntro'
 import Head from 'next/head'
-import Cryptos from 'components/Cryptos/Cryptos'
 
 export default function Home() {
   return (
