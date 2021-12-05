@@ -61,4 +61,7 @@ body {
   .tasks__item__remove i {
     vertical-align: middle;
   }
+  .tasks__clear {
+    margin: 5px;
+  }
   
