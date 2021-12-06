@@ -1,0 +1,13 @@
+{
+  "type": "mongodb",
+  "host": "0.0.0.0",
+  "database": "db-cart",
+  "synchronize": true,
+  "logging": true,
+  "entities": [
+    "lib/entity/*.js"
+  ],
+  "cli": {
+    "entitiesDir": "lib/entity"
+  }
+}
