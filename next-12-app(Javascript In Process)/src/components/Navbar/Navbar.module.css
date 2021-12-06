@@ -14,3 +14,7 @@
 .brandName h1 {
     font-size: 24px;
 }
+
+.active {
+    color: rgb(174, 174, 255)!important;
+}

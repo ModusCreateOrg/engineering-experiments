@@ -28,7 +28,7 @@ export default function RandomCryptos() {
                 {coins.slice(0, 3).map((coin => {
                     return (
                         <div onClick={() => handleClick(coin.id)} className="w-33 d-flex align-items-center pe-3" key={coin.id} role="button">
-                            <Image src={coin.image.thumb} alt={coin.name} width="40" height="40" objectFit="cover" />
+                            <Image src={coin.image.small} alt={coin.name} width="80" height="80" objectFit="cover" />
                             <h3 className={style.cardTitleSize}>{coin.name}</h3>
                         </div>
                     )
