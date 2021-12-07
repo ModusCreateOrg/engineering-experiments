@@ -12,9 +12,20 @@ export class OrderService {
   ) {}
 
   async createOrder(orderInput: CreateOrderInput): Promise<OrderModel.Order> {
-      let orderModel = this.orderRepository.create(orderInput);
-      const orderResponse = await this.orderRepository.save(orderModel);
-      console.log(orderResponse);
-      return orderResponse;
+    let orderModel = this.orderRepository.create(orderInput);
+    const orderResponse = await this.orderRepository.save(orderModel);
+    return orderResponse;
   }
+
+  async findAll(): Promise<OrderModel.Order[]> {
+    return this.orderRepository.find();
+  }
+
+  async forLocation(id: string) {
+    return await this.orderRepository.find({ "locationId": id });
+  }
+
+  async forCustomer(id: string) {
+    return await this.orderRepository.find({ "customerId": id });
+}
 }
