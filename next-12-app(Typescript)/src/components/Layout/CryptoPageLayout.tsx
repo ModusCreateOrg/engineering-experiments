@@ -31,14 +31,16 @@ const navlinks = [
   {
     heading: 'Default Home Page',
     path: '/'
+  },
+  {
+    heading: 'Exchange',
+    path: '/Cryptos/Exchange'
   }
 ]
 
 const CryptoPageLayout = ({ children, title }: CryptoPageProps) => {
 
   const router = useRouter();
-
-  console.log(router.pathname)
 
   return (
     <>

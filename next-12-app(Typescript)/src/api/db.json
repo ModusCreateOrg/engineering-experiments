@@ -1,0 +1,20 @@
+{
+    "exchanges": [
+      {
+        "name": "Binance",
+        "score": 1
+      },
+      {
+        "name": "CoinBase",
+        "score": 1
+      },
+      {
+        "name": "CryptoExchange",
+        "score": 1
+      },
+      {
+        "name": "RobinHood",
+        "score": 1
+      }
+    ]
+  }

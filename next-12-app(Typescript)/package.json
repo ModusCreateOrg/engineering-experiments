@@ -5,7 +5,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "fakeapi": "json-server ./src/api/db.json"
   },
   "dependencies": {
     "@chakra-ui/react": "^1.7.1",
@@ -15,7 +16,9 @@
     "axios": "^0.24.0",
     "chart.js": "^3.6.0",
     "eslint-plugin-prettier": "^4.0.0",
+    "fakeapi": "^0.0.0",
     "framer-motion": "^4",
+    "json-server": "^0.17.0",
     "moment": "^2.29.1",
     "next": "12.0.3",
     "nivo": "^0.31.0",
