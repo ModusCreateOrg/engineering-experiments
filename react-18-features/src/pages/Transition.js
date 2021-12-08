@@ -1,21 +1,65 @@
-import {useState, useTransition} from 'react'
+/* eslint-disable no-unused-vars */
+import {useTransition, useState} from 'react'
+import Word from 'components/Word'
+import randomWords from 'random-words'
+
+const names = randomWords(5000)
 
 const Transition = () => {
-  const [startTransition, isPending] = useTransition({
-    timeoutMs: 3000,
-  })
+  const [isPending, startTransition] = useTransition()
 
-  const [numValue, setNumValue] = useState(0)
+  const [isTransition, setIsTransition] = useState(false)
 
-  console.log(startTransition, isPending)
+  const [findWord, setfindWord] = useState('')
+  const [uiWord, setUiWord] = useState('')
+
+  console.log(isPending, startTransition)
+
+  const handleChange = ({target: {value}}) => {
+    setfindWord(value)
+    if (isTransition) {
+      startTransition(() => {
+        setUiWord(value)
+      })
+    }
+  }
   return (
     <>
+      (
       <div className="container">
         <h1 className="text-center mt-3">Transition</h1>
-        <button type="button" onClick={() => setNumValue((curr) => curr + 1)}>
-          Add Value
+        <h2 className="">List of Names Example</h2>
+        <p>
+          When useTransition is used to set the state, it will first priortize
+          the input rather than the UI. By default, with no transition, the word
+          and the highlighted word are both priortize and updated around the
+          same time.
+        </p>
+        <button
+          type="button"
+          className={`border-0 p-1 text-white me-3 rounded ${
+            isTransition ? 'bg-success' : 'bg-danger'
+          }`}
+          onClick={() => setIsTransition((curr) => !curr)}
+        >
+          {' '}
+          Use Transition {isTransition ? ' on' : 'off'}
         </button>
-        <p>Current Value: {numValue}</p>
+        <input
+          onChange={handleChange}
+          type="text"
+          value={findWord}
+          placeholder="Enter some letters here"
+        />
+        <div className="d-flex flex-wrap">
+          {names.map((name) => (
+            <Word
+              findWord={isTransition ? uiWord : findWord}
+              word={name}
+              key={name}
+            />
+          ))}
+        </div>
       </div>
     </>
   )

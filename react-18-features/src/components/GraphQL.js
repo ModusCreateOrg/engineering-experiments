@@ -8,7 +8,6 @@ import {
 } from 'react-relay/hooks'
 import RelayEnvironment from 'api/relayEnvironment'
 import {graphql} from 'react-relay'
-import FallBack from 'components/FallBack'
 
 const RepositoryNameQuery = graphql`
   query GraphQLQuery {
@@ -38,7 +37,7 @@ const GraphQL = ({preloadedQuery: preQuery}) => {
 const GraphQLRoot = () => {
   return (
     <RelayEnvironmentProvider environment={RelayEnvironment}>
-      <Suspense fallback={FallBack}>
+      <Suspense fallback="Loading...">
         <GraphQL preloadedQuery={preloadedQuery} />
       </Suspense>
     </RelayEnvironmentProvider>
