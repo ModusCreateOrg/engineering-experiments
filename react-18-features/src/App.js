@@ -6,6 +6,8 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import Suspense from 'pages/Suspense'
 import Relay from 'pages/Relay'
 import Transition from 'pages/Transition'
+import Mutable from 'pages/Mutable'
+
 
 const App = () => (
   <div>
@@ -17,6 +19,8 @@ const App = () => (
       <Route path="/suspense" element={<Suspense />} />
       <Route path="/relay" element={<Relay />} />
       <Route path="/transition" element={<Transition />} />
+      <Route path="/mutable" element={<Mutable />} />
+
     </Routes>
   </div>
 )

@@ -24,6 +24,10 @@ const Home = () => (
           Use Transition Hook
           <Link to="/transition"> Click Here</Link>
         </li>
+        <li>
+          Use Mutable Source Hook
+          <Link to="/mutable"> Click Here</Link>
+        </li>
       </ol>
     </main>
   </>
