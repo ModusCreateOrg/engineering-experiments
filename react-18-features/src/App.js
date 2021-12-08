@@ -8,7 +8,6 @@ import Relay from 'pages/Relay'
 import Transition from 'pages/Transition'
 import Mutable from 'pages/Mutable'
 
-
 const App = () => (
   <div>
     <Navbar />
@@ -20,7 +19,6 @@ const App = () => (
       <Route path="/relay" element={<Relay />} />
       <Route path="/transition" element={<Transition />} />
       <Route path="/mutable" element={<Mutable />} />
-
     </Routes>
   </div>
 )
