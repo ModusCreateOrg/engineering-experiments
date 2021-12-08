@@ -6143,7 +6143,7 @@ rc@^1.2.8:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-dom@^18.0.0-beta-fdc1d617a-20211118:
+react-dom@^18.0.0-alpha-fd5e01c2e-20210913:
   version "18.0.0-beta-fdc1d617a-20211118"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-18.0.0-beta-fdc1d617a-20211118.tgz#0d2ddaa962fae1bbcf17c0eac5e3879d30793753"
   integrity sha512-BlA0NdAKE+Ibe5orAfHphf76ltL9+PiWsexrjVjtRcumrra3WH3rDYT+evXfLFBzxpbZDjhkL1oQ1/zCjKyWBA==
@@ -6209,10 +6209,10 @@ react-router@6.0.2:
   dependencies:
     history "^5.1.0"
 
-react@^18.0.0-beta-fdc1d617a-20211118:
-  version "18.0.0-beta-fdc1d617a-20211118"
-  resolved "https://registry.yarnpkg.com/react/-/react-18.0.0-beta-fdc1d617a-20211118.tgz#ed8dd1674ddcab02bfff88ba368ad4d44db79fa7"
-  integrity sha512-+02tXs7Wc5az4Aw+dWp7Vwmd68POpiJF0pD20dVCwS+W8xxQ9GFEJrd5VE4Nal+HWDkGzSb6dApxoahULK/8ZA==
+react@^18.0.0-alpha-fd5e01c2e-20210913:
+  version "18.0.0-alpha-fd5e01c2e-20210913"
+  resolved "https://registry.yarnpkg.com/react/-/react-18.0.0-alpha-fd5e01c2e-20210913.tgz#3e67ccd4a41a187958788d416b6a19595b8669ab"
+  integrity sha512-SWeUmHARw0qSM8LcpGzpw3UbyCTVNcJTuCHmPIvgHMvZrs8R8wwk2nil5BQ+LZ8q0iNwwU0ilkLTWIqCQ5d44w==
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"

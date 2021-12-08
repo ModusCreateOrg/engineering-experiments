@@ -3,7 +3,7 @@ import {useTransition, useState} from 'react'
 import Word from 'components/Word'
 import randomWords from 'random-words'
 
-const names = randomWords(5000)
+const names = randomWords(3000)
 
 const Transition = () => {
   const [isPending, startTransition] = useTransition()
@@ -12,8 +12,6 @@ const Transition = () => {
 
   const [findWord, setfindWord] = useState('')
   const [uiWord, setUiWord] = useState('')
-
-  console.log(isPending, startTransition)
 
   const handleChange = ({target: {value}}) => {
     setfindWord(value)
@@ -43,7 +41,7 @@ const Transition = () => {
           onClick={() => setIsTransition((curr) => !curr)}
         >
           {' '}
-          Use Transition {isTransition ? ' on' : 'off'}
+          Transition is {isTransition ? ' on' : 'off'}
         </button>
         <input
           onChange={handleChange}
