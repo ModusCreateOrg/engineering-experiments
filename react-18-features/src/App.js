@@ -5,6 +5,7 @@ import Batching from 'pages/Batching'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Suspense from 'pages/Suspense'
 import Relay from 'pages/Relay'
+import Transition from 'pages/Transition'
 
 const App = () => (
   <div>
@@ -15,6 +16,7 @@ const App = () => (
       <Route path="/batching" element={<Batching />} />
       <Route path="/suspense" element={<Suspense />} />
       <Route path="/relay" element={<Relay />} />
+      <Route path="/transition" element={<Transition />} />
     </Routes>
   </div>
 )

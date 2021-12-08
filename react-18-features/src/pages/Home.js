@@ -11,14 +11,18 @@ const Home = () => (
 
       <ol>
         <li>
-          Batching Feature <Link to="/batching">Click Here</Link>
+          Batching Feature <Link to="/batching"> Click Here</Link>
         </li>
         <li>
-          Suspense and Lazy Load Feature <Link to="/suspense">Click Here</Link>
+          Suspense and Lazy Load Feature <Link to="/suspense"> Click Here</Link>
         </li>
         <li>
           Suspense in Action with React Relay
-          <Link to="/relay">Click Here</Link>
+          <Link to="/relay"> Click Here</Link>
+        </li>
+        <li>
+          Use Transition Hook
+          <Link to="/transition"> Click Here</Link>
         </li>
       </ol>
     </main>
