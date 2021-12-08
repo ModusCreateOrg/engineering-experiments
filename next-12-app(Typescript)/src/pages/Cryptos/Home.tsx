@@ -39,6 +39,7 @@ const CryptoHomePage = () => {
           >
             Click here
           </Link>
+          This link will take you to a new tab. In new tab, click request temporary access to the demo server and come back here. 
         </Text>
         <Flex flexWrap="wrap">
           {coins.map((values) => {
