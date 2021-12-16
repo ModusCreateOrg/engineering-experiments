@@ -7,11 +7,13 @@ const Batching = () => {
   const [data, setData] = useState(null)
 
   const handleClick = () => {
+    console.log('handleClick Event')
     setNumberState((n) => n + 1)
     setSwitchState(!switchState)
   }
 
   const handleTimeoutClick = () => {
+    console.log('time out click')
     setTimeout(() => {
       setNumberState((n) => n + 1)
       setSwitchState(!switchState)
@@ -19,11 +21,10 @@ const Batching = () => {
   }
 
   const handleAsyncClick = () => {
-    console.log(`${process.env.BASE_URL}/users`)
+    console.log('async click')
     fetch(`${process.env.BASE_URL}/users`)
       .then((res) => res.json())
       .then((d) => {
-        console.log(d)
         setData(d)
         setNumberState((n) => n + 1)
         setSwitchState(!switchState)
@@ -32,9 +33,10 @@ const Batching = () => {
 
   useEffect(() => {
     setRenderState((n) => n + 1)
-  }, [numberState, switchState, data])
+  }, [])
 
-  console.log(data)
+  console.log('render')
+
   return (
     <>
       <main className="p-3 container">

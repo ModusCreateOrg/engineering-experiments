@@ -3,10 +3,10 @@ import {useTransition, useState} from 'react'
 import Word from 'components/Word'
 import randomWords from 'random-words'
 
-const names = randomWords(3000)
+const names = randomWords(7000).map((word, index) => `${word}${index}`)
 
 const Transition = () => {
-  const [isPending, startTransition] = useTransition()
+  const [isPending, startTransition] = useTransition({timeoutMs: 100})
 
   const [isTransition, setIsTransition] = useState(false)
 
@@ -27,6 +27,7 @@ const Transition = () => {
       <div className="container">
         <h1 className="text-center mt-3">Transition</h1>
         <h2 className="">List of Names Example</h2>
+        <h2>pending? {isPending ? 'yes' : 'no'} </h2>
         <p>
           When useTransition is used to set the state, it will first priortize
           the input rather than the UI. By default, with no transition, the word
