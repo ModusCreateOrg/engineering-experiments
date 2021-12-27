@@ -9,7 +9,9 @@ import SocketContext from './socket';
 
 const WEBSOCKET_URL = 'http://localhost:8080';
 
-const socket = io(WEBSOCKET_URL);
+const socket = io(WEBSOCKET_URL,{
+   "transports": ['websocket']
+});
 
 ReactDOM.render(
     <React.StrictMode>

@@ -19,20 +19,20 @@ EXPOSE 3000
 #start the frontend app
 CMD ["npm", "run", "start"]
 
-# FROM node:14-alpine AS production
-# ENV NODE_ENV production
+FROM node:17-alpine AS production
+ENV NODE_ENV production
 
-# # Add a work directory
-# WORKDIR /app
+# Add a work directory
+WORKDIR /app
 
-# #Cache and install dependencies
-# COPY package.json ./
-# COPY package-lock.json ./
+#Cache and install dependencies
+COPY package.json ./
+COPY package-lock.json ./
 
-# #Copy app files
-# COPY ./ ./
+#Copy app files
+COPY ./ ./
 
-# RUN npm i
+RUN npm i
 
-# #build the frontend app
-# CMD ["npm", "run", "build"]
+#build the frontend app
+CMD ["npm", "run", "build"]
