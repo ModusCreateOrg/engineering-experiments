@@ -1,7 +1,7 @@
 const express = require('express');
 const { createServer } = require('http');
 const { Server } = require('socket.io');
-
+const redis = require('socket.io-redis');
 const chatServer = require('./chat');
 
 const port = parseInt(process.argv[2] || '8080');
@@ -15,6 +15,9 @@ const io = new Server(httpServer, {
         methods: ['GET', 'POST']
     }
 });
+
+// bringing redis into the mix
+io.adapter(redis({ host: 'redis', port: 6379 }));
 
 // mount chat server
 chatServer(io);

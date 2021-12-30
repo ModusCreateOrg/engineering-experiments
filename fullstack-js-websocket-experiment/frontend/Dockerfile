@@ -17,7 +17,7 @@ RUN npm i
 EXPOSE 3000
 
 #start the frontend app
-CMD ["npm", "run", "start"]
+CMD ["npm", "start"]
 
 FROM node:17-alpine AS production
 ENV NODE_ENV production
@@ -35,4 +35,4 @@ COPY ./ ./
 RUN npm i
 
 #build the frontend app
-CMD ["npm", "run", "build"]
+CMD ["npm", "build"]
