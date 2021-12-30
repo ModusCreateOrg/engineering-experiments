@@ -33,3 +33,12 @@ function extractFile(event) {
   }
 }
 
+In this way we can do a code more cleaner
+
+so here the first step will be to extract file from the payload
+
+to extract the file, we're gonna be using parseMultipart functions
+
+the first will be getBoundary to extract the boundary from headers
+and the second one will be the function parse, that will extract the content of our file inside the payload
+
