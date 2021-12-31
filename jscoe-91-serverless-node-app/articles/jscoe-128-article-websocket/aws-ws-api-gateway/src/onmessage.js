@@ -13,7 +13,10 @@ class OnMessage {
             const postCalls = this.postMessages(event, connectionData.Items);
             await Promise.all(postCalls);
         } catch (err) {
-            return { statusCode: 500, body: err.stack };
+            return {
+                statusCode: 500,
+                body: err.stack
+            };
         }
 
         return { statusCode: 200 };
