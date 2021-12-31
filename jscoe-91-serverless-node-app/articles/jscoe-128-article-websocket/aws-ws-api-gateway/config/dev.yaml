@@ -1,2 +1,2 @@
 ENV: "dev"
-CONNECTIONS_WEBSOCKET_TABLE: "ConnectionsWebSocket${self:provider.stage}"
+CONNECTIONS_WEBSOCKET_TABLE: "ConnectionsWebSocketdev"
