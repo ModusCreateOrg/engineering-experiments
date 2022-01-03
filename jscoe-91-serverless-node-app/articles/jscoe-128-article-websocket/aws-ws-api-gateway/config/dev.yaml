@@ -1,0 +1,2 @@
+ENV: "dev"
+CONNECTIONS_WEBSOCKET_TABLE: "ConnectionsWebSocketdev"

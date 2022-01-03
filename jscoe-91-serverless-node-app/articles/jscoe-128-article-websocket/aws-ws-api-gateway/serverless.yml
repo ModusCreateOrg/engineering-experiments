@@ -1,0 +1,29 @@
+service: aws-ws-api-gateway
+
+frameworkVersion: '2 || 3'
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  lambdaHashingVersion: 20201221
+  stage: ${opt:stage, "dev"}
+  environment:
+    ${file(./config/${opt:stage, 'dev'}.yaml)}
+
+functions:
+  websocketConnect: ${file('./deploy/functions/WebSocketConnect.yaml')}
+  websocketDisconnect: ${file('./deploy/functions/WebSocketDisconnect.yaml')}
+  websocketOnMessage: ${file('./deploy/functions/WebSocketOnMessage.yaml')}
+
+package:
+  individually: true
+  patterns:
+    - '!deploy/**'
+    - '!config/**'
+    - '!src/**'
+
+plugins:
+  - serverless-iam-roles-per-function
+resources:
+  Resources:
+    ConnectionsWebsocketTable: ${file(./deploy/resources/ConnectionsWsDynamoDb.yaml)}  
