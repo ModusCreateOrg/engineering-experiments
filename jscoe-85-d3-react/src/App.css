@@ -7,7 +7,7 @@
 
 /* Side of Page */
 .side {
-    min-height: 80vh;
+    min-height: 60vh;
     background: #fff;
     border: 1px solid rgb(216, 214, 214);
 }

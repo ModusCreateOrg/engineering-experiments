@@ -23,7 +23,7 @@ function App() {
         <h1 className="text-center mb-4">D3 Visuals</h1>
         <div className="container">
             <div className="d-flex">
-            <div className="w-50">
+            <div className="w-100">
               <div className="side">
                 <BarGraph data={currentData}/>
 
