@@ -12,5 +12,9 @@ export const createRandomData = (amount, config) => {
         })
     }   
 
+    // Sort Data Points by X Value
+
+    dataPoints.sort((a,b) => a.x - b.x)
+    console.log(dataPoints)
     return dataPoints
 }

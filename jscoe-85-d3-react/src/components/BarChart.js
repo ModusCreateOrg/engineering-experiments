@@ -7,14 +7,14 @@ export default function BarGraph({data}) {
     useEffect(() => {
         // Integrate Graph here from Ref
         const d3Node = d3.select(ref.current)
-        const margin = { top: 20, right: 30, bottom: 30, left: 40 };
+        const margin = { top: 20, right: 10, bottom: 30, left: 40 };
         const height = 400;
-        const width = 1400;
+        const width = 1200;
         const x =  d3
         .scaleBand()
         .domain(data.map((d) => d.x))
         .rangeRound([margin.left, width - margin.right])
-        .padding(0.5);
+        .padding(0.4);
 
         const y = d3
         .scaleLinear()
@@ -25,15 +25,9 @@ export default function BarGraph({data}) {
         g.attr("transform", `translate(0,${height - margin.bottom})`).call(
           d3
             .axisBottom(x)
-            .tickValues(
-              d3
-                .ticks(...d3.extent(x.domain()), width / 40)
-                .filter((v) => x(v) !== undefined)
-            )
-            .tickSizeOuter(0)
         );
 
-      const y1Axis = (g) =>
+      const yAxis = (g) =>
         g
           .attr("transform", `translate(${margin.left},0)`)
           .style("color", "steelblue")
@@ -50,7 +44,7 @@ export default function BarGraph({data}) {
           );
 
       d3Node.select(".x-axis").call(xAxis);
-      d3Node.select(".y-axis").call(y1Axis);
+      d3Node.select(".y-axis").call(yAxis);
 
       d3Node
         .select(".plot-area")
@@ -66,13 +60,13 @@ export default function BarGraph({data}) {
     }, [ data ])
 
     return (
-        <>
-        <h2 className="text-center">BarChart</h2>
-        <svg style={{ margin: "0 auto", height: 400, width: 1000, }} ref={ref}>
+        <div className="p-2">
+        <h2 className="text-center mb-5">BarChart</h2>
+        <svg style={{ margin: "0 auto", height: 400, width: '100%'}} ref={ref}>
             <g className="plot-area" />
             <g className="x-axis" />
             <g className="y-axis" />
         </svg>
-        </>
+        </div>
     )
 }

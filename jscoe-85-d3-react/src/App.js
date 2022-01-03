@@ -5,11 +5,11 @@ import { createRandomData } from 'utils/data';
 
 function App() {
   // Default Data
-  const [currentData, setCurrentData] = useState(createRandomData(400, {
-    xMax: 40, 
+  const [currentData, setCurrentData] = useState(createRandomData(20, {
+    xMax: 7, 
     xMin: 1, 
     yMax: 1, 
-    yMin: 200
+    yMin: 30,
   }))
 
   useEffect(() => {
