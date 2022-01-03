@@ -1,7 +1,12 @@
 import * as d3 from 'd3'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { createRandomData } from 'utils/data';
 
-export default function BarGraph({data}) {
+
+export default function BarGraph() {
+
+    const [data, setData] = useState(createRandomData(5, { xMin: 1, xMax: 5, yMin: 10, yMax: 20}))
+
     const ref = useRef()
 
     useEffect(() => {
@@ -48,7 +53,7 @@ export default function BarGraph({data}) {
 
       d3Node
         .select(".plot-area")
-        .attr("fill", "steelblue")
+        .attr("fill", "orange")
         .selectAll(".bar")
         .data(data)
         .join("rect")

@@ -11,3 +11,16 @@
     background: #fff;
     border: 1px solid rgb(216, 214, 214);
 }
+
+
+/* Card Item */
+.card-item {
+    padding: 10px;
+    border: 1px solid rgb(211, 210, 210);
+    background: #fff;
+    cursor: pointer;
+}
+
+.card-item .active {
+    color: rgb(250, 213, 145);
+}

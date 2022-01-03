@@ -1,41 +1,37 @@
 import './App.css';
-import BarGraph from 'components/BarChart';
 import { useEffect, useState } from 'react';
-import { createRandomData } from 'utils/data';
+import RenderCharts from 'components/RenderChart';
+
+const options = ['Bar Chart','Line Chart']
+
 
 function App() {
-  // Default Data
-  const [currentData, setCurrentData] = useState(createRandomData(20, {
-    xMax: 7, 
-    xMin: 1, 
-    yMax: 1, 
-    yMin: 30,
-  }))
+  // Default Chart
+
+  const [currentChart, setCurrentChart] = useState(options[0]);
 
   useEffect(() => {
- 
+    
   }, [])
-
-  console.log(currentData)
 
   return (
     <div className="App">
         <h1 className="text-center mb-4">D3 Visuals</h1>
         <div className="container">
-            <div className="d-flex">
+           
             <div className="w-100">
               <div className="side">
-                <BarGraph data={currentData}/>
-
-
+                  {<RenderCharts option={currentChart} />}
               </div>
             </div>
-            <div className="row">
 
-
+            <div className="menu-bar d-flex flex-wrap">
+              {options.map(option => (<div key={option} className="card-item">{option}</div>))}
+            </div>
+            <div className="data-sets">
+                
             </div>
 
-            </div>
            
         </div>
     </div>
