@@ -1,11 +1,12 @@
-import BarGraph from 'components/BarChart';
+import BarChart from 'components/BarChart';
+import LineChart from './LineChart';
 
 export default function RenderCharts({option}) {
     switch(option) {
       case 'Line Chart':
-        return <div></div>
+        return <LineChart />
       default: 
-        return <BarGraph />
+        return <BarChart />
     }
 }
   
