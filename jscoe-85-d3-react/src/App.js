@@ -1,7 +1,23 @@
 import './App.css';
 import BarGraph from 'components/BarChart';
+import { useEffect, useState } from 'react';
+import { createRandomData } from 'utils/data';
 
 function App() {
+  // Default Data
+  const [currentData, setCurrentData] = useState(createRandomData(400, {
+    xMax: 40, 
+    xMin: 1, 
+    yMax: 1, 
+    yMin: 200
+  }))
+
+  useEffect(() => {
+ 
+  }, [])
+
+  console.log(currentData)
+
   return (
     <div className="App">
         <h1 className="text-center">D3 Visuals</h1>
