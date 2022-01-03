@@ -4,3 +4,10 @@
     background: rgb(242, 252, 247);
     min-height: 100vh;
 }
+
+/* Side of Page */
+.side {
+    min-height: 80vh;
+    background: #fff;
+    border: 1px solid rgb(216, 214, 214);
+}
