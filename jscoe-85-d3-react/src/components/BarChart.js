@@ -5,7 +5,7 @@ import { createRandomData } from 'utils/data';
 
 export default function BarGraph() {
 
-    const [data, setData] = useState(createRandomData(5, { xMin: 1, xMax: 5, yMin: 10, yMax: 20}))
+    const [data, setData] = useState(createRandomData(20, {yMin: 10, yMax: 20}))
 
     const ref = useRef()
 
@@ -13,7 +13,7 @@ export default function BarGraph() {
         // Integrate Graph here from Ref
         const d3Node = d3.select(ref.current)
         const margin = { top: 20, right: 10, bottom: 30, left: 40 };
-        const height = 400;
+        const height = 600;
         const width = 1200;
         const x =  d3
         .scaleBand()
@@ -66,8 +66,8 @@ export default function BarGraph() {
 
     return (
         <div className="p-2">
-        <h2 className="text-center mb-5">BarChart</h2>
-        <svg style={{ margin: "0 auto", height: 400, width: '100%'}} ref={ref}>
+        <h2 className="text-center mb-5">Bar Chart</h2>
+        <svg className="graph-default" ref={ref}>
             <g className="plot-area" />
             <g className="x-axis" />
             <g className="y-axis" />

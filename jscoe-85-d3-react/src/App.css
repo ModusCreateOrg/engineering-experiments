@@ -17,10 +17,22 @@
 .card-item {
     padding: 10px;
     border: 1px solid rgb(211, 210, 210);
+    border-top: none;
     background: #fff;
     cursor: pointer;
 }
 
-.card-item .active {
+.card-item:nth-child(odd) {
+    border-right: none;
+}
+
+.card-item.active {
     color: rgb(250, 213, 145);
+}
+
+/* Graph */
+.graph-default {
+    margin: 0 auto;
+    height: 600px; 
+    width: 100%;
 }
