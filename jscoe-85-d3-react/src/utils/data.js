@@ -1,6 +1,6 @@
 import { randomNumber } from "./utils";
 
-export const createData = (amount, config) => {
+export const createRandomData = (amount, config) => {
     const {xMax, xMin, yMax, yMin} = config;
 
     const dataPoints = [];
