@@ -7,3 +7,9 @@ For the implementation was used Serverless Framework, AWS API Gateway and AWS La
 
 Prerequisites
 ```sls plugin install --name serverless-iam-roles-per-function```
+
+Deploy:
+-
+
+To deploy this project, you should have the Serverless Framework installed and an AWS Account configured. With all configured and installed, you need just type:
+```sls deploy```
