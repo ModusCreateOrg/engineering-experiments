@@ -26,7 +26,7 @@ function App() {
             </div>
 
             <div className="menu-bar d-flex flex-wrap">
-              {options.map(option => (<div key={option} className={`card-item ${currentChart === option ? 'active' : ''}`}>{option}</div>))}
+              {options.map(option => (<div key={option} onClick={() => setCurrentChart(option)} className={`card-item ${currentChart === option ? 'active' : ''}`}>{option}</div>))}
             </div>
             <div className="data-sets">
                 

@@ -1,11 +1,11 @@
 import { randomNumber } from "./utils";
 
 export const createRandomData = (amount, config) => {
-    const {yMax, yMin} = config;
+    const {xMax, xMin, yMax, yMin} = config;
 
     const dataPoints = [];
 
-    for (let i = 1; i <= amount; i++) {
+    for (let i = xMin; i <= xMax; i++) {
         dataPoints.push({
             x: i,
             y: randomNumber(yMin, yMax)
