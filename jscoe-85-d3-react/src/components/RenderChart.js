@@ -7,7 +7,7 @@ export default function RenderCharts({option, dataCount}) {
       case 'Line Chart':
         return <LineChart  dataCount={dataCount} />
       case 'Circle Chart':
-        return <CircleChart />
+        return <CircleChart dataCount={dataCount} />
       default: 
         return <BarChart dataCount={dataCount} />
     }

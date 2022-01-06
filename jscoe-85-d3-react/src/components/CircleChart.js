@@ -3,11 +3,13 @@ import { useEffect, useRef, useState } from 'react'
 import { createDistRandomData, createRandomData } from 'utils/data';
 
 
-export default function CircleChart() {
+export default function CircleChart({dataCount}) {
 
-    const [data, setData] = useState(createDistRandomData(6))
+    const [data, setData] = useState([])
 
-    console.log(data)
+    useEffect(() => {
+        setData(createDistRandomData(dataCount))                                            
+      }, [dataCount])
 
     const ref = useRef()
     useEffect(() => {
@@ -54,7 +56,7 @@ export default function CircleChart() {
             .text((d) => `${d.data.x} (${d.data.y})`)
             .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")";  })
             .style("text-anchor", "middle")
-            .style("font-size", 17)
+            .style("font-size", 12)
     }, [ data ])
 
     return (
