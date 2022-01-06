@@ -9,7 +9,7 @@ export default function HistoChart({dataCount}) {
     const ref = useRef()
 
     useEffect(() => {
-      setData(createHistogramData(dataCount * 200))
+      setData(createHistogramData((dataCount+ 2) * 100))
     }, [dataCount])
 
     useEffect(() => {
@@ -29,7 +29,7 @@ export default function HistoChart({dataCount}) {
             "translate(" + 100 + "," + 10 + ")");
 
         const x = d3.scaleLinear()
-        .domain([0, 500])
+        .domain([0, (dataCount+ 2) * 100])
         .range([0, width])
 
         // Append X 

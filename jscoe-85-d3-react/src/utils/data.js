@@ -27,15 +27,14 @@ export const createHistogramData = (length) => {
     // Keep it at 10 - 500 range
     const data = [];
 
-    for (let i = 0; i <= length; i++) {
+    for (let i = 0; i <= 1000; i++) {
         // Lets make middle value appear more frequently
         let tries = 0;
-        let triesTwo = 0;
 
-        let randomNum = randomNumber(10, 500);
+        let randomNum = randomNumber(10, length);
 
-        while ((randomNum < 200 || randomNum > 300) && tries !== 2) {
-            randomNum = randomNumber(10, 500);
+        while ((randomNum < (length / 2 - (length / 10 )) || randomNum > (length / 2 + length / 5)) && tries !== 2) {
+            randomNum = randomNumber(10, length);
             
             tries ++;
         }
