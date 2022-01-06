@@ -13,7 +13,7 @@ export default function LineChart() {
         // Integrate Graph here from Ref
         const d3Node = d3.select(ref.current)
         const height = 500;
-        const width = 900;
+        const width = 1200;
         const x =  d3
         .scaleLinear()
         .domain(d3.extent(data, (d) => d.x))

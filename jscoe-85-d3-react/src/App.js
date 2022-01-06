@@ -2,7 +2,7 @@ import './App.css';
 import { useEffect, useState } from 'react';
 import RenderCharts from 'components/RenderChart';
 
-const options = ['Bar Chart','Line Chart']
+const options = ['Bar Chart','Line Chart', 'Circle Chart']
 
 
 function App() {
