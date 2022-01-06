@@ -12,11 +12,10 @@ export default function CircleChart() {
     useEffect(() => {
         // Integrate Graph here from Ref
         const d3Node = d3.select(ref.current)
-        const margin = { top: 20, right: 10, bottom: 30, left: 40 };
         const height = 500;
-        const width = 700;
+        const width = 1300;
 
-        const radius = Math.min(width, height)/ 2;
+        const radius = Math.min(width, height)/ 2 - 20;
 
         const graphSection = d3Node.attr("width", width)
             .attr("height", height)
@@ -32,20 +31,29 @@ export default function CircleChart() {
 
         const renderGraph = circle(data)
 
+        const arc = d3.arc()
+            .innerRadius(0)
+            .outerRadius(radius)
+
         graphSection
             .selectAll('graphs')
             .data(renderGraph)
             .enter()
             .append('path')
-            .attr('d', d3.arc()
-                .innerRadius(0)
-                .outerRadius(radius)
-            )
-            .attr('fill', (d) => color(d.x))
+            .attr('d', arc)
+            .attr('fill', (d) => color(d))
             .attr("stroke", "black")
             .style("stroke-width", "2px")
             .style("opacity", 1)
-        
+        graphSection
+            .selectAll('graphs')
+            .data(renderGraph)
+            .enter()
+            .append('text')
+            .text((d) => d.data.x)
+            .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")";  })
+            .style("text-anchor", "middle")
+            .style("font-size", 17)
     }, [ data ])
 
     return (
