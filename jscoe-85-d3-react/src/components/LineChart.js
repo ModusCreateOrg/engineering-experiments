@@ -3,13 +3,21 @@ import { useEffect, useRef, useState } from 'react'
 import { createRandomData } from 'utils/data';
 
 
-export default function LineChart() {
+export default function LineChart({dataCount}) {
 
-    const [data, setData] = useState(createRandomData({xMin: 2012, xMax: 2020 ,yMin: 1000, yMax: 5000}))
+    const [data, setData] = useState([])
 
     const ref = useRef()
 
     useEffect(() => {
+        setData(createRandomData({xMin: 10, xMax: 5 * dataCount, yMin: 400, yMax: 800}))
+      }, [dataCount])
+  
+
+    useEffect(() => {
+        // Removes all paths (graphical lines)
+        d3.selectAll("path").remove();
+
         // Integrate Graph here from Ref
         const d3Node = d3.select(ref.current)
         const height = 500;

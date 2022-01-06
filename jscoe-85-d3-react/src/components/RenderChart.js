@@ -5,7 +5,7 @@ import LineChart from './LineChart';
 export default function RenderCharts({option, dataCount}) {
     switch(option) {
       case 'Line Chart':
-        return <LineChart />
+        return <LineChart  dataCount={dataCount} />
       case 'Circle Chart':
         return <CircleChart />
       default: 
