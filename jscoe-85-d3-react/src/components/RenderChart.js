@@ -1,4 +1,4 @@
-import BarChart from 'components/BarChart';
+import BarChart from './BarChart';
 import CircleChart from './CircleChart';
 import LineChart from './LineChart';
 

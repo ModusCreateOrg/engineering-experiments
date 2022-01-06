@@ -5,36 +5,35 @@ import { createRandomData } from 'utils/data';
 
 export default function CircleChart() {
 
-    const [data, setData] = useState(createRandomData(5, {xMin: 1, xMax: 20,yMin: 10, yMax: 20}))
+    const [data, setData] = useState(createRandomData(5, {xMin: 1, xMax: 5,yMin: 10, yMax: 20}))
 
     const ref = useRef()
-
+    console.log(data)
     useEffect(() => {
         // Integrate Graph here from Ref
         const d3Node = d3.select(ref.current)
         const margin = { top: 20, right: 10, bottom: 30, left: 40 };
-        const height = 600;
-        const width = 1200;
+        const height = 500;
+        const width = 700;
 
         const radius = Math.min(width, height)/ 2;
 
         const graphSection = d3Node.attr("width", width)
-            .attr("heigh", height)
+            .attr("height", height)
             .append("g")
             .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
 
         const color = d3.scaleOrdinal()
             .domain(data)
-            .range(["blue","orange", "purple", "green", "red"])
+            .range(["#AA7B16", "#16AA91", "#168BAA", "#60747A", "#a05d56"])
 
-        const circle = d3.pie()
-            .value((d) => d.value)
+        const circle = d3.pie().value(d => d.x)
 
-        const renderGraph = circle(d3.entries(data))
+        const renderGraph = circle(data)
 
         graphSection
-            .selectAll('whatever')
+            .selectAll('graphs')
             .data(renderGraph)
             .enter()
             .append('path')
@@ -42,10 +41,10 @@ export default function CircleChart() {
                 .innerRadius(0)
                 .outerRadius(radius)
             )
-            .attr('fill', (d) => color(d.data.key))
+            .attr('fill', (d) => color(d.x))
             .attr("stroke", "black")
             .style("stroke-width", "2px")
-            .style("opacity", 0.7)
+            .style("opacity", 1)
         
     }, [ data ])
 
