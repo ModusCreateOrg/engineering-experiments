@@ -1,13 +1,16 @@
 import * as d3 from 'd3'
 import { useEffect, useRef, useState } from 'react'
-import { createRandomData } from 'utils/data';
+import { createDistRandomData, createRandomData } from 'utils/data';
 
 
-export default function BarChart() {
+export default function BarChart({dataCount}) {
 
-    const [data, setData] = useState(createRandomData({xMin: 1, xMax: 20,yMin: 10, yMax: 20}))
-
+    const [data, setData] = useState([])
     const ref = useRef()
+
+    useEffect(() => {
+      setData(createRandomData({xMin: 1, xMax: dataCount, yMin:10, yMax: 50}))
+    }, [dataCount])
 
     useEffect(() => {
         // Integrate Graph here from Ref
@@ -63,6 +66,8 @@ export default function BarChart() {
         .attr("y", (d) => y(d.y))
         .attr("height", (d) => y(0) - y(d.y));
     }, [ data ])
+
+
 
     return (
         <div className="p-2">

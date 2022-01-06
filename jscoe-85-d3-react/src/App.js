@@ -9,19 +9,34 @@ function App() {
   // Default Chart
 
   const [currentChart, setCurrentChart] = useState(options[0]);
+  const [dataCount ,setDataCount] = useState(3)
 
-  useEffect(() => {
-    
-  }, [])
+
+  const changeAmount = (type) => {
+    if (type === 'minus') {
+      if (dataCount > 3) {
+        setDataCount(count => count - 1);
+      }
+    }
+    else {
+      if (dataCount < 30) {
+        setDataCount(count => count + 1);
+      }
+    }
+  }
+
 
   return (
     <div className="App">
         <h1 className="text-center mb-4">D3 Visuals</h1>
         <div className="container">
-           
+            <div className="adjust-data">
+              <button onClick={() => changeAmount('minus')} className="px-4 py-2">-</button>
+              <button onClick={() => changeAmount('add')} className="px-4 py-2">+</button>
+            </div>
             <div className="w-100">
               <div className="side">
-                  {<RenderCharts option={currentChart} />}
+                  {<RenderCharts option={currentChart} dataCount={dataCount} />}
               </div>
             </div>
 

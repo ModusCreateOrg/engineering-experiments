@@ -35,5 +35,18 @@
     margin: 0 auto;
     height: 600px; 
     width: 100%;
+    overflow: auto;
 }
 
+/* Adjust Data */
+.adjust-data {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 10px auto;
+    width: 450px;
+}
+
+.adjust-data button {
+    background: #fff;
+    border: 2px solid rgb(206, 202, 202);
+}

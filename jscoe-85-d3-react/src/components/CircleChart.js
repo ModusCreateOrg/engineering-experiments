@@ -59,9 +59,9 @@ export default function CircleChart() {
 
     return (
         <div className="p-2">
-        <h2 className="text-center mb-5">Pie Chart</h2>
-        <svg className="graph-default" ref={ref}>
-        </svg>
+            <h2 className="text-center mb-5">Pie Chart</h2>
+            <svg className="graph-default" ref={ref}>
+            </svg>   
         </div>
     )
 }
