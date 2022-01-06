@@ -1,6 +1,7 @@
 import { randomNumber } from "./utils";
 
-export const createRandomData = (amount, config) => {
+// Use for Line and Bar Charts
+export const createRandomData = (config) => {
     const {xMax, xMin, yMax, yMin} = config;
 
     const dataPoints = [];
@@ -17,4 +18,9 @@ export const createRandomData = (amount, config) => {
     dataPoints.sort((a,b) => a.x - b.x)
     console.log(dataPoints)
     return dataPoints
+}
+
+// Use for Circle Charts or any Distribution
+export const createDistRandomData = (length) => {
+    
 }

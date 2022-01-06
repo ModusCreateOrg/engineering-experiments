@@ -5,7 +5,7 @@ import { createRandomData } from 'utils/data';
 
 export default function BarChart() {
 
-    const [data, setData] = useState(createRandomData(20, {xMin: 1, xMax: 20,yMin: 10, yMax: 20}))
+    const [data, setData] = useState(createRandomData({xMin: 1, xMax: 20,yMin: 10, yMax: 20}))
 
     const ref = useRef()
 

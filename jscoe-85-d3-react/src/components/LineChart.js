@@ -5,7 +5,7 @@ import { createRandomData } from 'utils/data';
 
 export default function LineChart() {
 
-    const [data, setData] = useState(createRandomData(20, {xMin: 2012, xMax: 2020 ,yMin: 1000, yMax: 5000}))
+    const [data, setData] = useState(createRandomData({xMin: 2012, xMax: 2020 ,yMin: 1000, yMax: 5000}))
 
     const ref = useRef()
 

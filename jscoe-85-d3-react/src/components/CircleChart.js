@@ -5,7 +5,7 @@ import { createRandomData } from 'utils/data';
 
 export default function CircleChart() {
 
-    const [data, setData] = useState(createRandomData(5, {xMin: 1, xMax: 5,yMin: 10, yMax: 20}))
+    const [data, setData] = useState(createRandomData({xMin: 1, xMax: 5,yMin: 10, yMax: 20}))
 
     const ref = useRef()
     console.log(data)
