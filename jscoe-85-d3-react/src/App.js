@@ -2,7 +2,7 @@ import './App.css';
 import { useEffect, useState } from 'react';
 import RenderCharts from 'components/RenderChart';
 
-const options = ['Bar Chart','Line Chart', 'Circle Chart']
+const options = ['Bar Chart','Line Chart', 'Circle Chart', 'Histogram Chart']
 
 
 function App() {
@@ -44,15 +44,9 @@ function App() {
                   {<RenderCharts option={currentChart} dataCount={dataCount} />}
               </div>
             </div>
-
             <div className="menu-bar d-flex flex-wrap">
               {options.map(option => (<div key={option} onClick={() => changeCurrentChart(option)} className={`card-item ${currentChart === option ? 'active' : ''}`}>{option}</div>))}
-            </div>
-            <div className="data-sets">
-                
-            </div>
-
-           
+            </div>         
         </div>
     </div>
   );
