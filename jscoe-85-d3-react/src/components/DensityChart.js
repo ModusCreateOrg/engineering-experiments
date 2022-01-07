@@ -1,6 +1,6 @@
 import * as d3 from 'd3'
 import { useEffect, useRef, useState } from 'react'
-import { createRandomData } from 'utils/data';
+import { createRandomData, kernelDensityEstimator, kernelEpanechnikov } from 'utils/data';
 
 
 export default function DensityChart({dataCount}) {
@@ -22,36 +22,51 @@ export default function DensityChart({dataCount}) {
         const d3Node = d3.select(ref.current)
         const height = 500;
         const width = 1200;
+
+        // Max for X
         const x =  d3
         .scaleLinear()
-        .domain(d3.extent(data, (d) => d.x))
+        .domain(d3.max(data, (d) => d.x))
         .range([ 0, width ])
 
+
+        // Append X instead of producing it
+        d3Node.append('g')
+        .call(d3.axisBottom(x))
+
+
+
+
+        // Max for Y
         const y = d3
         .scaleLinear()
         .domain([0, d3.max(data, (d) => d.y)])
         .range([height, 0]);
 
+        // Append Y instead of producing it 
+        d3Node.append('g')
+        .call(d3.axisBottom(x));
+
+
+         // Compute kernel density estimation
+        const kde = kernelDensityEstimator(kernelEpanechnikov(7), x.ticks(40), d3);
+        const density =  kde( data.map(d => d.x))
+
         
-      d3Node.select(".x-axis").attr("transform", "translate(45," + height + ")")
-      .call(d3.axisBottom(x));
-
-      d3Node.select(".y-axis").attr("transform", "translate(40,0)").call(d3.axisLeft(y));
-      
-      const line = d3.line()
-      .x(function(d) { return x(d.x)})
-      .y(function(d) { return y(d.y)})
-
-      d3Node
-        .append("path")
-        .datum(data)
-        .transition()
-        .attr("transform", "translate(" + 100 + "," + 100 + ")")
-        .attr("d", line) 
-        .style("fill", "none")
-        .style("stroke", "orange")
-        .style("stroke-width", "1");
-
+       // Plot the area
+        d3Node.append("path")
+            .attr("class", "mypath")
+            .datum(density)
+            .attr("fill", "#69b3a2")
+            .attr("opacity", ".8")
+            .attr("stroke", "#000")
+            .attr("stroke-width", 1)
+            .attr("stroke-linejoin", "round")
+            .attr("d",  d3.line()
+            .curve(d3.curveBasis)
+            .x(function(d) { return x(d[0]); })
+            .y(function(d) { return y(d[1]); })
+  );
     
     }, [ data ])
 
@@ -59,8 +74,7 @@ export default function DensityChart({dataCount}) {
         <div className="p-2">
         <h2 className="text-center mb-5">Line Chart</h2>
         <svg className="graph-default" ref={ref}>
-            <g className="x-axis" />
-            <g className="y-axis" />
+           
         </svg>
         </div>
     )
