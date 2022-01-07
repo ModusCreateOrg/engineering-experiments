@@ -45,6 +45,7 @@ export default function LineChart({dataCount}) {
       d3Node
         .append("path")
         .datum(data)
+        .transition()
         .attr("transform", "translate(" + 100 + "," + 100 + ")")
         .attr("d", line) 
         .style("fill", "none")
