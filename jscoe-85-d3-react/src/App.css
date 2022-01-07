@@ -22,9 +22,15 @@
     cursor: pointer;
 }
 
-.card-item:nth-child(odd) {
+.card-item:nth-child(odd).card-item:not(:last-child) {
     border-right: none;
 }
+
+.card-item:nth-child(even) {
+    border-right: none;
+}
+
+
 
 .card-item.active {
     color: rgb(250, 213, 145);
