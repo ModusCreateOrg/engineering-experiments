@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack serve",
-    "build": "webpack"
+    "build:watch": "concurrently \"npm run webpack:watch\" \"npm run serve\"",
+    "webpack:watch": "webpack --watch",
+    "serve": "serve dist -p 8080",
+    "start": "webpack serve --env development"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +22,7 @@
     "@babel/preset-react": "^7.16.7",
     "autoprefixer": "^10.4.2",
     "babel-loader": "^8.2.3",
+    "concurrently": "^7.0.0",
     "css-loader": "^6.5.1",
     "html-webpack-plugin": "^5.5.0",
     "postcss": "^8.4.5",

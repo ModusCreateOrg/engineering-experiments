@@ -2,7 +2,7 @@
   "name": "root",
   "private": true,
   "scripts": {
-    "start": "npx lerna run start --parallel"
+    "build:watch": "npx lerna run build:watch --parallel"
   },
   "devDependencies": {
     "lerna": "^4.0.0"

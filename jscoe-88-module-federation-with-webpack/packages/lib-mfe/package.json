@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "description": "This MFE provides all the required libraries for the given SPA. This way you can control the versions of libraries.",
   "scripts": {
-    "webpack": "webpack --watch --mode production",
-    "serve": "serve dist -p 8081",
-    "start": "concurrently \"npm run webpack\" \"npm run serve\""
+    "build:watch": "concurrently \"npm run webpack:watch\" \"npm run serve\"",
+    "webpack:watch": "webpack --watch --mode production",
+    "serve": "serve dist -p 8081"
   },
   "keywords": [],
   "author": "",
