@@ -12,10 +12,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
-  },
   "devDependencies": {
     "@babel/core": "^7.16.7",
     "@babel/preset-env": "^7.16.7",
@@ -28,6 +24,7 @@
     "postcss": "^8.4.5",
     "postcss-import": "^14.0.2",
     "postcss-loader": "^6.2.1",
+    "serve": "13.0.2",
     "style-loader": "^3.3.1",
     "tailwindcss": "^3.0.12",
     "webpack": "^5.65.0",
