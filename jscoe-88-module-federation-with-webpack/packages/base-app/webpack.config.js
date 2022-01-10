@@ -1,5 +1,6 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin')
 
 module.exports = {
   mode: 'development',
@@ -7,10 +8,13 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist')
   },
+  devServer: {
+    port: 8080
+  },
   module: {
     rules: [
       {
-        test: /\.?js$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
@@ -26,6 +30,13 @@ module.exports = {
     ]
   },
   plugins: [
+    new ModuleFederationPlugin({
+      name: 'BaseApp',
+      remotes: {
+        LibMFE: 'LibMFE@http://localhost:8081/remoteEntry.js',
+        HomePageMFE: 'HomePageMFE@http://localhost:8082/remoteEntry.js'
+      }
+    }),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'public', 'index.html')
     })
