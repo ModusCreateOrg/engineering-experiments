@@ -6,6 +6,7 @@
   img {
     vertical-align: middle;
     max-height: 70vh;
+    width: 100%;
   }
 
   .content {
@@ -18,7 +19,6 @@
     display: flex;
     width: 100%;
     padding: 80px 160px;
-    box-sizing: border-box;
     h1 {
       font-size: 56px;
       line-height: 1.4;
