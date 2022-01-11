@@ -1,11 +1,13 @@
 import React from 'LibMFE/react'
 import ReactDOM from 'LibMFE/react-dom'
-import './main.css'
+import 'normalize.css'
 import HomePage from 'HomePageMFE/HomePage'
+
+import './styles.css'
 import Header from './components/Header/Header'
 
 ReactDOM.render(
-  <div>
+  <div className="base-app-shell">
     <Header />
     <HomePage />
   </div>,
