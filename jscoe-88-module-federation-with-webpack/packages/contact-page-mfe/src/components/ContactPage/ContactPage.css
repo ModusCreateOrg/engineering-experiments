@@ -3,10 +3,10 @@
   background-position: center center;
   background-attachment: scroll;
   background-size: cover;
-  min-height: 60vh;
+  min-height: 300px;
   filter: brightness(50%);
 
-  padding: 90px 30px;
+  padding: 100px 80px;
 
   .content {
     color: #fff;
