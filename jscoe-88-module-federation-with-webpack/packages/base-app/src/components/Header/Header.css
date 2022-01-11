@@ -18,7 +18,10 @@
     .nav-item {
       padding: 16px;
       text-transform: uppercase;
-      color: gray;
+      a {
+        color: gray;
+        text-decoration: none;
+      }
     }
   }
 }

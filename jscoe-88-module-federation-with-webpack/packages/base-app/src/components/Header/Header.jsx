@@ -1,4 +1,5 @@
 import React from 'LibMFE/react'
+import { Link } from 'LibMFE/react-router-dom'
 import content from 'ContentMFE/content'
 import './Header.css'
 
@@ -13,7 +14,7 @@ const Header = () => {
       <ul className="nav-items">
         {navItems.map(({ id, title, url }) => (
           <li className="nav-item" key={id}>
-            {title}
+            <Link to={url}>{title}</Link>
           </li>
         ))}
       </ul>
