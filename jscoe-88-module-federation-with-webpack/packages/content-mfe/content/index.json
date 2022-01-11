@@ -27,6 +27,13 @@
         "subTitle": "Let's chat.",
         "image": "https://moduscreate.com/wp-content/uploads/2020/12/Contact-Modus-RO.png"
       }
+    },
+    "aboutPage": {
+      "banner": {
+        "title": "About Modus",
+        "subTitle": "Redefining consulting for the digital age.",
+        "image": "https://moduscreate.com/wp-content/uploads/2020/12/About-Modus-DC-HQ.png"
+      }
     }
   }
 }
