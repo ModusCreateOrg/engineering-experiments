@@ -37,7 +37,8 @@ module.exports = {
       name: 'BaseApp',
       remotes: {
         LibMFE: 'LibMFE@http://localhost:8081/remoteEntry.js',
-        HomePageMFE: 'HomePageMFE@http://localhost:8082/remoteEntry.js'
+        HomePageMFE: 'HomePageMFE@http://localhost:8082/remoteEntry.js',
+        ContentMFE: 'ContentMFE@http://localhost:8083/remoteEntry.js'
       }
     }),
     new HtmlWebpackPlugin({

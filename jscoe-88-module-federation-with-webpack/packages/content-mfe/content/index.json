@@ -1,0 +1,25 @@
+{
+  "appContent": {
+    "navItems": [
+      {
+        "id": "contact",
+        "title": "Contact",
+        "url": "/contact"
+      },
+      {
+        "id": "about",
+        "title": "About",
+        "url": "/about"
+      }
+    ]
+  },
+  "pageContent": {
+    "homePage": {
+      "banner": {
+        "title": "Build for the Digital Future",
+        "subTitle": "Modernize your customer interactions and transform the way your business works.",
+        "image": "https://res.cloudinary.com/modus-create-inc/images/f_auto,q_auto:eco,w_auto/f_auto,q_auto:eco/v1611942530/Modus-Hero-2/Modus-Hero-2.jpg"
+      }
+    }
+  }
+}

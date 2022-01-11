@@ -1,16 +1,24 @@
 import React from 'LibMFE/react'
+import content from 'ContentMFE/content'
+
 import './HomePage.css'
 
 const HomePage = () => {
+  const {
+    pageContent: { homePage }
+  } = content
+  const { banner } = homePage
+  const { title, subTitle, image } = banner
+
   return (
-    <div className="home-page-banner">
+    <div
+      className="home-page-banner"
+      style={{ backgroundImage: `url(${image})` }}
+    >
       <div className="content">
         <div className="left-col">
-          <h1>Build for the Digital Future</h1>
-          <h2>
-            Modernize your customer interactions and transform the way your
-            business works.
-          </h2>
+          <h1>{title}</h1>
+          <h2>{subTitle}</h2>
         </div>
         <div className="right-col">&nbsp;</div>
       </div>
