@@ -10,7 +10,9 @@ const Header = () => {
 
   return (
     <div className="main-header">
-      <div className="logo-section">Modus Create</div>
+      <div className="logo-section">
+        <Link to="/">Modus Create</Link>
+      </div>
       <ul className="nav-items">
         {navItems.map(({ id, title, url }) => (
           <li className="nav-item" key={id}>

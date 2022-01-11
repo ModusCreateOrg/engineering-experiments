@@ -38,7 +38,8 @@ module.exports = {
       remotes: {
         LibMFE: 'LibMFE@http://localhost:8081/remoteEntry.js',
         HomePageMFE: 'HomePageMFE@http://localhost:8082/remoteEntry.js',
-        ContentMFE: 'ContentMFE@http://localhost:8083/remoteEntry.js'
+        ContentMFE: 'ContentMFE@http://localhost:8083/remoteEntry.js',
+        ContactPageMFE: 'ContactPageMFE@http://localhost:8084/remoteEntry.js'
       }
     }),
     new HtmlWebpackPlugin({
