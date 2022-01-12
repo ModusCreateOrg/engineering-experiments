@@ -18,21 +18,21 @@
       "banner": {
         "title": "Build for the Digital Future",
         "subTitle": "Modernize your customer interactions and transform the way your business works.",
-        "image": "https://res.cloudinary.com/modus-create-inc/images/f_auto,q_auto:eco,w_auto/f_auto,q_auto:eco/v1611942530/Modus-Hero-2/Modus-Hero-2.jpg"
+        "image": "/images/Modus-Hero-2.jpg"
       }
     },
     "contactPage": {
       "banner": {
         "title": "Contact",
         "subTitle": "Let's chat.",
-        "image": "https://moduscreate.com/wp-content/uploads/2020/12/Contact-Modus-RO.png"
+        "image": "/images/Contact-Modus-RO.png"
       }
     },
     "aboutPage": {
       "banner": {
         "title": "About Modus",
         "subTitle": "Redefining consulting for the digital age.",
-        "image": "https://moduscreate.com/wp-content/uploads/2020/12/About-Modus-DC-HQ.png"
+        "image": "/images/About-Modus-DC-HQ.png"
       }
     }
   }
