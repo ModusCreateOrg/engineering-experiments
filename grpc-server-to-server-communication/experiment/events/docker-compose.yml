@@ -1,0 +1,29 @@
+version: '3'
+services:
+  app:
+    image: node:16.13.1-alpine3.14
+    working_dir: /var/www/html
+    env_file: .env
+    ports:
+      - '8001:8001'
+      - '9221:9229' # Debug port
+    volumes:
+      - ./:/var/www/html
+    networks:
+      - gprc_events
+    command: sh -c "npm i -g npm@latest && npm install && npm run start:docker"
+  db:
+    image: mysql:8.0.25
+    # comment this line out when the mysql driver used has added support for caching_sha2_password.
+    command: mysqld --default-authentication-plugin=mysql_native_password
+    env_file: .env
+    environment:
+      - MYSQL_ROOT_PASSWORD=$DB_PASS
+      - MYSQL_DATABASE=$DB_NAME
+    ports:
+      - '33061:3306'
+    networks:
+      - gprc_events
+networks:
+  gprc_events:
+    driver: bridge
