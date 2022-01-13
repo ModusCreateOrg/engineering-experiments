@@ -10,6 +10,7 @@
     "start": "tsc && node ./dist",
     "start:docker": "npm-run-all --parallel build:watch docker",
     "docker": "nodemon --inspect=0.0.0.0:9229 ./dist",
+    "migration": "node ./dist/db/migrations",
     "lint": "tslint src/**/*.ts",
     "format": "tslint src/**/*.ts --fix"
   },
