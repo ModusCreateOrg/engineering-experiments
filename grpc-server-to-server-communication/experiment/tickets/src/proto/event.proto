@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package eventPackage;
+
+service Event {
+  rpc createEvent(CreateEventRequest) returns (EventItem);
+  rpc readEvents(Empty) returns (stream EventItem);
+  rpc readEvent(EventIdRequest) returns (EventItem);
+  rpc getTickets(EventIdRequest) returns (TicketItems);
+  rpc buyTicket(BuyTicketRequest) returns (TicketItem);
+}
+
+message Empty {}
+
+message CreateEventRequest {
+  string name = 1;
+  string organizer = 2;
+  string venue = 3;
+  int32 seats = 4;
+  string startsAt = 5;
+}
+
+message EventIdRequest {
+  int32 id = 1;
+}
+
+message BuyTicketRequest {
+  int32 id = 1;
+  string addressee = 2;
+  int32 noOfAttendees = 3;
+}
+
+message EventItem {
+  int32 id = 1;
+  string name = 2;
+  string organizer = 3;
+  string venue = 4;
+  int32 seats = 5;
+  string startsAt = 6;
+  string createdAt = 7;
+  string updatedAt = 8;
+}
+
+message TicketItem {
+  int32 id = 1;
+  int32 eventId = 2;
+}
+
+message TicketItems {
+  repeated TicketItem items = 1;
+}

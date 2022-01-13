@@ -5,14 +5,15 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc",
-    "build:watch": "tsc -w",
+    "build": "npm run copy-files && tsc",
+    "build:watch": "npm run copy-files && tsc -w",
     "start": "tsc && node ./dist",
     "start:docker": "npm-run-all --parallel build:watch docker",
     "docker": "nodemon --inspect=0.0.0.0:9229 ./dist",
     "migration": "node ./dist/db/migrations",
     "lint": "tslint src/**/*.ts",
-    "format": "tslint src/**/*.ts --fix"
+    "format": "tslint src/**/*.ts --fix",
+    "copy-files": "cp -r src/proto dist"
   },
   "husky": {
     "hooks": {
