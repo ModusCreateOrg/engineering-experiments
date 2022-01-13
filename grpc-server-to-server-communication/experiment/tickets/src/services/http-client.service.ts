@@ -28,8 +28,8 @@ export class HttpClientService {
 
   async getEventInfo(eventId: number) {
     const options: HttpRequestConfigInterface = {
-      hostname: config.dns,
-      port: +config.ports.events,
+      hostname: config.dnsHTTP,
+      port: +config.httpPorts.events,
       method: 'GET',
       path: `/api/v1/events/${eventId}`
     }
@@ -44,8 +44,8 @@ export class HttpClientService {
 
   async getAttendeeInfo(invoiceId: number) {
     const options: HttpRequestConfigInterface = {
-      hostname: config.dns,
-      port: +config.ports.invoices,
+      hostname: config.dnsHTTP,
+      port: +config.httpPorts.invoices,
       method: 'GET',
       path: `/api/v1/invoices/${invoiceId}`
     }

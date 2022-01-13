@@ -1,11 +1,11 @@
 import express from 'express';
 import cors from 'cors';
-import { HttpController } from './controllers';
+import { HttpController } from './controllers/http';
 import config from './shared/configs';
 
 const app            = express();
 const router         = express.Router();
-const port           = config.ports.self;
+const httpPort       = config.httpPorts.self;
 const httpController = new HttpController();
 
 // Actual APIs
@@ -22,4 +22,4 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/v1/tickets', router);
 
-app.listen(port, () => console.log(`server is listening on ${port}`));
+app.listen(httpPort, () => console.log(`HTTP server is listening on ${httpPort}`));

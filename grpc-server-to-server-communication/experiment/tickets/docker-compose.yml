@@ -5,6 +5,7 @@ services:
     working_dir: /var/www/html
     env_file: .env
     ports:
+      - '3003:3003'
       - '8003:8003'
       - '9223:9229' # Debug port
     volumes:
