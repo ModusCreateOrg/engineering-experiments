@@ -3,6 +3,15 @@ import * as dotenv from 'dotenv';
 
 dotenv.config();
 
+// Handling the misconfiguration of services
+if (!process.env.DNS) {
+  throw new Error('No domains configured');
+}
+
+if (!process.env.PORT_SELF) {
+  throw new Error('No port configured for server');
+}
+
 const dbConfig: DBConfigInterface = Object.create(null);
 const dbParams = ['name', 'host', 'user', 'pass'];
 
@@ -18,6 +27,12 @@ for (const param of dbParams) {
 }
 
 const config: ServerInterface = {
+  ports: {
+    self: process.env.PORT_SELF,
+    events: process.env.PORT_HTTP_EVENTS || '',
+    invoices: process.env.PORT_HTTP_INVOICES || ''
+  },
+  dns: process.env.DNS,
   db: dbConfig,
   isDevelopment: ['development', 'dev', 'local'].includes(process.env.NODE_ENV || 'dev')
 };
