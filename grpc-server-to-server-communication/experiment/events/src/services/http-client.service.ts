@@ -28,8 +28,8 @@ export class HttpClientService {
 
   async getTickets(eventId: string) {
     const options: HttpRequestConfigInterface = {
-      hostname: config.dns,
-      port: +config.ports.tickets,
+      hostname: config.dnsHTTP,
+      port: +config.httpPorts.tickets,
       method: 'GET',
       path: `/api/v1/tickets?eventId=${eventId}`
     }
@@ -40,8 +40,8 @@ export class HttpClientService {
   async buyTicket(ticketRequest: TicketRequestInterface) {
     // Send request to invoice service here
     const options: HttpRequestConfigInterface = {
-      hostname: config.dns,
-      port: +config.ports.invoices,
+      hostname: config.dnsHTTP,
+      port: +config.httpPorts.invoices,
       method: 'POST',
       path: '/api/v1/invoices'
     }

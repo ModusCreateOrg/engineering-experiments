@@ -6,6 +6,7 @@ services:
     env_file: .env
     ports:
       - '8001:8001'
+      - '3001:3001'
       - '9221:9229' # Debug port
     volumes:
       - ./:/var/www/html
