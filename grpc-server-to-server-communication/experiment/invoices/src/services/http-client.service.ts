@@ -28,8 +28,8 @@ export class HttpClientService {
 
   async createTicket(ticketRequest: TicketRequestInterface) {
     const options: HttpRequestConfigInterface = {
-      hostname: config.dns,
-      port: +config.ports.tickets,
+      hostname: config.dnsHTTP,
+      port: +config.httpPorts.tickets,
       method: 'POST',
       path: '/api/v1/tickets'
     }

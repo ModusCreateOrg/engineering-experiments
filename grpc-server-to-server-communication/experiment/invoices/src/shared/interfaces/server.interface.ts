@@ -1,4 +1,4 @@
-export interface PortsInterface {
+export interface DNSConfigInterface {
   self: string,
   events: string,
   tickets: string
@@ -14,9 +14,11 @@ export interface DBConfigInterface {
 export interface ServerInterface {
   db: DBConfigInterface;
 
+  grpcDNS: DNSConfigInterface;
+
   isDevelopment: boolean;
 
-  dns: string;
+  dnsHTTP: string;
 
-  ports: PortsInterface;
+  httpPorts: DNSConfigInterface;
 }
