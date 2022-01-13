@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package invoicePackage;
+
+service Invoice {
+  rpc createInvoice(CreateInvoiceRequest) returns (InvoiceItem);
+  rpc readInvoice(InvoiceIdRequest) returns (InvoiceItem);
+  rpc payForInvoice(InvoiceIdRequest) returns (TicketItem);
+}
+
+message CreateInvoiceRequest {
+  string addressee = 1;
+  int32 eventId = 2;
+  int32 noOfAttendees = 3;
+  bool isPaid = 4;
+}
+
+message InvoiceIdRequest {
+  int32 id = 1;
+}
+
+message InvoiceItem {
+  int32 id = 1;
+  string addressee = 2;
+  int32 eventId = 3;
+  int32 noOfAttendees = 4;
+  bool isPaid = 5;
+  string createdAt = 6;
+  string updatedAt = 7;
+}
+
+message TicketItem {
+  int32 id = 1;
+  int32 eventId = 2;
+}
