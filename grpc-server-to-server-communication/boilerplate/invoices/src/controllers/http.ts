@@ -16,8 +16,6 @@ export class HttpController {
       res.status(400).end(err.message);
       next(err);
     }
-
-    return;
   }
 
   async create(req: Request, res: Response, next: NextFunction) {
@@ -46,8 +44,6 @@ export class HttpController {
       res.status(400).end(err.message);
       next(err);
     }
-
-    return;
   }
 
   async update(req: Request, res: Response, next: NextFunction) {
@@ -67,7 +63,5 @@ export class HttpController {
       res.status(400).end(err.message);
       next(err);
     }
-
-    return;
   }
 }

@@ -18,8 +18,6 @@ export class HttpController {
       res.status(400).end(err.message);
       next(err);
     }
-
-    return;
   }
 
   async getOne(req: Request, res: Response, next: NextFunction) {
@@ -31,8 +29,6 @@ export class HttpController {
       res.status(400).end(err.message);
       next(err);
     }
-
-    return;
   }
 
   async create(req: Request, res: Response, next: NextFunction) {
@@ -54,8 +50,6 @@ export class HttpController {
       res.status(400).end(err.message);
       next(err);
     }
-
-    return;
   }
 
   async getAttendeeInfo(req: Request, res: Response, next: NextFunction) {
@@ -68,8 +62,6 @@ export class HttpController {
       res.status(400).end(err.message);
       next(err);
     }
-
-    return;
   }
 
   async getEventInfo(req: Request, res: Response, next: NextFunction) {
@@ -82,7 +74,5 @@ export class HttpController {
       res.status(400).end(err.message);
       next(err);
     }
-
-    return;
   }
 }

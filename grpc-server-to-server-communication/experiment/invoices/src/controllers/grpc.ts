@@ -9,10 +9,7 @@ export class GrpcController {
 
   async getOne(call: grpc.ServerUnaryCall<any, any>, callback: grpc.sendUnaryData<any>) {
     const invoice = await this.invoiceService.getOne(call.request.id);
-
     callback(null, invoice);
-
-    return;
   }
 
   async create(call: grpc.ServerUnaryCall<any, any>, callback: grpc.sendUnaryData<any>) {
@@ -36,8 +33,6 @@ export class GrpcController {
     await this.grpcClientService.createTicket(ticketRequest);
 
     callback(null, invoice);
-
-    return;
   }
 
   async update(call: grpc.ServerUnaryCall<any, any>, callback: grpc.sendUnaryData<any>) {
@@ -51,7 +46,5 @@ export class GrpcController {
 
     const ticket = await this.grpcClientService.createTicket(ticketRequest);
     callback(null, ticket);
-
-    return;
   }
 }

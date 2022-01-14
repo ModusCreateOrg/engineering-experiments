@@ -13,15 +13,11 @@ export class GrpcController {
       call.write(ticket);
     }
     call.end();
-
-    return;
   }
 
   async getOne(call: grpc.ServerUnaryCall<any, any>, callback: grpc.sendUnaryData<any>) {
     const ticket = await this.ticketService.getOne(call.request.id);
     callback(null, ticket);
-
-    return;
   }
 
   async create(call: grpc.ServerUnaryCall<any, any>, callback: grpc.sendUnaryData<any>) {
@@ -37,8 +33,6 @@ export class GrpcController {
 
     const ticket = await this.ticketService.create(ticketObject);
     callback(null, ticket);
-
-    return;
   }
 
   async getAttendeeInfo(call: grpc.ServerUnaryCall<any, any>, callback: grpc.sendUnaryData<any>) {
@@ -46,8 +40,6 @@ export class GrpcController {
     const attendee = await this.grpcClientService.getAttendeeInfo(ticket.invoiceId);
 
     callback(null, attendee);
-
-    return;
   }
 
   async getEventInfo(call: grpc.ServerUnaryCall<any, any>, callback: grpc.sendUnaryData<any>) {
@@ -55,7 +47,5 @@ export class GrpcController {
     const event = await this.grpcClientService.getEventInfo(ticket.eventId);
 
     callback(null, event);
-
-    return;
   }
 }
