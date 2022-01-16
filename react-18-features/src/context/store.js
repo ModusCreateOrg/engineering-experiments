@@ -15,7 +15,7 @@ const getSnapShot = (globalStore) => {
     globalStore.callbacks.forEach((cb) => cb())
   }
 
-  return store.count
+  return [store.count, setState]
 }
 
 const subscribe = (globalStore, callback) => {

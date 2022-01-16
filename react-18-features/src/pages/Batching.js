@@ -32,6 +32,7 @@ const Batching = () => {
   }
 
   useEffect(() => {
+    console.log('first render')
     setRenderState((n) => n + 1)
   }, [])
 
