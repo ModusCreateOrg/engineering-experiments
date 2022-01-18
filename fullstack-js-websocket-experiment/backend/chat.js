@@ -106,8 +106,6 @@ class Connection {
             // this.socket.off('room.getMessages', this.getRoomMessages);
             // this.socket.off('room.message', this.sendMessageToRoom);
 
-            // this.socket.disconnect();
-
             this.socket.removeAllListeners();
         }
     };

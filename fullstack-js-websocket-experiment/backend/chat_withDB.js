@@ -119,7 +119,6 @@ class Connection {
             // this.socket.off('room.getMessages', this.getRoomMessages);
             // this.socket.off('room.message', this.sendMessageToRoom);
             this.socket.removeAllListeners();
-            // this.socket.disconnect();
         }
     };
 }
