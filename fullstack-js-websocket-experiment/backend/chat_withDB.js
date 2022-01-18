@@ -113,13 +113,13 @@ class Connection {
             members.splice(index, 1);
             this.saveMembers(members);
 
-            this.socket.off('join', this.join);
-            this.socket.off('room.join', this.joinRoom);
-            this.socket.off('room.leave', this.leaveRoom);
-            this.socket.off('room.getMessages', this.getRoomMessages);
-            this.socket.off('room.message', this.sendMessageToRoom);
-
-            this.socket.disconnect();
+            // this.socket.off('join', this.join);
+            // this.socket.off('room.join', this.joinRoom);
+            // this.socket.off('room.leave', this.leaveRoom);
+            // this.socket.off('room.getMessages', this.getRoomMessages);
+            // this.socket.off('room.message', this.sendMessageToRoom);
+            this.socket.removeAllListeners();
+            // this.socket.disconnect();
         }
     };
 }

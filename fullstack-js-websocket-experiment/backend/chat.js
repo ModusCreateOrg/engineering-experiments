@@ -100,13 +100,15 @@ class Connection {
             });
             members.splice(index, 1);
 
-            this.socket.off('join', this.join);
-            this.socket.off('room.join', this.joinRoom);
-            this.socket.off('room.leave', this.leaveRoom);
-            this.socket.off('room.getMessages', this.getRoomMessages);
-            this.socket.off('room.message', this.sendMessageToRoom);
+            // this.socket.off('join', this.join);
+            // this.socket.off('room.join', this.joinRoom);
+            // this.socket.off('room.leave', this.leaveRoom);
+            // this.socket.off('room.getMessages', this.getRoomMessages);
+            // this.socket.off('room.message', this.sendMessageToRoom);
 
-            this.socket.disconnect();
+            // this.socket.disconnect();
+
+            this.socket.removeAllListeners();
         }
     };
 }
