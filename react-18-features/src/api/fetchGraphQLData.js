@@ -1,5 +1,3 @@
-/* eslint-disable no-return-await */
-// your-app-name/src/fetchGraphQL.js
 async function fetchGraphQL(text, variables) {
   const {GITHUB_AUTH_TOKEN} = process.env
 
@@ -17,7 +15,7 @@ async function fetchGraphQL(text, variables) {
   })
 
   // Get the response as JSON
-  return await response.json()
+  return response.json()
 }
 
 export default fetchGraphQL
