@@ -1,6 +1,6 @@
 import * as d3 from 'd3'
 import { useEffect, useRef, useState } from 'react'
-import { createDistRandomData, createRandomData } from 'utils/data';
+import { createRandomData } from 'utils/data';
 
 
 export default function BarChart({dataCount}) {
@@ -35,28 +35,17 @@ export default function BarChart({dataCount}) {
             .axisBottom(x)
         );
 
-      const yAxis = (g) =>
+        const yAxis = (g) =>
         g
           .attr("transform", `translate(${margin.left},0)`)
-          .style("color", "steelblue")
-          .call(d3.axisLeft(y).ticks(null, "s"))
-          .call((g) => g.select(".domain").remove())
-          .call((g) =>
-            g
-              .append("text")
-              .attr("x", -margin.left)
-              .attr("y", 10)
-              .attr("fill", "currentColor")
-              .attr("text-anchor", "start")
-              .text(data.y1)
-          );
+          .call(d3.axisLeft(y));
+
 
       d3Node.select(".x-axis").call(xAxis);
       d3Node.select(".y-axis").call(yAxis);
 
       d3Node
         .select(".plot-area")
-        .attr("fill", "orange")
         .selectAll(".bar")
         .data(data)
         .join("rect")
@@ -64,19 +53,20 @@ export default function BarChart({dataCount}) {
         .attr("x", (d) => x(d.x))
         .attr("width", x.bandwidth())
         .attr("y", (d) => y(d.y))
-        .attr("height", (d) => y(0) - y(d.y));
+        .attr("height", (d) => y(0) - y(d.y))
+        .attr("fill", "orange");
     }, [ data ])
 
 
 
     return (
         <div className="p-2">
-        <h2 className="text-center mb-5">Bar Chart</h2>
-        <svg className="graph-default" ref={ref}>
-            <g className="plot-area" />
-            <g className="x-axis" />
-            <g className="y-axis" />
-        </svg>
+          <h2 className="text-center mb-5">Bar Chart</h2>
+          <svg className="graph-default" ref={ref}>
+              <g className="plot-area" />
+              <g className="x-axis" />
+              <g className="y-axis" />
+          </svg>
         </div>
     )
 }
