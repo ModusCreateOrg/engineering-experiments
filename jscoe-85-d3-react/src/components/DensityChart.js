@@ -19,14 +19,15 @@ export default function DensityChart({dataCount}) {
         // Removes all paths (graphical lines)
         d3.selectAll("path").remove();
         d3.selectAll("g").remove();
-        const height = 550;
-        const width = 1200;
+
 
         // Integrate Graph here from Ref
         const d3Node = d3.select(ref.current)
         .append("g")
         .attr("transform",
               "translate(" + 50 + "," + 20 + ")");
+        const height = 550;
+        const width = 1200;
 
         // Max for X
         const x =  d3
@@ -54,7 +55,6 @@ export default function DensityChart({dataCount}) {
          // Compute kernel density estimation
         const kde = kernelDensityEstimator(kernelEpanechnikov(7), x.ticks(30), d3);
         const density =  kde(data.map(d => d))
-
         
        // Plot the area
         d3Node.append("path")
@@ -75,10 +75,10 @@ export default function DensityChart({dataCount}) {
 
     return (
         <div className="p-2">
-        <h2 className="text-center mb-5">Density Chart</h2>
-        <svg className="graph-default" ref={ref}>
-           
-        </svg>
+            <h2 className="text-center mb-5">Density Chart</h2>
+            <svg className="graph-default" ref={ref}>
+            
+            </svg>
         </div>
     )
 }

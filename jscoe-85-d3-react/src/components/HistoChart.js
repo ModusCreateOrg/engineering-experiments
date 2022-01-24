@@ -16,7 +16,7 @@ export default function HistoChart({dataCount}) {
         // Integrate Graph here from Ref
         d3.selectAll("g").remove();
         d3.selectAll("path").remove();
-        
+
         
         const d3Node = d3.select(ref.current)
         const height = 550;
@@ -49,7 +49,6 @@ export default function HistoChart({dataCount}) {
             .range([height, 100]);
         y.domain([0, d3.max(bins, (d) => d.length)]);  
 
-
         svg.append("g")
             .call(d3.axisLeft(y));
 
@@ -68,10 +67,9 @@ export default function HistoChart({dataCount}) {
 
     return (
         <div className="p-2">
-        <h2 className="text-center mb-5">Histogram Chart</h2>
-        <svg className="graph-default" ref={ref}>
-
-        </svg>
+            <h2 className="text-center mb-5">Histogram Chart</h2>
+            <svg className="graph-default" ref={ref}>
+            </svg>
         </div>
     )
 }
