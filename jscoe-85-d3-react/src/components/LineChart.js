@@ -10,7 +10,7 @@ export default function LineChart({dataCount}) {
     const ref = useRef()
 
     useEffect(() => {
-        setData(createRandomData({xMin: 10, xMax: 5 * dataCount, yMin: 400, yMax: 800}))
+        setData(createRandomData({xMin: 2000, xMax: 2000 + 5 * dataCount, yMin: 400, yMax: 800}))
       }, [dataCount])
   
 
@@ -33,35 +33,35 @@ export default function LineChart({dataCount}) {
         .range([height, 0]);
 
         
-      d3Node.select(".x-axis").attr("transform", "translate(45," + height + ")")
-      .call(d3.axisBottom(x));
+        d3Node.select(".x-axis").attr("transform", "translate(45," + height + ")")
+        .call(d3.axisBottom(x));
 
-      d3Node.select(".y-axis").attr("transform", "translate(40,0)").call(d3.axisLeft(y));
-      
-      const line = d3.line()
-      .x(function(d) { return x(d.x)})
-      .y(function(d) { return y(d.y)})
+        d3Node.select(".y-axis").attr("transform", "translate(40,0)").call(d3.axisLeft(y));
+        
+        const line = d3.line()
+        .x(function(d) { return x(d.x)})
+        .y(function(d) { return y(d.y)})
 
-      d3Node
-        .append("path")
-        .datum(data)
-        .transition()
-        .attr("transform", "translate(" + 100 + "," + 100 + ")")
-        .attr("d", line) 
-        .style("fill", "none")
-        .style("stroke", "orange")
-        .style("stroke-width", "1");
+        d3Node
+            .append("path")
+            .datum(data)
+            .transition()
+            .attr("transform", "translate(" + 100 + "," + 100 + ")")
+            .attr("d", line) 
+            .style("fill", "none")
+            .style("stroke", "orange")
+            .style("stroke-width", "1");
 
     
     }, [ data ])
 
     return (
         <div className="p-2">
-        <h2 className="text-center mb-5">Line Chart</h2>
-        <svg className="graph-default" ref={ref}>
-            <g className="x-axis" />
-            <g className="y-axis" />
-        </svg>
+            <h2 className="text-center mb-5">Line Chart</h2>
+            <svg className="graph-default" ref={ref}>
+                <g className="x-axis" />
+                <g className="y-axis" />
+            </svg>
         </div>
     )
 }

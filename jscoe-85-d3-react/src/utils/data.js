@@ -6,7 +6,7 @@ import randomWords from 'random-words';
 export const createRandomData = (config) => {
     const {xMax, xMin, yMax, yMin} = config;
 
-                    const dataPoints = [];
+    const dataPoints = [];
 
     for (let i = xMin; i <= xMax; i++) {
         dataPoints.push({

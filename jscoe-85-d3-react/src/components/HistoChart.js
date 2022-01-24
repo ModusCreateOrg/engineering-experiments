@@ -16,7 +16,7 @@ export default function HistoChart({dataCount}) {
         // Integrate Graph here from Ref
         d3.selectAll("g").remove();
         d3.selectAll("path").remove();
-
+        
         
         const d3Node = d3.select(ref.current)
         const height = 550;
@@ -37,7 +37,6 @@ export default function HistoChart({dataCount}) {
             .attr("transform", "translate(0," + height + ")")
             .call(d3.axisBottom(x));
 
-
         const histo = d3.histogram()
             .value((d) => d) 
             .domain(x.domain())
@@ -51,10 +50,8 @@ export default function HistoChart({dataCount}) {
         y.domain([0, d3.max(bins, (d) => d.length)]);  
 
 
-
         svg.append("g")
             .call(d3.axisLeft(y));
-
 
         svg.selectAll("rect")
             .data(bins)
@@ -65,7 +62,6 @@ export default function HistoChart({dataCount}) {
               .attr("width", function(d) { return x(d.x1) - x(d.x0) -1 ; })
               .attr("height", function(d) { return height - y(d.length); })
               .style("fill", "#69b3a2")
-
     }, [ data ])
 
 
