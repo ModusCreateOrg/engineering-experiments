@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "This MFE provides all the required contents for the given SPA.",
   "scripts": {
-    "build:watch": "concurrently \"npm run webpack:watch\" \"npm run serve\"",
+    "build-serve": "concurrently \"npm run webpack:watch\" \"npm run serve\"",
     "webpack:watch": "webpack --watch --mode production",
     "serve": "serve dist -p 8083"
   },

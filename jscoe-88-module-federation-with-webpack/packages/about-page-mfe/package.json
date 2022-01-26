@@ -6,7 +6,7 @@
     "start": "node ./runwebpack.config.js --mode=development --port=8085",
     "build": "node ./runwebpack.config.js --mode=production",
     "serve": "npx serve dist -p 8085",
-    "build:watch": "npm run build && npm run serve"
+    "build-serve": "npm run build && npm run serve"
   },
   "keywords": [],
   "author": "",
