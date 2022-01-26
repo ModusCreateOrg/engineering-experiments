@@ -22,15 +22,29 @@ const rules = [
     test: /\.(js|jsx)$/,
     exclude: /node_modules/,
     use: {
-      loader: 'babel-loader',
+      loader: require.resolve('babel-loader'),
       options: {
-        presets: ['@babel/preset-env', '@babel/preset-react']
+        presets: [
+          require.resolve('@babel/preset-env'),
+          require.resolve('@babel/preset-react')
+        ]
       }
     }
   },
   {
     test: /\.css$/i,
-    use: ['style-loader', 'css-loader', 'postcss-loader']
+    use: [
+      require.resolve('style-loader'),
+      require.resolve('css-loader'),
+      {
+        loader: require.resolve('postcss-loader'),
+        options: {
+          postcssOptions: {
+            plugins: [require('postcss-nested'), require('autoprefixer')]
+          }
+        }
+      }
+    ]
   }
 ]
 const plugins = [
