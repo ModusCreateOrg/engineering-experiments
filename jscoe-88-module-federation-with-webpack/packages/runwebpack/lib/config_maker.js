@@ -85,7 +85,12 @@ const getDevelopmentConfig = ({
   return merge(
     getCommonConfig(mode),
     {
-      devServer: { port }
+      devServer: {
+        port,
+        headers: {
+          'Access-Control-Allow-Origin': '*'
+        }
+      }
     },
     moduleFederationConfig,
     moreWebpackConfig
