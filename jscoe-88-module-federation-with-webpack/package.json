@@ -2,6 +2,7 @@
   "name": "root",
   "private": true,
   "scripts": {
+    "bootstrap": "npx lerna clean && npx lerna bootstrap",
     "build:watch": "npx lerna run build:watch --parallel"
   },
   "devDependencies": {
