@@ -1,33 +1,21 @@
 {
   "name": "about-page-mfe",
   "version": "1.0.0",
-  "description": "",
-  "main": "webpack.config.js",
+  "description": "This is the about page microfronted",
   "scripts": {
-    "build:watch": "concurrently \"npm run webpack:watch\" \"npm run serve\"",
-    "webpack:watch": "webpack --watch",
-    "serve": "serve dist -p 8085",
-    "start": "webpack serve --env development"
+    "start": "node ./runwebpack.config.js --mode=development --port=8085",
+    "build": "node ./runwebpack.config.js --mode=production",
+    "serve": "npx serve dist -p 8085",
+    "build:watch": "npm run build && npm run serve"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@babel/core": "^7.16.7",
-    "@babel/preset-env": "^7.16.7",
-    "@babel/preset-react": "^7.16.7",
-    "autoprefixer": "^10.4.2",
-    "babel-loader": "^8.2.3",
-    "concurrently": "^7.0.0",
-    "css-loader": "^6.5.1",
-    "html-webpack-plugin": "^5.5.0",
-    "postcss": "^8.4.5",
-    "postcss-loader": "^6.2.1",
-    "postcss-nested": "^5.0.6",
     "serve": "13.0.2",
-    "style-loader": "^3.3.1",
-    "webpack": "^5.65.0",
-    "webpack-cli": "^4.9.1",
-    "webpack-dev-server": "^4.7.2"
+    "runwebpack": "^0.0.0"
+  },
+  "dependencies": {
+    "normalize.css": "^8.0.1"
   }
 }
