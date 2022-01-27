@@ -5,19 +5,15 @@ import './Header.css'
 
 const Header = () => {
   const {
-    appContent: { navItems }
-  } = content
+      appContent: { navItems, header }
+    } = content,
+    { orgName, logoImage } = header
 
   return (
     <div className="main-header">
       <div className="logo-section">
-        <img
-          src="https://3lhowb48prep40031529g5yj-wpengine.netdna-ssl.com/wp-content/uploads/2018/11/avatar_user_57_1542388114.png"
-          alt=""
-          height="80"
-          width="80"
-        />
-        <Link to="/">Modus Create</Link>
+        <img src={logoImage} alt="" height="80" width="80" />
+        <Link to="/">{orgName}</Link>
       </div>
       <ul className="nav-items">
         {navItems.map(({ id, title, url }) => (

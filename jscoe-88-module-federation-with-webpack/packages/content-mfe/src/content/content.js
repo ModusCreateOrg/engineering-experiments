@@ -1,6 +1,10 @@
 const imageServerUrl = 'http://localhost:8083' // Currently served from this package / project
 const content = {
   appContent: {
+    header: {
+      orgName: 'Modus Create',
+      logoImage: `${imageServerUrl}/images/modus-logo.png`
+    },
     navItems: [
       {
         id: 'contact',
