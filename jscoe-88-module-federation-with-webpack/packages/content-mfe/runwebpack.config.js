@@ -6,7 +6,7 @@ const moduleFederationOptions = {
   name: 'ContentMFE',
   filename: 'remoteEntry.js',
   exposes: {
-    './content': './src/content/index.json'
+    './content': './src/content/content.js'
   }
 }
 

@@ -1,6 +1,4 @@
-const path = require('path')
 const runwebpack = require('runwebpack')
-const CopyPlugin = require('copy-webpack-plugin')
 
 const moduleFederationOptions = {
   name: 'BaseApp',
@@ -13,17 +11,4 @@ const moduleFederationOptions = {
   }
 }
 
-const moreWebpackConfig = {
-  plugins: [
-    new CopyPlugin({
-      patterns: [
-        {
-          from: path.resolve(__dirname, 'public', 'images'),
-          to: path.resolve(__dirname, 'dist', 'images')
-        }
-      ]
-    })
-  ]
-}
-
-runwebpack(moduleFederationOptions, moreWebpackConfig)
+runwebpack(moduleFederationOptions)
