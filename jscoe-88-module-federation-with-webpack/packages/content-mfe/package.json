@@ -3,17 +3,17 @@
   "version": "0.0.0",
   "description": "This MFE provides all the required contents for the given SPA.",
   "scripts": {
-    "build-serve": "concurrently \"npm run webpack:watch\" \"npm run serve\"",
-    "webpack:watch": "webpack --watch --mode production",
-    "serve": "serve dist -p 8083"
+    "start": "node ./runwebpack.config.js --mode=development --port=8083",
+    "build": "node ./runwebpack.config.js --mode=production",
+    "serve": "npx serve dist -p 8083",
+    "build-serve": "npm run build && npm run serve"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "concurrently": "6.5.1",
+    "copy-webpack-plugin": "^10.2.0",
     "serve": "13.0.2",
-    "webpack": "5.61.0",
-    "webpack-cli": "4.8.0"
+    "runwebpack": "^0.0.0"
   }
 }
