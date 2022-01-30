@@ -72,7 +72,7 @@ const getUserById = async (userID) => {
     }
   }
 `;
-  const uri = `http://localhost:3001/graphql`;
+  const uri = `http://192.168.1.74:3001/graphql`;
   const res = await awaitRequest(userID, query, uri);
   return res;
 };

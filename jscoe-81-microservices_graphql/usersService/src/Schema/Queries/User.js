@@ -61,7 +61,8 @@ const getPostsByUserId = async (userID) => {
     }
   }
 `;
-  const uri = `http://localhost:3002/graphql`;
+  const uri = `http://192.168.1.74:8002/graphql`;
+
   const res = await awaitRequest(userID, query, uri);
   return res;
 };
