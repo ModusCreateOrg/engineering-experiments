@@ -78,3 +78,21 @@ export const GET_USER_WITH_POSTS = {
     return { ...userObj, posts: postData };
   },
 };
+
+async function getAllPostsForAllUsers(users) {
+  await Promise.all(
+    UserObj.map(async (user) => {
+      const postData = await getPostsByUserId(user.id);
+      users.push({ ...user, posts: postData });
+    })
+  );
+}
+
+export const GET_ALL_USERS_WITH_POSTS = {
+  type: new GraphQLList(UserWithPostType),
+  async resolve() {
+    const users = [];
+    await getAllPostsForAllUsers(users);
+    return users;
+  },
+};

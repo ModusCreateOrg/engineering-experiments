@@ -1,5 +1,5 @@
 import { GraphQLObjectType, GraphQLSchema } from 'graphql';
-import { GET_ALL_USERS, GET_USER_BY_ID, GET_USER_WITH_POSTS } from './Queries/User.js';
+import { GET_ALL_USERS, GET_USER_BY_ID, GET_USER_WITH_POSTS, GET_ALL_USERS_WITH_POSTS } from './Queries/User.js';
 import { CREATE_USER } from './Mutations/User.js';
 
 const RootQuery = new GraphQLObjectType({
@@ -8,6 +8,7 @@ const RootQuery = new GraphQLObjectType({
     getAllUsers: GET_ALL_USERS,
     getUserById: GET_USER_BY_ID,
     getUserWithPosts: GET_USER_WITH_POSTS,
+    getAllUsersWithPosts: GET_ALL_USERS_WITH_POSTS,
   },
 });
 
