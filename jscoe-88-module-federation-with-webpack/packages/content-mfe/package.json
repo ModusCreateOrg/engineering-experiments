@@ -1,0 +1,19 @@
+{
+  "name": "content-mfe",
+  "version": "0.0.0",
+  "description": "This MFE provides all the required contents for the given SPA.",
+  "scripts": {
+    "start": "node ./runwebpack.config.js --mode=development --port=8083",
+    "build": "node ./runwebpack.config.js --mode=production",
+    "serve": "npx serve dist -p 8083",
+    "build-serve": "npm run build && npm run serve"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "copy-webpack-plugin": "^10.2.0",
+    "serve": "13.0.2",
+    "runwebpack": "^0.0.0"
+  }
+}
