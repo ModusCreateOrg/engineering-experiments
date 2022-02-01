@@ -1,6 +1,7 @@
 import { GraphQLObjectType, GraphQLSchema } from 'graphql';
 import { GET_ALL_USERS, GET_USER_BY_ID, GET_USER_WITH_POSTS, GET_ALL_USERS_WITH_POSTS } from './Queries/User.js';
 import { CREATE_USER } from './Mutations/User.js';
+import { USER_ADDED } from './Subscription/User.js';
 
 const RootQuery = new GraphQLObjectType({
   name: 'RootQuery',
@@ -19,7 +20,15 @@ const Mutation = new GraphQLObjectType({
   },
 });
 
+const Subscription = new GraphQLObjectType({
+  name: 'Subscription',
+  fields: {
+    userAdded: USER_ADDED,
+  },
+});
+
 export const schema = new GraphQLSchema({
   query: RootQuery,
   mutation: Mutation,
+  subscription: Subscription,
 });

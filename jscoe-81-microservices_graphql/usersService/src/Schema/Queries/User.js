@@ -40,7 +40,7 @@ function awaitRequest(userID, query, uri) {
         JSON: true,
       },
       function (error, response, body) {
-        if (!error && response.statusCode == 200) {
+        if (!error && response.statusCode === 200) {
           const postData = JSON.parse(body);
           resolve(postData?.data?.getPostsByUserId ? postData.data.getPostsByUserId : []);
         } else {

@@ -2,6 +2,9 @@ import express from 'express';
 import { graphqlHTTP } from 'express-graphql';
 import cors from 'cors';
 import { schema } from './Schema/index.js';
+import { createServer } from 'http';
+import { SubscriptionServer } from 'subscriptions-transport-ws';
+import { execute, subscribe } from 'graphql';
 
 const main = async () => {
   const app = express();
@@ -16,7 +19,22 @@ const main = async () => {
     })
   );
 
-  app.listen(3001, () => {
+  const server = createServer(app);
+
+  server.listen(3001, () => {
+    new SubscriptionServer(
+      {
+        schema,
+        execute,
+        subscribe,
+        onConnect: () => console.log('client connected'),
+      },
+      {
+        server,
+        path: '/subscriptions',
+      }
+    );
+
     console.log('User Service is running on port 3001');
   });
 };

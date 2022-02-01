@@ -17,9 +17,11 @@
     "express": "^4.17.2",
     "express-graphql": "^0.12.0",
     "graphql": "^16.2.0",
+    "graphql-subscriptions": "^2.0.0",
     "mocha": "^9.2.0",
     "nodemon": "^2.0.15",
     "request": "^2.88.2",
+    "subscriptions-transport-ws": "^0.11.0",
     "supertest": "^6.2.2"
   }
 }
