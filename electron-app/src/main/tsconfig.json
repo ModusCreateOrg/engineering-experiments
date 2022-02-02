@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "allowJs": false,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "alwaysStrict": true,
+    "target": "es6",
+    "removeComments": true,
+    "strictNullChecks": true,
+    "outDir": "../../dist",
+    "typeRoots": ["./node_modules/@types", "./typings.d.ts"],
+    "types" : ["node"]
+  },
+  "include": ["src"],
+  "exclude": ["../../dist"],
+  "paths": {
+    "@controller/*": ["controller/*"]
+  }
+}

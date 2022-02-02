@@ -1,0 +1,1 @@
+### This directory responsible for managing source code of app
