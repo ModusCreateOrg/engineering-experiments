@@ -1,0 +1,21 @@
+{
+  "name": "contact-page-mfe",
+  "version": "1.0.0",
+  "description": "This is the contact page microfronted",
+  "scripts": {
+    "start": "node ./runwebpack.config.js --mode=development --port=8084",
+    "build": "node ./runwebpack.config.js --mode=production",
+    "serve": "npx serve dist -p 8084",
+    "build-serve": "npm run build && npm run serve"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "serve": "13.0.2",
+    "runwebpack": "^0.0.0"
+  },
+  "dependencies": {
+    "normalize.css": "^8.0.1"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "root",
+  "private": true,
+  "scripts": {
+    "bootstrap": "npx lerna clean --yes && npx lerna bootstrap",
+    "build-serve": "npx lerna run build-serve --parallel"
+  },
+  "devDependencies": {
+    "lerna": "^4.0.0"
+  }
+}
