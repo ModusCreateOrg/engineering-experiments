@@ -1,12 +1,13 @@
 <script>
-
+    import Counter from '../Components/Counter.svelte';
+    let count = 0;
 </script>
-<h1>HomePage for Learning Svelte</h1>
 
-<!-- Add styles just for Home Page -->
+<h1>Homepage for Learning Svelte</h1>
+<Counter count={count} />
+
 <style>
     h1 {
         text-align: center;
-        color: rgb(255, 253, 253);
     }
 </style>
