@@ -5,14 +5,8 @@
 
 <!-- Add styles just for Home Page -->
 <style>
-    /* Global Styles */
-    :global(body) {
-		/* this will apply to <body> */
-		margin: 0;
-        padding: 0;
-	}
-
     h1 {
         text-align: center;
+        color: rgb(255, 253, 253);
     }
 </style>
