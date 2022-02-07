@@ -1,0 +1,8 @@
+{
+  "usersService": {
+    "url": "http://localhost:3003/graphql"
+  },
+  "postsService": {
+    "url": "http://localhost:3002/graphql"
+  }
+}

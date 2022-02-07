@@ -21,7 +21,7 @@ const main = async () => {
 
   const server = createServer(app);
 
-  server.listen(3001, () => {
+  server.listen(3003, () => {
     new SubscriptionServer(
       {
         schema,
@@ -35,7 +35,7 @@ const main = async () => {
       }
     );
 
-    console.log('User Service is running on port 3001');
+    console.log('User Service is running on port 3003');
   });
 };
 
