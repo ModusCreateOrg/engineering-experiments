@@ -1,22 +1,24 @@
 <script>
-    import Counter from '../Components/Counter.svelte';
-    import CounterMessage from '../Components/CounterMessage.svelte';
-    let count = 0;
-    
-    function increment() {
-        count ++;
-    }
+  import Counter from "../Components/Counter.svelte";
+  import CounterMessage from "../Components/CounterMessage.svelte";
 
-    function decrement() {
-        count --;
-    }
+  let count = 0;
+
+  function increment() {
+    count++;
+  }
+
+  function decrement() {
+    count--;
+  }
+  
 </script>
 
-<h1>Homepage for Learning Svelte</h1>
-<Counter count={count} increment={increment} decrement={decrement} />
-<CounterMessage count={count} />
+<h1>Home Svelte</h1>
+<Counter {count} {increment} {decrement} />
+<CounterMessage {count} />
 <style>
-    h1 {
-        text-align: center;
-    }
+  h1 {
+    text-align: center;
+  }
 </style>
