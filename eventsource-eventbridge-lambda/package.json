@@ -1,5 +1,5 @@
 {
-  "name": "eventbridge-lambda",
+  "name": "eventsource-eventbridge-lambda",
   "version": "1.0.0",
   "description": "JSCOE-155 - Event sourcing pattern experiment with Amazon EventBridge and Lambda.",
   "main": "index.js",
@@ -8,6 +8,6 @@
   "license": "UNLICENSED",
   "private": true,
   "devDependencies": {
-    "serverless": "^3.1.1"
+    "serverless": "3.1.1"
   }
 }

@@ -1,15 +1,17 @@
-export const createEvent = async (event, context) => {
+exports.createEvent = async (event, context) => {
   console.log(`Handler::createEvent\n${JSON.stringify(event, null, 2)}`);
-  return {
-    statusCode: 200,
-    event,
-  };
+  return formatResponse({ event });
 };
 
-export const processEvent = async (event, context) => {
+exports.processEvent = async (event, context) => {
   console.log(`Handler::processEvent\n${JSON.stringify(event, null, 2)}`);
+  return formatResponse({ event });
+};
+
+const formatResponse = (response, statusCode = 200) => {
+  const body = response ? JSON.stringify(response) : undefined;
   return {
-    statusCode: 200,
-    event,
+    statusCode,
+    body,
   };
 };

@@ -2,7 +2,7 @@
 node_modules
 
 # Serverless directories
-.Serverless
+.serverless
 
 # build directories
 build
