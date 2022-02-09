@@ -1,6 +1,8 @@
 service: jscoe155-eventbridge-lambda
 
 custom:
+  eventBus: 'jscoe155'
+  eventSource: 'moduscreate.jscoe155'
   stage: ${opt:stage, self:provider.stage}
   tags:
     App: 'jscoe.moduscreate.com'
@@ -12,9 +14,21 @@ custom:
 provider:
   name: aws
   stage: dev
+  region: us-east-1
   runtime: nodejs14.x
   memorySize: 128
   timeout: 6
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - events:PutEvents
+          Resource:
+            - { 'Fn::GetAtt': ['Jscoe155EventBridgeEventBus', 'Arn'] }
+  environment:
+    EVENTBRIDGE_BUS: ${self:custom.eventBus}
+    EVENTBRIDGE_SOURCE: ${self:custom.eventSource}
   logRetentionInDays: 7
   tags: ${self:custom.tags}
 
@@ -27,5 +41,13 @@ functions:
           method: post
   processEvent:
     handler: src/events/handler.processEvent
+    events:
+      - eventBridge:
+          eventBus: ${self:custom.eventBus}
+          pattern:
+            source:
+              - ${self:custom.eventSource}
+            detail-type:
+              - 'Process Event'
 
 resources:

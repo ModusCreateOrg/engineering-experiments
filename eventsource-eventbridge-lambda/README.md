@@ -93,7 +93,7 @@ To create an event, you send a HTTP POST requst to the `/events` endpoint. You m
 ```
 % curl --request POST \
        --header 'Content-Type: application/json' \
-       --data-raw '{"type":"checkout","detail":{"accountId":"A112233",bookId":"B000001"}}' \
+       --data-raw '{"type":"checkout","detail":{"accountId":"A112233","bookId":"B000001"}}' \
        --verbose \
        {your-gateway-endpoint-url}
 ```

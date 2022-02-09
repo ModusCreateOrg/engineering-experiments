@@ -9,5 +9,8 @@
   "private": true,
   "devDependencies": {
     "serverless": "3.1.1"
+  },
+  "dependencies": {
+    "@aws-sdk/client-eventbridge": "3.50.0"
   }
 }
