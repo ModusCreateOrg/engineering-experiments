@@ -1,0 +1,31 @@
+service: jscoe155-eventbridge-lambda
+
+custom:
+  stage: ${opt:stage, self:provider.stage}
+  tags:
+    App: 'jscoe.moduscreate.com'
+    Env: ${self:custom.stage}
+    OU: 'moduscreate'
+    Owner: 'Matthew Warman'
+    Issue: 'JSCOE-155'
+
+provider:
+  name: aws
+  stage: dev
+  runtime: nodejs14.x
+  memorySize: 128
+  timeout: 6
+  logRetentionInDays: 7
+  tags: ${self:custom.tags}
+
+functions:
+  createEvent:
+    handler: src/events/handler.createEvent
+    events:
+      - http:
+          path: /events
+          method: post
+  processEvent:
+    handler: src/events/handler.processEvent
+
+resources:

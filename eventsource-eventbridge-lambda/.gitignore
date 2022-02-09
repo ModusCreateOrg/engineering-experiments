@@ -1,0 +1,11 @@
+# package directories
+node_modules
+
+# Serverless directories
+.Serverless
+
+# build directories
+build
+
+# log files
+*.log
