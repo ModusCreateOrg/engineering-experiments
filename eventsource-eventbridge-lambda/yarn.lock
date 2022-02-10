@@ -73,7 +73,7 @@
     "@aws-sdk/types" "3.50.0"
     tslib "^2.3.0"
 
-"@aws-sdk/client-eventbridge@^3.50.0":
+"@aws-sdk/client-eventbridge@3.50.0":
   version "3.50.0"
   resolved "https://registry.yarnpkg.com/@aws-sdk/client-eventbridge/-/client-eventbridge-3.50.0.tgz#9e75605e01c7fa1f16df7d2a291fa3e376a89937"
   integrity sha512-ycjazEpCAZ1QG4Gi1P2ZCR4NQMM6jkXR7Z6ZJaOU97O0XWX9j+QJ7CmhwBxSPrmlT4VVJ49wqwgjT63WLKEiPQ==
