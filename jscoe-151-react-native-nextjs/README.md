@@ -1,43 +1,53 @@
-# [Next.js Example](https://www.nextjs.org/)
-
+# About this experiment
 <p>
-  <!-- Web -->
-  <img alt="Supports Expo Web" longdesc="Supports Expo Web" src="https://img.shields.io/badge/web-4630EB.svg?style=flat-square&logo=GOOGLE-CHROME&labelColor=4285F4&logoColor=fff" />
+  <!-- iOS -->
+  <img alt="Supports iOS" longdesc="Supports iOS" src="https://img.shields.io/badge/iOS-Native%20-%23bbb" />
+  <!-- Android -->
+  <img alt="Supports Android" longdesc="Supports Android" src="https://img.shields.io/badge/Android-Native%20-%23bbb" />
+  <!-- NextJS -->
+  <img alt="Supports NextJS" longdesc="Supports NextJS" src="https://img.shields.io/badge/NextJS-Web-%23bbb" />
 </p>
 
-Using Next.js with Expo will enable you to [server side render](https://nextjs.org/features/server-side-rendering) the web part of your Expo app. This demo shows you how to setup your universal application to use use advanced universal modules from the Expo SDK like Camera, Gestures, Permissions, etc... with the Next.js tool-chain!
+This project aims to demonstrate how to work with **React Native** as a cross-platform solution and additionally solve a few paradigms for things like navigation, bottom sheet, media queries, permissions, SSR* (web only), and platform specific code. 
 
 > 🚨 SSR is an experimental feature with Expo so modules might not be fully optimized for Next.js. If you find bugs please report them on the [Expo repo](https://github.com/expo/expo/issues) or [expo-cli repo](https://github.com/expo/expo-cli/issues) with the `[nextjs]` tag in the title.
 
-### ⚽️ Running in the browser
+### Getting started
 
+**Setup**
+
+1. Clone the `js-coe` repository
+2. cd into the project folder (jscoe-151-react-native-nextjs)
+
+**Installation**
+
+3. Run `yarn install` to install the project dependencies.
+
+> The setup flow could vary greatly between MacOS, Linux and Windows so make sure to follow the instructions on How To Install React Native on your system.
+
+### Running the project
+
+So as you probably figured out, this project consists of two workflows: one being the mobile flow and the other being the web flow.
+
+You can run both workflows simultaneously with the following commands:
+
+**Mobile**
+
+```
+# for iOS
+expo start --ios
+
+# for Android
+expo start --android
+```
+
+**Web**
+```
+yarn next dev
+```
+
+### Notes
 For the most updated guide you should refer to the Expo docs: [Using Next.js](https://docs.expo.dev/versions/latest/guides/using-nextjs/). Here are the [latest docs on master](https://github.com/expo/expo/blob/master/docs/pages/guides/using-nextjs.md).
-
-In this approach you would be using SSR for web in your universal project. This is the recommended path because it gives you full access to the features of Expo and Next.js.
-
-- Bootstrap your project with Expo
-  - Install the CLI: `npm i -g expo-cli`
-  - Create a project: `expo init --template blank`
-  - `cd` into the project
-- Install the adapter:
-  - **yarn:** `yarn add @expo/next-adapter`
-  - npm: `npm i --save @expo/next-adapter`
-- Add Next.js support: `yarn next-expo`
-  - Always commit your changes first!
-  - You can optionally choose which customizations you want to do with `--customize or -c`
-  - Force reload changes with `--force or -f`
-- Start the project with `yarn next dev`
-  - Go to `http://localhost:3000/` to see your project!
-
-### 🏁 New Commands
-
-- **Starting web**
-  - 🚫 `expo start:web`
-  - ✅ `yarn next dev`
-
-- **Building web**
-  - 🚫 `expo build:web`
-  - ✅ `yarn next build`
 
 ### 👀 More Info
 
