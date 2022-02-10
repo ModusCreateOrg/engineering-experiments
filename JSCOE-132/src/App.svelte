@@ -1,14 +1,20 @@
 <script>
-	import HomePage from "./Pages/HomePage.svelte"
+	import HomePage from "./Pages/HomePage.svelte";
 	import Navbar from "./Components/Navbar.svelte";
-	import {Router} from "svelte-navigator"
+	import {Router, Route} from "svelte-navigator";
+	import ApiPage from "./Pages/ApiPage.svelte";
 </script>
 
 <main>
 	<div class="container">
 		<Router>
 			<Navbar />
-			<HomePage/>
+			<Route path="/">
+				<HomePage/>
+			</Route>
+			<Route path="api">
+				<ApiPage/>
+			</Route>
 		</Router>
 
 	</div>
