@@ -25,7 +25,7 @@ provider:
           Action:
             - events:PutEvents
           Resource:
-            - { 'Fn::GetAtt': ['Jscoe155EventBridgeEventBus', 'Arn'] }
+            - { 'Fn::GetAtt': ['EventBus', 'Arn'] }
   environment:
     EVENTBRIDGE_BUS: ${self:custom.eventBus}
     EVENTBRIDGE_SOURCE: ${self:custom.eventSource}
@@ -43,7 +43,7 @@ functions:
     handler: src/events/handler.processEvent
     events:
       - eventBridge:
-          eventBus: ${self:custom.eventBus}
+          eventBus: !Ref EventBus
           pattern:
             source:
               - ${self:custom.eventSource}
@@ -51,3 +51,17 @@ functions:
               - 'Process Event'
 
 resources:
+  Resources:
+    EventBus:
+      Type: AWS::Events::EventBus
+      Properties:
+        Name: ${self:custom.eventBus}
+
+  Outputs:
+    EventBusArn:
+      Description: EventBridge Event Bus ARN
+      Value:
+        'Fn::GetAtt': [EventBus, Arn]
+    EventBusName:
+      Description: EventBridge Event Bus Name
+      Value: !Ref EventBus
