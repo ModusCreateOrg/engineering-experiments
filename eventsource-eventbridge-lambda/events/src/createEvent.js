@@ -3,7 +3,7 @@ const { EventBridgeClient, PutEventsCommand } = require('@aws-sdk/client-eventbr
 const eventBus = process.env.EVENTBRIDGE_BUS || 'bus-name';
 const eventSource = process.env.EVENTBRIDGE_SOURCE || 'moduscreate.default';
 
-exports.createEvent = async (event, context) => {
+exports.handle = async (event, context) => {
   console.log(`Handler::createEvent\n${JSON.stringify(event, null, 2)}`);
 
   const { type, detail = {} } = JSON.parse(event.body);
@@ -32,18 +32,6 @@ exports.createEvent = async (event, context) => {
   };
 
   return formatResponse(response);
-};
-
-exports.processEvent = async (event, context) => {
-  console.log(`Handler::processEvent\n${JSON.stringify(event, null, 2)}`);
-
-  return {
-    status: 200,
-    statusText: 'OK',
-    data: {
-      event,
-    },
-  };
 };
 
 const formatResponse = (response, statusCode = 200) => {

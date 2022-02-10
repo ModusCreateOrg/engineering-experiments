@@ -1,7 +1,7 @@
 {
-  "name": "eventsource-eventbridge-lambda",
+  "name": "jscoe155-notifications",
   "version": "1.0.0",
-  "description": "JSCOE-155 - Event sourcing pattern experiment with Amazon EventBridge and Lambda.",
+  "description": "JSCOE-155 - Event sourcing pattern experiment with Amazon EventBridge and Lambda. Notifications component.",
   "main": "index.js",
   "repository": "git@github.com:ModusCreateOrg/js-coe-experiments.git",
   "author": "Matt Warman",
@@ -16,6 +16,5 @@
     "serverless": "3.1.1"
   },
   "dependencies": {
-    "@aws-sdk/client-eventbridge": "3.50.0"
   }
 }

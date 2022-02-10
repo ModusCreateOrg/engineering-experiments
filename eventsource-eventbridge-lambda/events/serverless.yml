@@ -1,4 +1,4 @@
-service: jscoe155-eventbridge-lambda
+service: jscoe155-events
 
 custom:
   eventBus: 'jscoe155'
@@ -34,21 +34,11 @@ provider:
 
 functions:
   createEvent:
-    handler: src/events/handler.createEvent
+    handler: src/createEvent.handle
     events:
       - http:
           path: /events
           method: post
-  processEvent:
-    handler: src/events/handler.processEvent
-    events:
-      - eventBridge:
-          eventBus: !Ref EventBus
-          pattern:
-            source:
-              - ${self:custom.eventSource}
-            detail-type:
-              - 'Process Event'
 
 resources:
   Resources:
