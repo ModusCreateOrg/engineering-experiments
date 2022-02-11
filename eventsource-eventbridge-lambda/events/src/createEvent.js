@@ -4,7 +4,8 @@ const eventBus = process.env.EVENTBRIDGE_BUS || 'bus-name';
 const eventSource = process.env.EVENTBRIDGE_SOURCE || 'moduscreate.default';
 
 exports.handle = async (event, context) => {
-  console.log(`Handler::createEvent\n${JSON.stringify(event, null, 2)}`);
+  console.log(`Handler::createEvent`);
+  console.log(`event:\n${JSON.stringify(event, null, 2)}`);
 
   const { type, detail = {} } = JSON.parse(event.body);
 

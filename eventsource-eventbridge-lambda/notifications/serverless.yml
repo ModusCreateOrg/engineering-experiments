@@ -37,3 +37,14 @@ functions:
               - 'Transfer Requested'
               - 'Add to Wait List'
               - 'Ready for Pickup'
+          deadLetterQueueArn: !GetAtt SendNotificationRuleDLQ.Arn
+          retryPolicy:
+            maximumEventAge: 3600
+            maximumRetryAttempts: 3
+
+resources:
+  Resources:
+    SendNotificationRuleDLQ:
+      Type: AWS::SQS::Queue
+      Properties:
+        QueueName: ${self:service}-${self:custom.stage}-sendNotificationRule-DLQ

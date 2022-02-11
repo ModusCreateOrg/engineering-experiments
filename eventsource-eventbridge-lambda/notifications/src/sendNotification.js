@@ -1,5 +1,6 @@
 exports.handle = async (event, context) => {
-  console.log(`Handler::sendNotification\n${JSON.stringify(event, null, 2)}`);
+  console.log(`Handler::sendNotification`);
+  // console.log(`event\n${JSON.stringify(event, null, 2)}`);
 
   const { detail = {} } = event;
   const detailType = event['detail-type'];

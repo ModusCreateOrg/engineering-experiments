@@ -2,7 +2,8 @@ const { isBookAvailable, isBookAvailableAtBranch } = require('./utils/availabili
 const { addToWaitList, readyForPickup, requestTransfer } = require('./utils/events');
 
 exports.handle = async (event, context) => {
-  console.log(`Handler::requestHold\n${JSON.stringify(event, null, 2)}`);
+  console.log(`Handler::requestHold`);
+  // console.log(`event:\n${JSON.stringify(event, null, 2)}`);
 
   const { detail = {} } = event;
   console.log(`Hold requested for book ${detail.bookId} at branch ${detail.branchId} by account ${detail.accountId}.`);

@@ -35,3 +35,14 @@ functions:
               - ${self:custom.eventSource}
             detail-type:
               - 'Hold Requested'
+          deadLetterQueueArn: !GetAtt RequestHoldRuleDLQ.Arn
+          retryPolicy:
+            maximumEventAge: 3600
+            maximumRetryAttempts: 3
+
+resources:
+  Resources:
+    RequestHoldRuleDLQ:
+      Type: AWS::SQS::Queue
+      Properties:
+        QueueName: ${self:service}-${self:custom.stage}-requestHoldRule-DLQ
