@@ -2,7 +2,6 @@ import { FC } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { FontAwesome } from '@expo/vector-icons';
 import Animated, { useAnimatedStyle, useSharedValue, withSequence, withSpring, withTiming } from "react-native-reanimated";
-// import { Keyframe } from 'react-native-reanimated';
 
 import { useStyles } from "../../hooks/useStyles";
 import { Image } from '../Image';
@@ -87,18 +86,6 @@ export const Post: FC<PostObj> = (props) => {
     }
   }));
 
-  // const keyframe = new Keyframe({
-  //   0: {
-  //     transform: [{ rotate: '0deg' }],
-  //   },
-  //   45: {
-  //     transform: [{ rotate: '100deg' }]
-  //   },
-  //   100: {
-  //     transform: [{ rotate: '45deg' }],
-  //   },
-  // });
-
   const likeAnimatedStyle = useAnimatedStyle(() => ({
     transform: [
       {
@@ -158,3 +145,5 @@ export const Post: FC<PostObj> = (props) => {
     </View>
   );
 };
+
+export default Post;

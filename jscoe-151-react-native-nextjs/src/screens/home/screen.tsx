@@ -1,19 +1,18 @@
 import { FC } from 'react';
+import dynamic from 'next/dynamic';
 
 import { Grid } from '../../common/components/Grid';
-import { Header } from '../../common/components/Header';
 import { HeroCard } from '../../common/components/HeroCard';
 import { PanelAddToFeed } from '../../common/components/PanelAddToFeed';
-import { Post } from '../../common/components/Post';
 import { PostCreator } from '../../common/components/PostCreator';
 import { ScreenTemplate } from '../../common/components/ScreenTemplate';
 import { Spacer } from '../../common/components/Spacer';
 
-import { useRouter } from '../../common/hooks/useRouter';
 import { POSTS } from './mock';
 
+const Post = dynamic(() => import('../../common/components/Post'), { ssr: false });
+
 export const HomeScreen: FC = () => {
-  const { navigate } = useRouter();
 
   return (
     <ScreenTemplate noPadding>

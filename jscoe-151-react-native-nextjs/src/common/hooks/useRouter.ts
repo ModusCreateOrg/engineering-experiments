@@ -6,8 +6,10 @@ export const useRouter = () => {
   const _navigateMobile = (routeName: string) => {
     const splitted = routeName.split('/');
     if (splitted?.length > 1) {
-      navigation.navigate(splitted[0], { screen: splitted[1] })
+      // @ts-ignore
+      navigation.navigate(splitted?.[0], { screen: splitted?.[1] })
     } else {
+      // @ts-ignore
       navigation.navigate(routeName);
     }
   }
