@@ -34,7 +34,7 @@ provider:
 
 functions:
   createEvent:
-    handler: src/createEvent.handle
+    handler: src/handlers/createEvent.handle
     events:
       - http:
           path: /events

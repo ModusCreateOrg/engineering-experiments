@@ -1,4 +1,4 @@
-service: jscoe155-books
+service: jscoe155-electionsummary
 
 custom:
   eventBusStack: 'jscoe155-events'
@@ -18,15 +18,12 @@ provider:
   runtime: nodejs14.x
   memorySize: 128
   timeout: 6
-  environment:
-    EVENTBRIDGE_SOURCE: ${self:custom.eventSource}
-    API_BASEURL: ${cf:${self:custom.eventBusStack}-${self:custom.stage}.ServiceEndpoint}
   logRetentionInDays: 7
   tags: ${self:custom.tags}
 
 functions:
-  requestHold:
-    handler: src/requestHold.handle
+  voteCast:
+    handler: src/handlers/voteCast.handle
     events:
       - eventBridge:
           eventBus: ${cf:${self:custom.eventBusStack}-${self:custom.stage}.EventBusArn}
@@ -34,15 +31,15 @@ functions:
             source:
               - ${self:custom.eventSource}
             detail-type:
-              - 'Hold Requested'
-          deadLetterQueueArn: !GetAtt RequestHoldRuleDLQ.Arn
+              - 'Vote Cast'
+          deadLetterQueueArn: !GetAtt VoteCastRuleDLQ.Arn
           retryPolicy:
-            maximumEventAge: 3600
-            maximumRetryAttempts: 3
+            maximumEventAge: 86400 # default 1 day
+            maximumRetryAttempts: 185 # default 185 attempts
 
 resources:
   Resources:
-    RequestHoldRuleDLQ:
+    VoteCastRuleDLQ:
       Type: AWS::SQS::Queue
       Properties:
-        QueueName: ${self:service}-${self:custom.stage}-requestHoldRule-DLQ
+        QueueName: ${self:service}-${self:custom.stage}-voteCastRule-DLQ

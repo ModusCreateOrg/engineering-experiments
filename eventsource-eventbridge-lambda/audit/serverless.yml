@@ -1,4 +1,4 @@
-service: jscoe155-notifications
+service: jscoe155-audit
 
 custom:
   eventBusStack: 'jscoe155-events'
@@ -18,33 +18,26 @@ provider:
   runtime: nodejs14.x
   memorySize: 128
   timeout: 6
-  environment:
-    EVENTBRIDGE_SOURCE: ${self:custom.eventSource}
-    API_BASEURL: ${cf:${self:custom.eventBusStack}-${self:custom.stage}.ServiceEndpoint}
   logRetentionInDays: 7
   tags: ${self:custom.tags}
 
 functions:
-  sendNotification:
-    handler: src/sendNotification.handle
+  auditEvent:
+    handler: src/handlers/auditEvent.handle
     events:
       - eventBridge:
           eventBus: ${cf:${self:custom.eventBusStack}-${self:custom.stage}.EventBusArn}
           pattern:
             source:
               - ${self:custom.eventSource}
-            detail-type:
-              - 'Transfer Requested'
-              - 'Add to Wait List'
-              - 'Ready for Pickup'
-          deadLetterQueueArn: !GetAtt SendNotificationRuleDLQ.Arn
+          deadLetterQueueArn: !GetAtt AuditEventRuleDLQ.Arn
           retryPolicy:
-            maximumEventAge: 3600
-            maximumRetryAttempts: 3
+            maximumEventAge: 86400 # default 1 day
+            maximumRetryAttempts: 185 # default 185 attempts
 
 resources:
   Resources:
-    SendNotificationRuleDLQ:
+    AuditEventRuleDLQ:
       Type: AWS::SQS::Queue
       Properties:
-        QueueName: ${self:service}-${self:custom.stage}-sendNotificationRule-DLQ
+        QueueName: ${self:service}-${self:custom.stage}-auditEventRule-DLQ
