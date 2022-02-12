@@ -19,7 +19,6 @@ provider:
   memorySize: 128
   timeout: 6
   environment:
-    EVENTBRIDGE_SOURCE: ${self:custom.eventSource}
     API_BASEURL: ${cf:${self:custom.eventBusStack}-${self:custom.stage}.ServiceEndpoint}
   logRetentionInDays: 7
   tags: ${self:custom.tags}
