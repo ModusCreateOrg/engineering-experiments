@@ -1,5 +1,12 @@
 const { processBallot } = require('../services/ballot');
 
+/**
+ * Ballot submitted function request handler. The entry point for ballot submission events.
+ * @param {Object} event The Lambda request event.
+ * @param {Object} event.detail The EventBridge `detail`. A Ballot object.
+ * @param {Object} context The Lambda request context.
+ * @returns A Lamba response object.
+ */
 exports.handle = async (event, context) => {
   console.log(`Handler::ballotSubmitted`);
   console.log(`event:\n${JSON.stringify(event, null, 2)}`);
@@ -21,6 +28,11 @@ exports.handle = async (event, context) => {
   }
 };
 
+/**
+ * Validate the request.
+ * @param {Object} event The Lambda request event.
+ * @returns A boolean whose value is `true` if the request is valid, otherwise `false`.
+ */
 const isValidRequest = (event = {}) => {
   const { detail = {} } = event;
   const { ballotId, voterId, votes } = detail;

@@ -1,0 +1,85 @@
+{
+  "jscoe155-voters": [
+    {
+      "PutRequest": {
+        "Item": {
+          "pk": {"S": "VOTER#b7a42e"},
+          "sk1": {"S": "PROFILE"},
+          "voterId": {"S": "b7a42e"},
+          "fullName": {"S": "Joe J Jones"},
+          "userName": {"S": "jjjones"},
+          "address": {"S": "123 Charming Ave."},
+          "createdAt": {"S": "2021-10-08T12:41:05.101Z"}
+        }
+      }
+    }, {
+      "PutRequest": {
+        "Item": {
+          "pk": {"S": "VOTER#b7a42e"},
+          "sk1": {"S": "BALLOT#2a8c1e"},
+          "voterId": {"S": "b7a42e"},
+          "ballotId": {"S": "2a8c1e"},
+          "ballotState": {"S": "SUBMITTED"},
+          "createdAt": {"S": "2021-11-04T14:18:31.501Z"}
+        }
+      }
+    }, {
+      "PutRequest": {
+        "Item": {
+          "pk": {"S": "VOTER#b7a42e"},
+          "sk1": {"S": "BALLOT#49aef2"},
+          "voterId": {"S": "b7a42e"},
+          "ballotId": {"S": "49aef2"},
+          "ballotState": {"S": "ISSUED"},
+          "createdAt": {"S": "2022-02-12T22:45:55.266Z"}
+        }
+      }
+    }, {
+      "PutRequest": {
+        "Item": {
+          "pk": {"S": "VOTER#e579df"},
+          "sk1": {"S": "PROFILE"},
+          "voterId": {"S": "e579df"},
+          "fullName": {"S": "Abby A Adams"},
+          "userName": {"S": "aaadams"},
+          "address": {"S": "456 First St."},
+          "createdAt": {"S": "2019-02-04T16:41:05.101Z"}
+        }
+      }
+    }, {
+      "PutRequest": {
+        "Item": {
+          "pk": {"S": "VOTER#e579df"},
+          "sk1": {"S": "BALLOT#de2ac4"},
+          "voterId": {"S": "e579df"},
+          "ballotId": {"S": "de2ac4"},
+          "ballotState": {"S": "ISSUED"},
+          "createdAt": {"S": "2022-02-12T22:41:11.704Z"}
+        }
+      }
+    }, {
+      "PutRequest": {
+        "Item": {
+          "pk": {"S": "VOTER#a3aa4f"},
+          "sk1": {"S": "PROFILE"},
+          "voterId": {"S": "a3aa4f"},
+          "fullName": {"S": "Robert R Rodriguez"},
+          "userName": {"S": "rrrodriguez"},
+          "address": {"S": "789 Maple Dr."},
+          "createdAt": {"S": "2020-08-21T11:07:25.651Z"}
+        }
+      }
+    }, {
+      "PutRequest": {
+        "Item": {
+          "pk": {"S": "VOTER#a3aa4f"},
+          "sk1": {"S": "BALLOT#73a342"},
+          "voterId": {"S": "a3aa4f"},
+          "ballotId": {"S": "73a342"},
+          "ballotState": {"S": "ISSUED"},
+          "createdAt": {"S": "2022-02-12T22:50:41.336Z"}
+        }
+      }
+    }
+  ]
+}
