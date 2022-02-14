@@ -1,4 +1,4 @@
-const { processBallot } = require('../services/election');
+const ElectionService = require('../services/election');
 
 /**
  * Ballot verified function request handler. The entry point for ballot verified events.
@@ -13,7 +13,7 @@ exports.handle = async (event, context) => {
 
   if (isValidRequest(event)) {
     const { detail = {} } = event;
-    await processBallot(detail);
+    await ElectionService.processBallot(detail);
 
     return {
       status: 200,
