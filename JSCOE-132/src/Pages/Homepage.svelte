@@ -1,22 +1,31 @@
 <script>
   import Counter from "../Components/Counter.svelte";
   import CounterMessage from "../Components/CounterMessage.svelte";
+  import { count } from '../Stores/Store.js';
+  let countNumber;
 
-  let count = 0;
+  count.subscribe(c => {
+		countNumber = c;
+	});
+
+  count.subscribe(c => {
+    countNumber = c;
+  });
+
 
   function increment() {
-    count++;
+    count.update(c => c + 1)
   }
 
   function decrement() {
-    count--;
+    count.update(c => c - 1)
   }
   
 </script>
 
 <h1>Home Svelte</h1>
-<Counter {count} {increment} {decrement} />
-<CounterMessage {count} />
+<Counter count={countNumber} {increment} {decrement} />
+<CounterMessage count={countNumber} />
 <style>
   h1 {
     text-align: center;
