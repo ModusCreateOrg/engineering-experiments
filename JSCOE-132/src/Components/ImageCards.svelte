@@ -11,7 +11,7 @@
 
     }
 </script>
-
+<h1>Here you can the title of the cards and it will update!</h1>
 <div class="cars">
 	{#each $images as { title, image, id} }
 		<div class="outer-div">

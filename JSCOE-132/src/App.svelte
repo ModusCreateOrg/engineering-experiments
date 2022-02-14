@@ -3,6 +3,7 @@
   import Navbar from "./Components/Navbar.svelte";
   import { Router, Route } from "svelte-navigator";
   import ApiPage from "./Pages/ApiPage.svelte";
+  import About from './Pages/About.svelte';
 
 </script>
 
@@ -15,6 +16,9 @@
       </Route>
       <Route path="api">
         <ApiPage />
+      </Route>
+      <Route path="about">
+        <About />
       </Route>
     </Router>
   </div>
