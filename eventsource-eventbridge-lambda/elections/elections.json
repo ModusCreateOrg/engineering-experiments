@@ -1,0 +1,75 @@
+{
+  "jscoe155-elections": [
+    {
+      "PutRequest": {
+        "Item": {
+          "pk": {"S": "ELECTION#6353a9"},
+          "sk1": {"S": "DETAIL"},
+          "electionId": {"S": "6353a9"},
+          "description": {"S": "City Council Seat 1"},
+          "electionDate": {"S": "2022-03-22"},
+          "createdAt": {"S": "2021-10-08T12:41:05.101Z"}
+        }
+      }
+    }, {
+      "PutRequest": {
+        "Item": {
+          "pk": {"S": "ELECTION#6353a9"},
+          "sk1": {"S": "CANDIDATE#f5484e"},
+          "electionId": {"S": "6353a9"},
+          "candidateId": {"S": "f5484e"},
+          "fullName": {"S": "Beth B Barnes"},
+          "voteCount": {"N": "0"},
+          "createdAt": {"S": "2021-11-04T14:18:31.501Z"}
+        }
+      }
+    }, {
+      "PutRequest": {
+        "Item": {
+          "pk": {"S": "ELECTION#6353a9"},
+          "sk1": {"S": "CANDIDATE#16eb70"},
+          "electionId": {"S": "6353a9"},
+          "candidateId": {"S": "16eb70"},
+          "fullName": {"S": "Carla C Castano"},
+          "voteCount": {"N": "0"},
+          "createdAt": {"S": "2021-11-04T13:38:01.336Z"}
+        }
+      }
+    }, {
+      "PutRequest": {
+        "Item": {
+          "pk": {"S": "ELECTION#cc4822"},
+          "sk1": {"S": "DETAIL"},
+          "electionId": {"S": "cc4822"},
+          "description": {"S": "Mayor"},
+          "electionDate": {"S": "2022-03-22"},
+          "createdAt": {"S": "2021-10-08T09:22:01.111Z"}
+        }
+      }
+    }, {
+      "PutRequest": {
+        "Item": {
+          "pk": {"S": "ELECTION#cc4822"},
+          "sk1": {"S": "CANDIDATE#ad0031"},
+          "electionId": {"S": "cc4822"},
+          "candidateId": {"S": "ad0031"},
+          "fullName": {"S": "Delores D Dumfries"},
+          "voteCount": {"N": "0"},
+          "createdAt": {"S": "2021-11-04T14:22:31.501Z"}
+        }
+      }
+    }, {
+      "PutRequest": {
+        "Item": {
+          "pk": {"S": "ELECTION#cc4822"},
+          "sk1": {"S": "CANDIDATE#3391e4"},
+          "electionId": {"S": "cc4822"},
+          "candidateId": {"S": "3391e4"},
+          "fullName": {"S": "Elena E Espinoza"},
+          "voteCount": {"N": "0"},
+          "createdAt": {"S": "2021-11-04T16:58:44.336Z"}
+        }
+      }
+    }
+  ]
+}
