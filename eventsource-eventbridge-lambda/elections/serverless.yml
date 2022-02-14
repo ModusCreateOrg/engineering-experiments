@@ -53,8 +53,8 @@ functions:
           retryPolicy:
             maximumEventAge: 86400 # default 1 day
             maximumRetryAttempts: 185 # default 185 attempts
-  voteCast:
-    handler: src/handlers/voteCast.handle
+  saveVote:
+    handler: src/handlers/saveVote.handle
     events:
       - eventBridge:
           eventBus: ${cf:${self:custom.eventBusStack}-${self:custom.stage}.EventBusArn}
@@ -63,7 +63,7 @@ functions:
               - ${self:custom.eventSource}
             detail-type:
               - 'Vote Cast'
-          deadLetterQueueArn: !GetAtt VoteCastRuleDLQ.Arn
+          deadLetterQueueArn: !GetAtt SaveVoteRuleDLQ.Arn
           retryPolicy:
             maximumEventAge: 86400 # default 1 day
             maximumRetryAttempts: 185 # default 185 attempts
@@ -74,6 +74,11 @@ resources:
       Type: AWS::SQS::Queue
       Properties:
         QueueName: ${self:service}-${self:custom.stage}-ballotVerifiedRule-DLQ
+
+    SaveVoteRuleDLQ:
+      Type: AWS::SQS::Queue
+      Properties:
+        QueueName: ${self:service}-${self:custom.stage}-saveVoteRule-DLQ
 
     ElectionsTable:
       Type: 'AWS::DynamoDB::Table'
@@ -101,8 +106,3 @@ resources:
             Value: ${self:custom.tags.Owner}
           - Key: Issue
             Value: ${self:custom.tags.Issue}
-
-    VoteCastRuleDLQ:
-      Type: AWS::SQS::Queue
-      Properties:
-        QueueName: ${self:service}-${self:custom.stage}-voteCastRule-DLQ
