@@ -4,7 +4,7 @@ const ElectionService = require('../services/election');
  * Save vote function request handler. EventBridge event handler.
  * @param {Object} event The Lambda request event.
  * @param {Object} event.detail The EventBridge `detail`.
- * @param {Object} context TheLambda request context.
+ * @param {Object} context The Lambda request context.
  * @returns A Lambda response object.
  */
 exports.handle = async (event, context) => {

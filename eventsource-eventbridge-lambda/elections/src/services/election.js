@@ -56,7 +56,7 @@ exports.saveVote = async (ballotId, voter, vote) => {
       createdAt: new Date().toISOString(),
     },
   };
-  const output = await dynamodb.put(input);
+  await dynamodb.put(input);
 };
 
 /**

@@ -4,6 +4,7 @@ custom:
   eventBusStack: 'jscoe155-events'
   eventSource: 'moduscreate.jscoe155'
   stage: ${opt:stage, self:provider.stage}
+  tableName: jscoe155-audit
   tags:
     App: 'jscoe.moduscreate.com'
     Env: ${self:custom.stage}
@@ -18,6 +19,21 @@ provider:
   runtime: nodejs14.x
   memorySize: 128
   timeout: 6
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:DeleteItem
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:UpdateItem
+          Resource:
+            - !GetAtt AuditTable.Arn
+  environment:
+    TABLE_NAME: ${self:custom.tableName}
   logRetentionInDays: 7
   tags: ${self:custom.tags}
 
@@ -41,3 +57,30 @@ resources:
       Type: AWS::SQS::Queue
       Properties:
         QueueName: ${self:service}-${self:custom.stage}-auditEventRule-DLQ
+
+    AuditTable:
+      Type: 'AWS::DynamoDB::Table'
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: pk
+            AttributeType: S
+          - AttributeName: createdAt
+            AttributeType: S
+        KeySchema:
+          - AttributeName: pk
+            KeyType: HASH
+          - AttributeName: createdAt
+            KeyType: RANGE
+        BillingMode: PAY_PER_REQUEST
+        TableName: ${self:custom.tableName}
+        Tags:
+          - Key: App
+            Value: ${self:custom.tags.App}
+          - Key: Env
+            Value: ${self:custom.tags.Env}
+          - Key: OU
+            Value: ${self:custom.tags.OU}
+          - Key: Owner
+            Value: ${self:custom.tags.Owner}
+          - Key: Issue
+            Value: ${self:custom.tags.Issue}
