@@ -10,6 +10,7 @@
   <h3>{data.date}</h3>
   <h3>{data.title}</h3>
   <p>{data.explanation}</p>
+  <img src={data.hdurl} alt={data.title} />
 {/await}
 
 <style>
@@ -18,5 +19,12 @@
   }
   h3 {
     text-align: center;
+  }
+
+  img  {
+    height: 680px;
+    width: 100%;
+    object-fit: cover;
+    display: block;
   }
 </style>

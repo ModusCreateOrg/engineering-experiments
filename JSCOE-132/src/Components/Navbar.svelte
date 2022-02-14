@@ -9,7 +9,7 @@
     <nav>
       <Link to="/">Home</Link>
       <Link to="about">About</Link>
-      <Link to="api">API Testing</Link>
+      <Link to="api">API Page</Link>
     </nav>
 </header>
 
