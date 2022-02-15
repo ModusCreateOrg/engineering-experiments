@@ -8,7 +8,7 @@ The Event Service component creates a REST API endpoint to which events are post
 
 > **REQUIREMENTS:** NodeJS `lts/fermium (v14.15 or later)`. If you are using `nvm` run `nvm use` to ensure you're using the required Node version.
 
-Run the following command to install the `Yarn` package manager.
+If necessary, run the following command to install the `Yarn` package manager.
 
 ```
 npm i -g yarn
@@ -51,8 +51,13 @@ Done in 129.01s.
 
 When the AWS resources are no longer needed, run the following command to remove them.
 
+> **NOTE:** This component should be removed **LAST**.
+
 ```
 yarn run remove
 ```
 
 ## Related Information
+
+[nvm | Node Version Manager](https://github.com/nvm-sh/nvm)  
+[Yarn Package Manager](https://yarnpkg.com/)

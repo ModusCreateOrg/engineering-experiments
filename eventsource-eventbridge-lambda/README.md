@@ -35,11 +35,11 @@ The event sourcing pattern should be avoided if/when...
 
 ## Experiment Scenario
 
-The scenario used to illustrate the Event Sourcing pattern is a an _Election_ application. Specifically, the process of submitting Ballots to be processed.
+The scenario used to illustrate the Event Sourcing pattern is an _Election_ application. Specifically, it depicts the process of submitting Ballots to be processed.
 
-Ballots are submitted by application clients, e.g. web browsers, mobile devices, voting machines, etc. A ballot submission is posted to the `/events` REST API endpoint which is handled by the _Create Event_ Lambda function and serves as the entry point to our Event Sourcing pattern. After performing rudimentary validation of the ballot, the _Create Event_ function sends a `Ballot Sumitted` event to Amazon Event Bridge.
+Ballots are submitted by application clients, e.g. web browsers, mobile devices, voting machines, etc. A ballot submission is posted to the `/events` REST API endpoint which is handled by the _Create Event_ Lambda function and serves as the entry point to our Event Sourcing pattern. After performing rudimentary validation of the ballot, the _Create Event_ function sends a `Ballot Submitted` event to Amazon Event Bridge.
 
-Ballot Submitted events are handled by the _Ballot Submission_ function of the Voter microservice. The function verifies that the ballot is authentic, it was previously issued to the submitting voter, and that it has not already been processed. If ballot verification succeeds, the function augments the event payload with Voter information and sends a `Ballot Verified` event to Amazon EventBridge. If it fails, a `Ballot Rejected` event is sent.
+Ballot Submitted events are handled by the _Ballot Submission_ function of the Voter microservice. The function verifies that the ballot is authentic, that it was previously issued to the submitting voter, and that it has not already been processed. If ballot verification succeeds, the function augments the event payload with Voter information and sends a `Ballot Verified` event to Amazon EventBridge. If it fails, a `Ballot Rejected` event is sent.
 
 Ballot Verified events are handled by the _Ballot Processing_ function of the Election microservice. For each Vote within the Ballot, a `Vote Cast` event is sent to Amazon EventBridge.
 
@@ -49,11 +49,11 @@ All events are handled by the _Audit_ microservice. This service contains functi
 
 ## Installation
 
-This experiment consists of 4 components. Each component is deployed to AWS separately.
+This experiment consists of 4 components. Each component is deployed to AWS separately. Follow the links below to find detailed component installation instructions.
 
 First, deploy the [events](./events/README.md) component.
 
-Next, deploy the [elections](./elections/README.md), [voters](./voters/README.md), and [audit](./audit/README.md) components. These 3 components may be deployed in any order and may be deployed in parallel if you choose. They simply depend upon resources created by the _events_ component.
+After the events component deployment is complete, deploy the [elections](./elections/README.md), [voters](./voters/README.md), and [audit](./audit/README.md) components. These 3 components may be deployed in any order and may be deployed in parallel if you choose. They simply depend upon resources created by the _events_ component.
 
 > **NOTE:** When removing these components from AWS, remove the _events_ component last.
 
@@ -71,7 +71,7 @@ yarn sls info
 
 ### Create Event
 
-To create an event, you send a HTTP POST requst to the `/events` endpoint. You may use an API client such as PostMan, or issue a curl command structured like this:
+To create an event, you send a HTTP POST requst to the `/events` endpoint. You may use an API client such as [Postman](https://postman.com/downloads), or issue a curl command structured like this:
 
 ```
 % curl --request POST \
@@ -123,7 +123,7 @@ curl --request POST \
 
 ### Rejected Ballot Submissions
 
-#### Scenario 1: Ballot Not Found
+#### Scenario 1: Ballot Already Submitted
 
 ```
 curl --request POST \
@@ -137,10 +137,10 @@ curl --request POST \
 
 As noted above, ballots may only be processed one time. Subsequent submissions result in `Ballot Rejected` events since the ballot has already been processed.
 
-To reset the DynamoDB tables to their original state, perform the following steps in the AWS Console for DynamoDB.
+To reset the DynamoDB tables to their original state, perform the following steps in the AWS Console for DynamoDB and in your terminal.
 
-1. Delete all items in the _Audit_ table.
-1. Delete all items in the _Elections_ table.
+1. In the AWS Console for DynamodDB, delete all items in the _Audit_ table.
+1. In the AWS Console for DynamoDB, delete all items in the _Elections_ table.
 1. At a terminal prompt, in the `/elections` directory, run `yarn run init`
 1. At a terminal promot, in the `/voters` direcotry, run `yarn run init`.
 
