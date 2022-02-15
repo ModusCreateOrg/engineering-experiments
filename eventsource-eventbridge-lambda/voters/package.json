@@ -9,7 +9,7 @@
   "private": true,
   "scripts": {
     "deploy": "sls deploy",
-    "init": "aws dynamodb batch-write-item --request-items file://voters.json",
+    "init": "aws dynamodb batch-write-item --request-items file://voters.json --region us-east-1",
     "logs": "sls logs --tail",
     "remove": "sls remove"
   },
