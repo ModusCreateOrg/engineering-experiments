@@ -1,94 +1,77 @@
 # Experiment: Event Sourcing Pattern with Amazon EventBridge and Lambda
 
-This project provides an example of the _Event Sourcing_ architectural pattern using Amazon EventBridge as the event source and AWS Lambda functions as event processors.
+This project provides an example of the _Event Sourcing_ architectural pattern using Amazon EventBridge as the event store and AWS Lambda functions as event processors as descibed in this [AWS Prescriptive Guidance][es-aws].
 
-## Install
+## About Event Sourcing
 
-Use NPM or Yarn to install the project dependencies.
+### Summary
 
-> **REQUIREMENTS:** NodeJS `lts/fermium (v14.15 or later)`. If you are using `nvm` run `nvm use` to ensure you're using the required Node version.
+Rather than storing just the current state of the application, data is stored as a series of events. These events are persisted in an _Event Store_. Microservices (re)play events from the store to perform business logic or calculate/mutate the state of their own domain.
 
-### With NPM
+### When to consider using
 
-```
-% npm i
-```
+The event souring pattern is an approach for data persistence in microservices. However, as with any design choice, the requirements should dictate selection.
 
-### With Yarn
+Consider using event sourcing if/when...
 
-```
-% yarn
-```
+1. The application uses events to create (or recreate) state.
+1. Data access is read-heavy with low to moderate write activity.
+1. You need to minimize or eliminate data store write conflicts.
+1. You need to decouple data intake from the sequence of tasks that result from that submission.
+1. It is 'OK' for data to be eventually consistent due to the nature of event publication and propagation.
+1. There is (already) a stream of events emitted by the application.
+1. There is a need to determine application state at a point in time or to recreate the application state at a given point in time.
 
-## Deploy
+> **NOTE:** When the Event Sourcing pattern is employed, the [Saga pattern][saga-aws] should also be used to ensure consistency of application state.
 
-> **NOTE:** It is assumed that you have sufficient AWS privileges to provision the AWS resources utilized by this project.
+### When to avoid using
 
-This project uses the Serverless framework to provison AWS resources and deploy application components. Use your preferred package manager to deploy the application to AWS.
+The event sourcing pattern should be avoided if/when...
 
-### With NPM
+1. Real time data consistency is required.
+1. The application domain is small and/or simple.
+1. Audit trails, change history, and the ability to recreate state are not needed.
+1. Data store write conflicts rarely or never occur.
 
-```
-% npx sls deploy
-```
+## Experiment Scenario
 
-### With Yarn
+The scenario used to illustrate the Event Sourcing pattern is a an _Election_ application. Specifically, the process of submitting Ballots to be processed.
 
-```
-% yarn sls deploy
-```
+Ballots are submitted by application clients, e.g. web browsers, mobile devices, voting machines, etc. A ballot submission is posted to the `/events` REST API endpoint which is handled by the _Create Event_ Lambda function and serves as the entry point to our Event Sourcing pattern. After performing rudimentary validation of the ballot, the _Create Event_ function sends a `Ballot Sumitted` event to Amazon Event Bridge.
 
-> **TIP:** The Serverless Framework logs the API Gateway URL for the `POST /events` endpoint to the console. Save this URL to use when running the experiment.
+Ballot Submitted events are handled by the _Ballot Submission_ function of the Voter microservice. The function verifies that the ballot is authentic, it was previously issued to the submitting voter, and that it has not already been processed. If ballot verification succeeds, the function augments the event payload with Voter information and sends a `Ballot Verified` event to Amazon EventBridge. If it fails, a `Ballot Rejected` event is sent.
 
-_Sample output_
+Ballot Verified events are handled by the _Ballot Processing_ function of the Election microservice. For each Vote within the Ballot, a `Vote Cast` event is sent to Amazon EventBridge.
 
-```
-Deploying jscoe155-eventbridge-lambda to stage dev (us-east-1)
+Vote Cast events are handled by multiple functions in the Election microservice. The _Save Vote_ function persists the details of the Vote. The _Count Vote_ function simply increments a counter of votes cast for each candidate in the election.
 
-✔ Service deployed to stack jscoe155-eventbridge-lambda-dev (127s)
+All events are handled by the _Audit_ microservice. This service contains functions which preserve a detailed log of events for all election related entities such as Elections, Candidates, Voters, and Ballots.
 
-endpoint: POST - https://11cw2k7rt2.execute-api.us-east-1.amazonaws.com/dev/events
-functions:
-  createEvent: jscoe155-eventbridge-lambda-dev-createEvent (71 kB)
-  processEvent: jscoe155-eventbridge-lambda-dev-processEvent (71 kB)
-Done in 129.01s.
-```
+## Installation
 
-## Clean up
+This experiment consists of 4 components. Each component is deployed to AWS separately.
 
-When the AWS resources are no longer needed, remove them by running the following command.
+First, deploy the [events](./events/README.md) component.
 
-### With NPM
+Next, deploy the [elections](./elections/README.md), [voters](./voters/README.md), and [audit](./audit/README.md) components. These 3 components may be deployed in any order and may be deployed in parallel if you choose. They simply depend upon resources created by the _events_ component.
 
-```
-% npx sls remove
-```
+> **NOTE:** When removing these components from AWS, remove the _events_ component last.
 
-### With Yarn
+## Running the Experiment
 
-```
-% yarn sls remove
-```
+To run the experiment, you will POST to the `/events` API Gateway endpoint.
 
-## Run
+If you noted the `/events` URL when you deployed the _events_ component to AWS, proceed to the next step.
 
-To demonstrate the event sourcing pattern, events are submitted to an `/events` API Gateway endpoint via HTTP POST.
-
-If you noted the `/events` URL when you deployed this project to AWS, proceed to the next step.
-
-If you need to discover the URL for the endpoint, run one of the following commands:
+If you need to discover the URL for the endpoint, open a terminal. At the prompt change to the `/events` project directory and run the following command.
 
 ```
-% npx sls info
-
-OR
-
-% yarn sls info
+yarn sls info
 ```
 
 ### Create Event
 
-To create an event, you send a HTTP POST requst to the `/events` endpoint. You may use an API client such as PostMan, or run the following command at a terminal prompt:
+To create an event, you send a HTTP POST requst to the `/events` endpoint. You may use an API client such as PostMan, or issue a curl command structured like this:
 
 ```
 % curl --request POST \
@@ -98,4 +81,77 @@ To create an event, you send a HTTP POST requst to the `/events` endpoint. You m
        {your-gateway-endpoint-url}
 ```
 
+When you deployed the application, the deployment scripts bootstrap the system with data. The following are prepared events to illustrate the experiment scenarios.
+
+The REST API endpoint responds with event submission details. Meanwhile, Amazon EventBridge processes the events resulting from ballot submission. CloudWatch logs for the Lambda functions detail the results of event processing.
+
+DynamoDB tables are updated as well. The BALLOT item in the _Voters_ table is updated from `ISSUED` to `SUBMITTED`. VOTE items are created in the _Elections_ table and the vote count is incremented on the appropriate CANDIDATE item. The _Audit_ table captures details of each event which passes through the system.
+
+### Successful Ballot Submissions
+
+> **NOTE:** A ballot may be submitted only once. The system records it's submission and duplicates are rejected.
+
+#### Scenario 1: Voter Joe casts votes for Candidates Beth and Delores
+
+```
+curl --request POST \
+       --header 'Content-Type: application/json' \
+       --data-raw '{"type":"Ballot Submitted","detail":{"ballotId":"49aef2","voterId":"b7a42e","votes":[{"electionId":"6353a9","candidateId":"f5484e"},{"electionId":"cc4822","candidateId":"ad0031"}]}}' \
+       --verbose \
+       {your-gateway-endpoint-url}
+```
+
+#### Scenario 2: Voter Abby casts votes for Candidates Carla and Elena
+
+```
+curl --request POST \
+       --header 'Content-Type: application/json' \
+       --data-raw '{"type":"Ballot Submitted","detail":{"ballotId":"de2ac4","voterId":"e579df","votes":[{"electionId":"6353a9","candidateId":"16eb70"},{"electionId":"cc4822","candidateId":"3391e4"}]}}' \
+       --verbose \
+       {your-gateway-endpoint-url}
+```
+
+#### Scenario 3: Voter Robert casts votes for Candidates Carla and Elena
+
+```
+curl --request POST \
+       --header 'Content-Type: application/json' \
+       --data-raw '{"type":"Ballot Submitted","detail":{"ballotId":"73a342","voterId":"a3aa4f","votes":[{"electionId":"6353a9","candidateId":"16eb70"},{"electionId":"cc4822","candidateId":"3391e4"}]}}' \
+       --verbose \
+       {your-gateway-endpoint-url}
+```
+
+### Rejected Ballot Submissions
+
+#### Scenario 1: Ballot Not Found
+
+```
+curl --request POST \
+       --header 'Content-Type: application/json' \
+       --data-raw '{"type":"Ballot Submitted","detail":{"ballotId":"2a8c1e","voterId":"b7a42e","votes":[{"electionId":"6353a9","candidateId":"16eb70"},{"electionId":"cc4822","candidateId":"3391e4"}]}}' \
+       --verbose \
+       {your-gateway-endpoint-url}
+```
+
+### Resetting Experiment Data
+
+As noted above, ballots may only be processed one time. Subsequent submissions result in `Ballot Rejected` events since the ballot has already been processed.
+
+To reset the DynamoDB tables to their original state, perform the following steps in the AWS Console for DynamoDB.
+
+1. Delete all items in the _Audit_ table.
+1. Delete all items in the _Elections_ table.
+1. At a terminal prompt, in the `/elections` directory, run `yarn run init`
+1. At a terminal promot, in the `/voters` direcotry, run `yarn run init`.
+
 ## Related Information
+
+[Event Sourcing | Martin Fowler][es-martin-fowler]  
+[Event Sourcing pattern | AWS Prescriptive Guidance][es-aws]  
+[Event Sourcing pattern - Cloud Design Patterns | Microsoft][es-microsoft]  
+[Saga pattern | AWS Prescriptive Guidance][saga-aws]
+
+[es-martin-fowler]: https://martinfowler.com/eaaDev/EventSourcing.html 'Event Sourcing | Martin Fowler'
+[es-aws]: https://docs.aws.amazon.com/prescriptive-guidance/latest/modernization-data-persistence/service-per-team.html 'Event Sourcing pattern | AWS Prescriptive Guidance'
+[es-microsoft]: https://docs.microsoft.com/en-us/azure/architecture/patterns/event-sourcing 'Event Sourcing pattern - Cloud Design Patterns | Microsoft'
+[saga-aws]: https://docs.aws.amazon.com/prescriptive-guidance/latest/modernization-data-persistence/saga-pattern.html 'Saga pattern | AWS Prescriptive Guidance'
