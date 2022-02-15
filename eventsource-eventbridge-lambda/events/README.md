@@ -14,6 +14,8 @@ If necessary, run the following command to install the `Yarn` package manager.
 npm i -g yarn
 ```
 
+If necessary, follow these instructions to install the [AWS CLI (Command Line Interface)][aws-cli].
+
 ## Install
 
 At a terminal prompt, run the following command to install project dependencies.
@@ -60,4 +62,7 @@ yarn run remove
 ## Related Information
 
 [nvm | Node Version Manager](https://github.com/nvm-sh/nvm)  
-[Yarn Package Manager](https://yarnpkg.com/)
+[Yarn Package Manager](https://yarnpkg.com/)  
+[AWS CLI][aws-cli]
+
+[aws-cli]: https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html 'Installing or Updating the AWS CLI'
