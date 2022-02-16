@@ -1,6 +1,7 @@
 <script>
+    import { images } from '../Stores/Store.js';
 
-    export let images, handleChange;
+    export let handleChange;
 </script>
 <h1>Here you can the title of the cards and it will update!</h1>
 <div class="cars">
