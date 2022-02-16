@@ -47,6 +47,14 @@ Vote Cast events are handled by multiple functions in the Election microservice.
 
 All events are handled by the _Audit_ microservice. This service contains functions which preserve a detailed log of events for all election related entities such as Elections, Candidates, Voters, and Ballots.
 
+### Event Flow
+
+![Event Flow Diagram](./assets/JSCOE-155-Process-Flow.png)
+
+### Architecture
+
+![Architecture Diagram](./assets/JSCOE-155-Application-Architecture.png)
+
 ## Installation
 
 This experiment consists of 4 components. Each component is deployed to AWS separately. Follow the links below to find detailed component installation instructions.

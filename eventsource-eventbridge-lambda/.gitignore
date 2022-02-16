@@ -9,3 +9,6 @@ build
 
 # log files
 *.log
+
+# miscellaneous
+.DS_Store
