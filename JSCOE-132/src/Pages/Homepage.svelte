@@ -24,11 +24,10 @@
   }
 
   function handleChange(event, id) {
-    const copyImages= [...$images];
+    const copyImages= [...images];
     const idx = copyImages.findIndex(c => c.id === id);
     copyImages[idx].title = event.target.value; 
-    $images = copyImages;
-
+    images = copyImages;
   }
   
 </script>
