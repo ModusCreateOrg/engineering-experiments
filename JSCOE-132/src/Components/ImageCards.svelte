@@ -1,15 +1,6 @@
 <script>
 
-    import  { images } from '../Stores/Store'
-  
-    function handleChange(event, id) {
-
-        const copyImages= [...$images];
-        const idx = copyImages.findIndex(c => c.id === id);
-        copyImages[idx].title = event.target.value; 
-        $images = copyImages;
-
-    }
+    export let images, handleChange;
 </script>
 <h1>Here you can the title of the cards and it will update!</h1>
 <div class="cars">
