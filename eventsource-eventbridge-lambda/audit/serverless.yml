@@ -1,8 +1,11 @@
 service: jscoe155-audit
 
+frameworkVersion: '3'
+
 custom:
   eventBusStack: 'jscoe155-events'
   eventSource: 'moduscreate.jscoe155'
+  stackDescription: 'JSCOE-155 - Audit component resources'
   stage: ${opt:stage, self:provider.stage}
   tableName: jscoe155-audit
   tags:
@@ -52,6 +55,8 @@ functions:
             maximumRetryAttempts: 185 # default 185 attempts
 
 resources:
+  Description: ${self:custom.stackDescription}
+
   Resources:
     AuditEventRuleDLQ:
       Type: AWS::SQS::Queue
