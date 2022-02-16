@@ -37,7 +37,7 @@
 <h1>Home Svelte</h1>
 <Counter count={countNumber} {increment} {decrement} />
 <CounterMessage count={countNumber} />
-<ImageCards images={images} handleChange={handleChange} />
+<ImageCards {images} {handleChange} />
 <style>
   h1 {
     text-align: center;
