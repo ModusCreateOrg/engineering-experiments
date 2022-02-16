@@ -52,6 +52,17 @@ resources:
       Properties:
         Name: ${self:custom.eventBus}
 
+    EventArchive:
+      Type: AWS::Events::Archive
+      Properties:
+        ArchiveName: ${self:custom.eventBus}-eventBus-archive
+        SourceArn: !GetAtt EventBus.Arn
+        EventPattern:
+          source:
+            - ${self:custom.eventSource}
+          detail-type:
+            - 'Ballot Submitted'
+
   Outputs:
     EventBusArn:
       Description: EventBridge Event Bus ARN
