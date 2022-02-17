@@ -157,9 +157,11 @@ To reset the DynamoDB tables to their original state, perform the following step
 [Event Sourcing | Martin Fowler][es-martin-fowler]  
 [Event Sourcing pattern | AWS Prescriptive Guidance][es-aws]  
 [Event Sourcing pattern - Cloud Design Patterns | Microsoft][es-microsoft]  
-[Saga pattern | AWS Prescriptive Guidance][saga-aws]
+[Saga pattern | AWS Prescriptive Guidance][saga-aws]  
+[DynamoDB Single-Table Design | Alex DeBrie][dynamo-std-debrie]
 
 [es-martin-fowler]: https://martinfowler.com/eaaDev/EventSourcing.html 'Event Sourcing | Martin Fowler'
 [es-aws]: https://docs.aws.amazon.com/prescriptive-guidance/latest/modernization-data-persistence/service-per-team.html 'Event Sourcing pattern | AWS Prescriptive Guidance'
 [es-microsoft]: https://docs.microsoft.com/en-us/azure/architecture/patterns/event-sourcing 'Event Sourcing pattern - Cloud Design Patterns | Microsoft'
 [saga-aws]: https://docs.aws.amazon.com/prescriptive-guidance/latest/modernization-data-persistence/saga-pattern.html 'Saga pattern | AWS Prescriptive Guidance'
+[dynamo-std-debrie]: https://www.alexdebrie.com/posts/dynamodb-single-table/ 'The What, Why, and When of Single-Table Design with DynamoDB'
