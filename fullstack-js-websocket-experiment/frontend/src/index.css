@@ -1,0 +1,95 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body, div#root {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+/*main {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    height: calc(100% - 64px);*/
+/*    background-color: #f5f5f5*/
+/*}*/
+
+/* Login Page */
+
+
+.layout {
+    display: flex;
+    height: 100%;
+}
+
+.navigation {
+    width: 250px;
+    background: #f5f5f5;
+    border-right: solid 1px rgba(0, 0, 0, .12);
+}
+
+.content {
+    width: 100%;
+    height: calc(100% - 64px);
+    background: none;
+}
+
+.menu {
+    padding: 20px 5px;
+}
+
+.menu__item {
+    display: flex;
+    align-items: center;
+    height: 48px;
+    padding: 0 16px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+}
+
+.menu__item--active {
+    background: #dae8fc;
+    font-weight: 500;
+}
+
+.message {
+    display: flex;
+    align-items: center;
+    min-height: 50px;
+    margin-top: 10px;
+    border-top: 1px solid #f3f3f3;
+    padding-top: 10px;
+}
+
+.message:first-of-type {
+    border-top-width: 0;
+}
+
+.message__image {
+    height: 40px;
+    min-width: 40px;
+    margin-right: 20px;
+}
+
+.message__image img {
+    width: 100%;
+    height: 100%;
+}
+
+.message__text {
+    margin-bottom: 5px;
+}
+
+.message__sender {
+    color: #bbb;
+    font-style: italic;
+    font-size: 11px;
+}
