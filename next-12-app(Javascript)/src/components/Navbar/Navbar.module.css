@@ -1,0 +1,20 @@
+.header {
+    background: #4D4753;
+    width: 100%;
+    color: #fff;
+    padding: 10px;
+}
+
+.brandName {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.brandName h1 {
+    font-size: 24px;
+}
+
+.active {
+    color: rgb(174, 174, 255)!important;
+}
