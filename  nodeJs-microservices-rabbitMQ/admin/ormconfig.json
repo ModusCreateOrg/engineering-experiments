@@ -1,0 +1,13 @@
+{
+  "type": "mysql",
+  "host": "0.0.0.0",
+  "port": 3306,
+  "username": "rootall",
+  "password": "my-secret-pw",
+  "database": "db-admin",
+  "entities": [
+    "lib/entity/*.js"
+  ],
+  "logging": false,
+  "synchronize": true
+}
