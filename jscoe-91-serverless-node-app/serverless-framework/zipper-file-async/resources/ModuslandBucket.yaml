@@ -1,4 +1,0 @@
-Type: AWS::S3::Bucket
-Properties:
-  BucketName: modusland${self:provider.stage}
-  AccessControl: PublicRead

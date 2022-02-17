@@ -1,5 +1,0 @@
-ENV: "test"
-BUCKET: "modusland${self:provider.stage}"
-QUEUE_ZIP_FILE: "ZipFile${self:provider.stage}"
-FILES_ZIPPED_TABLE: "Zipped${self:provider.stage}"
-CONNECTIONS_WEBSOCKET_TABLE: "ConnectionsWebSocket${self:provider.stage}"
