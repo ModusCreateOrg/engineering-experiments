@@ -1,0 +1,47 @@
+{
+  "name": "electron-app",
+  "version": "0.1.0",
+  "description": "Sample Electron app",
+  "scripts": {
+    "start:dev": "wait-on http://localhost:3000 && cross-env ELECTRON_ENV=dev npm start",
+    "start": "electron ../../dist/main.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tsc": "./node_modules/.bin/tsc -p tsconfig.json",
+    "posttsc": "cp -r ../renderer/build/ ../package.json ../package-lock.json ../.env ./images ../../dist/",
+    "tsc:watch": "./node_modules/.bin/tsc -p tsconfig.json --watch",
+    "pretsc:watch": "cp -r ../renderer/build/ ../package.json ../package-lock.json ../.env ./images ../../dist/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ModusCreateOrg/js-coe-experiments.git"
+  },
+  "author": {
+    "name": "Akhilesh Jain",
+    "email": "akhilesh.jain@moduscreate.com"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ModusCreateOrg/js-coe-experiments/issues"
+  },
+  "homepage": "https://github.com/ModusCreateOrg/js-coe-experiments#readme",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.9.1",
+    "@typescript-eslint/parser": "^5.9.1",
+    "cross-env": "^7.0.3",
+    "electron": "^16.0.7",
+    "electron-builder": "^22.14.5",
+    "eslint": "^8.7.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "typescript": "^4.5.4",
+    "wait-on": "^6.0.0"
+  },
+  "dependencies": {
+    "dotenv": "^11.0.0"
+  }
+}
