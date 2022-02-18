@@ -1,0 +1,14 @@
+# package directories
+node_modules
+
+# Serverless directories
+.serverless
+
+# build directories
+build
+
+# log files
+*.log
+
+# miscellaneous
+.DS_Store

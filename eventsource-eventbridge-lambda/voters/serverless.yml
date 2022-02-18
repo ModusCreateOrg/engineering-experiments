@@ -1,0 +1,94 @@
+service: jscoe155-voters
+
+frameworkVersion: '3'
+
+custom:
+  eventBusStack: 'jscoe155-events'
+  eventSource: 'moduscreate.jscoe155'
+  stackDescription: 'JSCOE-155 - Voter component resources'
+  stage: ${opt:stage, self:provider.stage}
+  tableName: jscoe155-voters
+  tags:
+    App: 'jscoe.moduscreate.com'
+    Env: ${self:custom.stage}
+    OU: 'moduscreate'
+    Owner: 'Matthew Warman'
+    Issue: 'JSCOE-155'
+
+provider:
+  name: aws
+  stage: dev
+  region: us-east-1
+  runtime: nodejs14.x
+  memorySize: 128
+  timeout: 6
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:DeleteItem
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:UpdateItem
+          Resource:
+            - !GetAtt VotersTable.Arn
+  environment:
+    API_BASEURL: ${cf:${self:custom.eventBusStack}-${self:custom.stage}.ServiceEndpoint}
+    TABLE_NAME: ${self:custom.tableName}
+  logRetentionInDays: 7
+  tags: ${self:custom.tags}
+
+functions:
+  ballotSubmitted:
+    handler: src/handlers/ballotSubmitted.handle
+    events:
+      - eventBridge:
+          eventBus: ${cf:${self:custom.eventBusStack}-${self:custom.stage}.EventBusArn}
+          pattern:
+            source:
+              - ${self:custom.eventSource}
+            detail-type:
+              - 'Ballot Submitted'
+          deadLetterQueueArn: !GetAtt BallotSubmittedRuleDLQ.Arn
+          retryPolicy:
+            maximumEventAge: 86400 # default 1 day
+            maximumRetryAttempts: 185 # default 185 attempts
+
+resources:
+  Description: ${self:custom.stackDescription}
+
+  Resources:
+    BallotSubmittedRuleDLQ:
+      Type: AWS::SQS::Queue
+      Properties:
+        QueueName: ${self:service}-${self:custom.stage}-ballotSubmittedRule-DLQ
+
+    VotersTable:
+      Type: 'AWS::DynamoDB::Table'
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: pk
+            AttributeType: S
+          - AttributeName: sk1
+            AttributeType: S
+        KeySchema:
+          - AttributeName: pk
+            KeyType: HASH
+          - AttributeName: sk1
+            KeyType: RANGE
+        BillingMode: PAY_PER_REQUEST
+        TableName: ${self:custom.tableName}
+        Tags:
+          - Key: App
+            Value: ${self:custom.tags.App}
+          - Key: Env
+            Value: ${self:custom.tags.Env}
+          - Key: OU
+            Value: ${self:custom.tags.OU}
+          - Key: Owner
+            Value: ${self:custom.tags.Owner}
+          - Key: Issue
+            Value: ${self:custom.tags.Issue}

@@ -1,0 +1,132 @@
+service: jscoe155-elections
+
+frameworkVersion: '3'
+
+custom:
+  eventBusStack: 'jscoe155-events'
+  eventSource: 'moduscreate.jscoe155'
+  stackDescription: 'JSCOE-155 - Election component resources'
+  stage: ${opt:stage, self:provider.stage}
+  tableName: jscoe155-elections
+  tags:
+    App: 'jscoe.moduscreate.com'
+    Env: ${self:custom.stage}
+    OU: 'moduscreate'
+    Owner: 'Matthew Warman'
+    Issue: 'JSCOE-155'
+
+provider:
+  name: aws
+  stage: dev
+  region: us-east-1
+  runtime: nodejs14.x
+  memorySize: 128
+  timeout: 6
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:DeleteItem
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:UpdateItem
+          Resource:
+            - !GetAtt ElectionsTable.Arn
+  environment:
+    API_BASEURL: ${cf:${self:custom.eventBusStack}-${self:custom.stage}.ServiceEndpoint}
+    TABLE_NAME: ${self:custom.tableName}
+  logRetentionInDays: 7
+  tags: ${self:custom.tags}
+
+functions:
+  ballotVerified:
+    handler: src/handlers/ballotVerified.handle
+    events:
+      - eventBridge:
+          eventBus: ${cf:${self:custom.eventBusStack}-${self:custom.stage}.EventBusArn}
+          pattern:
+            source:
+              - ${self:custom.eventSource}
+            detail-type:
+              - 'Ballot Verified'
+          deadLetterQueueArn: !GetAtt BallotVerifiedRuleDLQ.Arn
+          retryPolicy:
+            maximumEventAge: 86400 # default 1 day
+            maximumRetryAttempts: 185 # default 185 attempts
+  saveVote:
+    handler: src/handlers/saveVote.handle
+    events:
+      - eventBridge:
+          eventBus: ${cf:${self:custom.eventBusStack}-${self:custom.stage}.EventBusArn}
+          pattern:
+            source:
+              - ${self:custom.eventSource}
+            detail-type:
+              - 'Vote Cast'
+          deadLetterQueueArn: !GetAtt SaveVoteRuleDLQ.Arn
+          retryPolicy:
+            maximumEventAge: 86400 # default 1 day
+            maximumRetryAttempts: 185 # default 185 attempts
+  countVote:
+    handler: src/handlers/countVote.handle
+    events:
+      - eventBridge:
+          eventBus: ${cf:${self:custom.eventBusStack}-${self:custom.stage}.EventBusArn}
+          pattern:
+            source:
+              - ${self:custom.eventSource}
+            detail-type:
+              - 'Vote Cast'
+          deadLetterQueueArn: !GetAtt CountVoteRuleDLQ.Arn
+          retryPolicy:
+            maximumEventAge: 86400 # default 1 day
+            maximumRetryAttempts: 185 # default 185 attempts
+
+resources:
+  Description: ${self:custom.stackDescription}
+
+  Resources:
+    BallotVerifiedRuleDLQ:
+      Type: AWS::SQS::Queue
+      Properties:
+        QueueName: ${self:service}-${self:custom.stage}-ballotVerifiedRule-DLQ
+
+    SaveVoteRuleDLQ:
+      Type: AWS::SQS::Queue
+      Properties:
+        QueueName: ${self:service}-${self:custom.stage}-saveVoteRule-DLQ
+
+    CountVoteRuleDLQ:
+      Type: AWS::SQS::Queue
+      Properties:
+        QueueName: ${self:service}-${self:custom.stage}-countVoteRule-DLQ
+
+    ElectionsTable:
+      Type: 'AWS::DynamoDB::Table'
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: pk
+            AttributeType: S
+          - AttributeName: sk1
+            AttributeType: S
+        KeySchema:
+          - AttributeName: pk
+            KeyType: HASH
+          - AttributeName: sk1
+            KeyType: RANGE
+        BillingMode: PAY_PER_REQUEST
+        TableName: ${self:custom.tableName}
+        Tags:
+          - Key: App
+            Value: ${self:custom.tags.App}
+          - Key: Env
+            Value: ${self:custom.tags.Env}
+          - Key: OU
+            Value: ${self:custom.tags.OU}
+          - Key: Owner
+            Value: ${self:custom.tags.Owner}
+          - Key: Issue
+            Value: ${self:custom.tags.Issue}
