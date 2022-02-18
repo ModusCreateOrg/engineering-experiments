@@ -1,0 +1,61 @@
+Type: AWS::IAM::Role
+Properties:
+  AssumeRolePolicyDocument:
+    Version: "2012-10-17"
+    Statement:
+      - Effect: Allow
+        Principal:
+          Service:
+            - lambda.amazonaws.com
+        Action: sts:AssumeRole
+  Policies:
+    - PolicyName: myPolicyName
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Action:
+              - logs:CreateLogGroup
+              - logs:CreateLogStream
+              - logs:PutLogEvents
+            Resource:
+              Fn::Sub:
+                - "arn:aws:logs:${Region}:${AccountId}:log-group:/aws/lambda/*:*:*"
+                - { Region: !Ref AWS::Region, AccountId: !Ref AWS::AccountId }
+          - Effect: Allow
+            Action:
+              - s3:*
+            Resource:
+              !Sub
+                - "arn:aws:s3:::${BucketName}/*"
+                - {BucketName: !Ref ModuslandBucket}
+          - Effect: Allow
+            Action:
+              - sqs:*
+            Resource:
+              Fn::GetAtt:
+                - ZipFileQueue
+                - Arn
+          - Effect: Allow
+            Action:
+              - dynamodb:Query
+              - dynamodb:Scan
+              - dynamodb:GetItem
+              - dynamodb:PutItem
+              - dynamodb:UpdateItem
+              - dynamodb:DeleteItem
+            Resource:
+              - Fn::GetAtt: [FilesTable, Arn]
+              - Fn::GetAtt: [ConnectionsWebsocketTable, Arn]
+          - Effect: Allow
+            Action:
+              - execute-api:Invoke
+              - execute-api:ManageConnections
+            Resource:
+              Fn::Sub:
+                - "arn:aws:execute-api:${Region}:${AccountId}:${WebSocketId}/*"
+                - {
+                    Region: !Ref AWS::Region,
+                    AccountId: !Ref AWS::AccountId,
+                    WebSocketId: !Ref WebsocketsApi,
+                  }
