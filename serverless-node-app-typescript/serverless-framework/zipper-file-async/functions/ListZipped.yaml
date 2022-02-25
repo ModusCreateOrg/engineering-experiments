@@ -1,0 +1,25 @@
+handler: src/list-zipped/index.handle
+events:
+  - http:
+      path: file/list
+      method: get
+
+package:
+  patterns:
+    - src/list-zipped/index.js
+
+iamRoleStatements:
+  - Effect: Allow
+    Action:
+      - logs:CreateLogGroup
+      - logs:CreateLogStream
+      - logs:PutLogEvents
+    Resource:
+      Fn::Sub:
+        - arn:aws:logs:${Region}:${AccountId}:log-group:/aws/lambda/*:*:*
+        - { Region: !Ref AWS::Region, AccountId: !Ref AWS::AccountId }
+  - Effect: Allow
+    Action:
+      - dynamodb:Scan
+    Resource:
+      - Fn::GetAtt: [FilesTable, Arn]

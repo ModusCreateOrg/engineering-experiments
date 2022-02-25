@@ -1,0 +1,23 @@
+handler: src/onmessage.handle
+events:
+  - websocket:
+      route: onMessage
+
+package:
+  patterns:
+    - ./src/onmessage.js
+
+iamRoleStatements:
+  - Effect: Allow
+    Action:
+      - dynamodb:Scan
+    Resource:
+      - Fn::GetAtt: [ConnectionsWebsocketTable, Arn]
+  - Effect: Allow
+    Action:
+      - execute-api:Invoke
+      - execute-api:ManageConnections
+    Resource:
+      Fn::Sub:
+        - "arn:aws:execute-api:${Region}:${AccountId}:${WebSocketId}/*"
+        - { Region: !Ref AWS::Region, AccountId: !Ref AWS::AccountId, WebSocketId: !Ref WebsocketsApi }

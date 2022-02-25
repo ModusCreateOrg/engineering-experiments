@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Testing WebSocket</h1>
+
+    <ul id="messages">
+        <li>first...</li>
+    </ul>
+
+    <label for="message">Message</label>
+    <input type="text" id="message">
+    <input type="button" value="Send" onclick="sendMessage()">
+
+    <script>
+
+    </script>
+
+    <script>
+        const messages = document.getElementById("messages");
+        const ws = new WebSocket("wss://ef9rhr3w13.execute-api.us-east-1.amazonaws.com/dev")
+        ws.onopen = (event) => {
+            console.log(event)
+        }
+
+        ws.onmessage = (event) => {
+            const data = JSON.parse(event.data);
+            console.log(data)
+            const li = document.createElement("li")
+            li.textContent = data.nome
+            messages.appendChild(li)
+            console.log(event)
+        }
+
+        function sendMessage() {
+            const message = document.getElementById("message")
+            ws.send(JSON.stringify({
+                action: "onMessage",
+                data: { nome: message.value }
+            }))
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,10 @@
+Type: AWS::DynamoDB::Table
+Properties:
+  AttributeDefinitions:
+    - AttributeName: connectionId
+      AttributeType: S
+  KeySchema:
+    - AttributeName: connectionId
+      KeyType: HASH
+  BillingMode: PAY_PER_REQUEST
+  TableName: ${self:provider.environment.CONNECTIONS_WEBSOCKET_TABLE}
