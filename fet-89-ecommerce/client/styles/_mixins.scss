@@ -1,0 +1,25 @@
+@import '_variables';
+
+@mixin rounded {
+  border-radius: $radius;
+}
+
+@mixin suttleBorder($color: $color-neutral-0) {
+  border: 1px solid $color;
+}
+
+@mixin suttleShadow($color: $color-neutral-0) {
+  box-shadow: 0px 0px .1rem $color;
+}
+
+@mixin containerSpacing() {
+  padding: 8px;
+
+  @media (min-width: $breakpoint-tablet) {
+    padding: 16px;
+  }
+
+  @media (min-width: $breakpoint-desktop) {
+    padding: 32px;
+  }
+}

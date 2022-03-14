@@ -1,0 +1,161 @@
+@import '../../../../styles/_mixins';
+
+@mixin menuLine {
+  display: inline-block;
+  width: 15px;
+  height: 1px;
+  background-color: $color-white;
+  padding: 0;
+  margin: 0;
+  margin-right: 16px;
+}
+
+@mixin collapsableDisplay($visibility: false) {
+  @if $visibility {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity .81s ease;
+  } @else {
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+
+$inner-padding: 16px;
+$line-height: 50px;
+
+.navigation-bar {
+  background-color: $color-primary-50;
+  padding-left: $inner-padding * 2;
+  line-height: $line-height;
+  margin-bottom: 16px;
+  @include rounded;
+  @include suttleShadow($color-primary-50);
+  
+  @media (min-width: $breakpoint-desktop) {
+    margin-bottom: 32px;
+  }
+
+  & div:first-child {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .toggle {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    padding-right: $inner-padding * 2;
+    border-right: 1px solid $color-neutral-50;
+
+    &:hover .collapsable {
+      @include collapsableDisplay(true);
+    }
+
+    .collapsable {
+      position: absolute;
+      background-color: $color-neutral-0;
+      top: $line-height;
+      left: -$inner-padding * 2;
+      padding: 0 $inner-padding;
+      z-index: 9999;
+      @include collapsableDisplay();
+      @include suttleBorder($color-neutral-10);
+      @include suttleShadow();
+      @include rounded;
+  
+      &::before {
+        content: '';
+        position: absolute;
+        top: -8px;
+        left: 30px;
+        display: inline-block;
+        transform: rotate(45deg);
+        background-color: $color-neutral-0;
+        width: 15px;
+        height: 15px;
+      }
+  
+      ul, li {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+  
+      li {
+        padding: 0 $inner-padding;
+        border-bottom: 1px solid $color-neutral-30;
+        transition: border-color 0.5s ease;
+  
+        &:hover {
+          border-color: $color-primary-50;
+          a {
+            color: $color-neutral-70;
+          }
+        }
+  
+        &:last-child {
+          border: 0;
+        }
+      }
+  
+      a {
+        font-family: $font-secondary;
+        color: $color-neutral-50;
+      }
+    }
+  }
+
+  .control {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-right: $inner-padding * 2;
+    color: $color-neutral-0;
+
+    a[title|=register] {
+      font-weight: bold;
+    }
+  }  
+}
+
+.menu {
+  @include menuLine;
+  position: relative;
+  vertical-align: middle;
+
+  &::before {
+    content: '';
+    @include menuLine;
+    position: absolute;
+    top: -5px;
+  }
+  &::after {
+    content: '';
+    @include menuLine;
+    position: absolute;
+    top: 5px;
+  }
+}
+
+.fab {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  height: 55px;
+  width: 55px;
+  border-radius: 30px;
+  background-color: $color-primary-0;
+  position: fixed;
+  z-index: 99999;
+  bottom: 32px;
+  right: 32px;
+  font-size: 18px;
+  font-weight: bold;
+  @include suttleShadow();
+
+  &.--show {
+    display: flex; 
+  }
+}

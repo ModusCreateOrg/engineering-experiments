@@ -1,0 +1,45 @@
+@import '../../../../styles/_mixins';
+
+.animated-card {
+  @include rounded;
+  background-color: $color-neutral-0;
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  transition: background-color 0.5s linear;
+  
+  .content {
+    padding: 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 0.5;
+  }
+
+  &:hover {
+    background-color: $color-neutral-20;
+  }
+
+  &:hover .image {
+    transform: translateX(350px);
+    filter: drop-shadow(1px 1px 10rem $color-neutral-0);
+  }
+
+  h1 {
+    font-weight: normal;
+    color: $color-primary-50;
+  }
+
+  a {
+    font-weight: bold;
+    font-size: 16px;
+    color: $color-primary-50;
+  }
+
+  .image {
+    float: right;
+    transform: translateX(500px) translateY(50px);
+    filter: drop-shadow(0px 0px 1rem $color-neutral-30) blur(0.5px);
+    transition: all 0.5s ease;
+  }
+}

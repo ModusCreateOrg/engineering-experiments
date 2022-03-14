@@ -1,0 +1,104 @@
+@import '../../../../styles/_mixins';
+
+.section {
+  margin-top: 32px;
+  padding: 16px 32px;
+  position: relative;
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    h2 {
+      color: $color-primary-50;
+    }
+
+    [title|="see-all"] {
+      color: $color-neutral-50;
+      font-style: italic;
+      font-size: 15px;
+    }
+  }
+  
+  .content {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+
+    @media (min-width: $breakpoint-desktop) {
+      margin-left: 64px;
+      margin-right: 64px;
+      flex-direction: row;
+    }
+
+    .item {
+      display: inline-block;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      align-items: center;
+      margin-right: 32px;
+      margin-bottom: 32px;
+
+      @media (min-width: $breakpoint-desktop) {
+        margin-bottom: 0px;
+      }
+
+      [title|='item image'] {
+        height: 200px;
+        width: inherit;
+        overflow: hidden;
+        background-color: $color-neutral-0;
+
+        img {
+          width: auto;
+          height: 100%;
+        }
+      }
+
+      [title|='item content'] {
+        margin-top: 16px;
+        text-align: center;
+
+        h4 {
+          font-weight: normal;
+          color: $color-neutral-70;
+          margin-bottom: 16px;
+        }
+        span {
+          color: $color-primary-50;
+          font-weight: bold;
+        }
+      }
+
+      [title|='item footer'] {
+        margin-top: 16px;
+      }
+    }
+  }
+
+  .control {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+
+    button {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      background-color: $color-neutral-0;
+      @include suttleBorder();
+      @include suttleShadow($color-neutral-30);
+    }
+  }
+}

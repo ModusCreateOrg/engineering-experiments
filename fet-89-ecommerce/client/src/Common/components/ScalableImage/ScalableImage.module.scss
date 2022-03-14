@@ -1,0 +1,13 @@
+@import '../../../../styles/_mixins';
+
+.scalable-image {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+
+  img {
+    height: auto;
+    width: 100%;
+    user-select: none;
+  }
+}

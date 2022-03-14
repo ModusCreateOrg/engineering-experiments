@@ -1,0 +1,53 @@
+@import '../../styles/variables';
+
+.product-container {
+  margin-bottom: 100px;
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    
+    @media (min-width: $breakpoint-desktop) {
+      flex-direction: row;
+    }
+
+    .col {
+      flex: 1;
+    }
+  }
+
+  .related-products {
+    margin-top: 78px;
+    text-align: center;
+  }
+
+  h1 {
+    color: $color-primary-40;
+    margin-top: 8px;
+    margin-bottom: 16px;
+  }
+
+  h2 {
+    color: $color-primary-30;
+    margin-bottom: 32px;
+  }
+
+  h3 {
+    font-size: 26px;
+  }
+  
+  p {
+    color: $color-neutral-60;
+    margin-bottom: 32px;
+  }
+
+  .stock {
+    margin-left: 16px;
+    font-size: 13px;
+    color: $color-neutral-40;
+  }
+
+  .left {
+    background: $color-neutral-0;
+  }
+}

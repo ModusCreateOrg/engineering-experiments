@@ -1,0 +1,32 @@
+.home-container {
+  margin-bottom: 100px;
+
+  .grid-layout {
+    display: flex;
+    flex-direction: row;
+    height: 400px;
+
+    > div {
+      display: flex;
+    }
+
+    .left {
+      flex: 2;
+      margin-right: 16px;
+    }
+
+    .right {
+      flex: 1;
+      flex-direction: column;
+
+       div {
+        margin-bottom: 16px;
+      }
+
+      div {
+        display: flex;
+        flex: 1;
+      }
+    }
+  }
+}
