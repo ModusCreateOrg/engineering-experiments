@@ -1,0 +1,9 @@
+@import '../../../../styles/_mixins';
+
+.simple-button {
+  background-color: $color-neutral-10;
+  border: 1px solid $color-neutral-20;
+  padding-left: 16px;
+  padding-right: 16px;
+  @include rounded();
+}

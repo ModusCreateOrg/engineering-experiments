@@ -1,0 +1,15 @@
+@import '../../../../styles/_mixins';
+
+.stock-label {
+  text-transform: uppercase;
+  background-color: $color-primary-20;
+  padding: 3px 6px;
+  font-size: 11px;
+  color: $color-primary-50;
+  @include suttleShadow();
+
+  &.--invalid {
+    color: $color-neutral-60;
+    background-color: $color-neutral-20;
+  }
+}

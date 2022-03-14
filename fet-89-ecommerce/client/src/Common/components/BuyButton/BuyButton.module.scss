@@ -1,0 +1,14 @@
+@import '../../../../styles/_mixins';
+
+.buy-button {
+  display: block;
+  background-color: $color-primary-40;
+  border: 0;
+  border-radius: 32px;
+  outline: 0;
+  padding: 16px 32px;
+  color: $color-neutral-0;
+  font-weight: bold;
+  margin-top: 32px;
+  margin-bottom: 16px;
+}

@@ -1,0 +1,10 @@
+@import '../../../../styles/_mixins';
+
+.tag-list {
+  color: $color-neutral-60;
+
+  a {
+    color: $color-neutral-50;
+    text-decoration: underline;
+  }
+}

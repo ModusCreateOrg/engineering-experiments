@@ -1,0 +1,31 @@
+@import 'mixins';
+
+.font-title {
+  font-family: $font-secondary;
+}
+
+.color-light {
+  color: $color-white;
+}
+
+.color-dark {
+  color: $color-dark;
+}
+
+.mobile-only {
+  @media (max-width: $breakpoint-tablet) {
+    display: none;
+  }
+}
+
+.desktop-only {
+  display: none;
+
+  @media (min-width: $breakpoint-desktop) {
+    display: block;
+  }
+}
+
+.container {
+  @include containerSpacing();
+}

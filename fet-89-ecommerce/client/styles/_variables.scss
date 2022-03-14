@@ -1,0 +1,38 @@
+@use "sass:color";
+
+$color-accent: #0a482e;
+$color-white: #ffffff;
+$color-dark: #0a482e;
+
+$color-primary-0: color.scale($color-accent, $lightness: 50%);
+$color-primary-10: color.scale($color-accent, $lightness: 40%);
+$color-primary-20: color.scale($color-accent, $lightness: 30%);
+$color-primary-30: color.scale($color-accent, $lightness: 20%);
+$color-primary-40: color.scale($color-accent, $lightness: 10%);
+$color-primary-50: color.scale($color-accent, $lightness: 0%);
+$color-primary-60: color.scale($color-accent, $lightness: -10%);
+$color-primary-70: color.scale($color-accent, $lightness: -20%);
+$color-primary-80: color.scale($color-accent, $lightness: -30%);
+$color-primary-90: color.scale($color-accent, $lightness: -40%);
+$color-primary-100: color.scale($color-accent, $lightness: -50%);
+
+$color-neutral-0: color.scale($color-white, $lightness: 0%);
+$color-neutral-10: color.scale($color-white, $lightness: -10%);
+$color-neutral-20: color.scale($color-white, $lightness: -20%);
+$color-neutral-30: color.scale($color-white, $lightness: -30%);
+$color-neutral-40: color.scale($color-white, $lightness: -40%);
+$color-neutral-50: color.scale($color-white, $lightness: -50%);
+$color-neutral-60: color.scale($color-white, $lightness: -60%);
+$color-neutral-70: color.scale($color-white, $lightness: -70%);
+$color-neutral-80: color.scale($color-white, $lightness: -80%);
+$color-neutral-90: color.scale($color-white, $lightness: -90%);
+$color-neutral-100: color.scale($color-white, $lightness: -100%);
+
+$font-primary: 'Roboto';
+$font-secondary: 'Fredoka';
+
+$radius: 6px;
+
+$breakpoint-mobile: 320px; 
+$breakpoint-tablet: 768px;
+$breakpoint-desktop: 769px;
