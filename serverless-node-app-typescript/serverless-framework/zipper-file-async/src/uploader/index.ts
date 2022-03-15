@@ -1,75 +1,46 @@
-import { S3, SQS } from 'aws-sdk';
-import parseMultipart from 'parse-multipart';
+import { S3 } from 'aws-sdk';
 import {
-	IEvent,
-	IExtractFile,
-	IFile,
-	IHandle,
-	IUploader,
-} from './interfaces';
-
-const BUCKET = process.env.BUCKET;
-const QUEUE_ZIP_FILE = process.env.QUEUE_ZIP_FILE;
+	APIGatewayEvent,
+	APIGatewayProxyResult,
+} from 'aws-lambda';
+import { getBoundary, Parse } from 'parse-multipart';
+import { UploaderRepository } from '../repositories/';
+import { IUploader } from './interfaces';
 
 class Uploader implements IUploader {
-	s3;
-	sqs;
+	private readonly BUCKET = process.env.BUCKET;
+	private readonly s3;
+	private readonly repository: any;
 
-  constructor({ s3, sqs }) {
-    this.s3 = s3;
-    this.sqs = sqs;
+  constructor() {
+    this.s3 = new S3();
+    this.repository = new UploaderRepository();
   }
 
-  async handle(event: IEvent): Promise<IHandle> {
-    console.log('Size');
-    console.log(JSON.stringify(event.body.length));
+  async handle(event: APIGatewayEvent): Promise<APIGatewayProxyResult> {
     try {
-      const { filename, data }: IExtractFile = this.extractFile(event);
-      console.log('asjdkajshdkjsa');
+      const { filename, data } = this.repository.extractFile(event ?? '');
       await this.s3.putObject({
-        Bucket: BUCKET,
+        Bucket: this.BUCKET,
         Key: `unziped/${filename}`,
         ACL: 'public-read',
-        Body: data
+        Body: data,
       }).promise();
 
-      await this.notifyUpload({ filename } as IFile);
+      await this.repository.notifyUpload({ filename });
 
       return {
         statusCode: 200,
-        body: JSON.stringify({ message: 'Uploaded with successful!' })
+        body: JSON.stringify({ message: 'Uploaded with successful!' }),
       }
     } catch (err) {
-      console.log(err.stack)
       return {
         statusCode: 500,
-        body: JSON.stringify({ message: err.stack })
+        body: JSON.stringify({ message: err.stack }),
       }
     }
-  }
-
-  extractFile(event: IEvent): IExtractFile {
-    const boundary = parseMultipart.getBoundary(event.headers['content-type'])
-    const parts = parseMultipart.Parse(Buffer.from(event.body, 'base64'), boundary);
-    const [{ filename, data }]: IExtractFile[] = parts;
-    const keyToSave: string = Buffer.from(filename, 'ascii').toString();
-
-    return {
-      filename: keyToSave,
-      data
-    }
-  }
-
-  async notifyUpload({ filename }: IFile) {
-    console.log(`Queu ${QUEUE_ZIP_FILE}`)
-    const { QueueUrl }: IFile = await this.sqs.getQueueUrl({ QueueName: QUEUE_ZIP_FILE }).promise();
-    await this.sqs.sendMessage({ QueueUrl, MessageBody: filename } as IFile).promise();
-    console.log('Messge sent')
   }
 }
 
-const s3 = new S3();
-const sqs = new SQS();
-const uploader = new Uploader({ s3, sqs })
-const handle = uploader.handle.bind(uploader)
-export default handle;
+const uploader = new Uploader();
+export const handle = uploader.handle.bind(uploader);

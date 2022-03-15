@@ -10,6 +10,7 @@
     "debug": "export SLS_DEBUG=* && node --debug ./node_modules/.bin/serverless start offline start"
   },
   "devDependencies": {
+    "@types/aws-lambda": "^8.10.93",
     "serverless-iam-roles-per-function": "^3.2.0",
     "serverless-offline": "^8.2.0",
     "serverless-plugin-typescript": "^2.1.1",

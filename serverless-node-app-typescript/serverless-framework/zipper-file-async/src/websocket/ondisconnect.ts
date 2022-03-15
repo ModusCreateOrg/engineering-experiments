@@ -1,38 +1,39 @@
 import { DynamoDB } from 'aws-sdk';
 import {
-	IHandle,
+	APIGatewayEvent,
+	APIGatewayProxyResult,
+} from 'aws-lambda';
+import { WebsocketRepository } from '../repositories/';
+import {
 	IParams,
 	IConnectionClass,
-	IEvent,
 } from './interfaces';
 
 class OnDisconnect implements IConnectionClass {
 	
-	repository;
+	private readonly repository: any;
 
-    constructor({repository}) {
-        this.repository = repository;
+  constructor() {
+    this.repository = new WebsocketRepository();
+  }
+
+  async handle(event: APIGatewayEvent): Promise<APIGatewayProxyResult> {
+    const deleteParams: IParams = {
+      TableName: process.env.CONNECTIONS_WEBSOCKET_TABLE,
+      Key: {
+        connectionId: event.requestContext.connectionId as string
+      }
+    };
+
+    try {
+      await this.repository.delete(deleteParams).promise();
+    } catch (err) {
+      return { statusCode: 500, body: 'Failed to disconnect: ' + JSON.stringify(err) };
     }
 
-    async handle(event): Promise<IHandle> {
-        const deleteParams: IParams = {
-            TableName: process.env.CONNECTIONS_WEBSOCKET_TABLE,
-            Key: {
-                connectionId: event.requestContext.connectionId
-            }
-        };
-
-        try {
-            await this.repository.delete(deleteParams).promise();
-        } catch (err) {
-            return { statusCode: 500, body: 'Failed to disconnect: ' + JSON.stringify(err) };
-        }
-
-        return { statusCode: 200, body: 'Disconnected.' };
-    }
+    return { statusCode: 200, body: 'Disconnected.' };
+  }
 }
 
-const ddb = new DynamoDB.DocumentClient();
-const onDisconnect = new OnDisconnect({repository: ddb});
-const handle = onDisconnect.handle.bind(onDisconnect);
-export default handle;
+const onDisconnect = new OnDisconnect();
+export const handle = onDisconnect.handle.bind(onDisconnect);

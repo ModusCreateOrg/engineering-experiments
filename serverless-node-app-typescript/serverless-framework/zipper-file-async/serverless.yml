@@ -34,7 +34,6 @@ plugins:
   - serverless-iam-roles-per-function
   - serverless-offline
   - serverless-plugin-typescript
-
 resources:
   Resources:
     UploadRole: ${file(./resources/UploadRole.yaml)}

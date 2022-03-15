@@ -6,6 +6,7 @@ events:
 package:
   patterns:
     - src/websocket/ondisconnect.js
+    - src/repositories/*.js
 
 iamRoleStatements:
   - Effect: Allow

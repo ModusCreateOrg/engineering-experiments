@@ -8,6 +8,7 @@ timeout: 20
 package:
   patterns:
     - src/uploader/index.js
+    - src/repositories/*.js
 
 iamRoleStatements:
   - Effect: Allow

@@ -1,23 +1,3 @@
-interface IBody {
-	data: string;
-}
-
-interface IRequestContext {
-	connectionId?: string | undefined;
-	domainName?: string | undefined;
-	stage?: string | undefined;
-}
-
-export interface IEvent {
-	requestContext?: IRequestContext | undefined;
-	body?: string | undefined;
-}
-
-export interface IHandle {
-	statusCode: number;
-	body: string;
-}
-
 interface IConnection {
 	connectionId: string;
 }
@@ -35,4 +15,8 @@ interface IOperation {
 
 export interface IConnectionClass {
 	repository: IOperation;
+	constructor: Function;
+	handle: Function;
+	findConnections?: Function;
+	postMessages?: Function;
 }

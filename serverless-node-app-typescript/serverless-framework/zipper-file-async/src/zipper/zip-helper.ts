@@ -5,31 +5,31 @@ import {
 	IZipValues,
 } from './interfaces';
 
-const pipe = promisify(pipeline);
+export default function ZipperHelper() {
+	const pipe = promisify(pipeline);
+}
 
-export default class ZipperHelper {
+ZipperHelper.zip = async function(keyS3File: string, file: string): Promise<IZipValues> {
+  try {
+    let stream = Buffer.alloc(0);
+    const gzip = createGzip();
+    let body = [file];
 
-    static async zip(keyS3File: string, file: string): Promise<IZipValues> {
-        try {
-            let stream = Buffer.alloc(0);
-            const gzip = createGzip();
-            let body = [file];
+    const buffering = new Writable({
+      write(chunk, encoding, cb) {
+        stream = Buffer.concat([stream, Buffer.from(chunk)]);
+        cb(chunk);
+      }
+    });
 
-            const buffering = new Writable({
-                write(chunk, encoding, cb) {
-                    stream = Buffer.concat([stream, Buffer.from(chunk)]);
-                    cb(chunk);
-                }
-            });
-            await pipe(body, gzip, buffering);
+    await this.pipe(body, gzip, buffering);
 
-            return {
-                zippedFileKey: `zip/${keyS3File}.gz`,
-                stream
-            };
-        } catch (err) {
-            console.log(`Error on zip. Cause: ${err.stack}`);
-            throw err;
-        }
-    }
+    return {
+      zippedFileKey: `zip/${keyS3File}.gz`,
+      stream,
+    };
+  } catch (err) {
+    console.log(`Error on zip. Cause: ${err.stack}`);
+    throw err;
+  }
 }

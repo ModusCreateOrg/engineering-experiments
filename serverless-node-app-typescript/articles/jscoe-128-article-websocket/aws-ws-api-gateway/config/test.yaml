@@ -1,2 +1,0 @@
-ENV: "test"
-CONNECTIONS_WEBSOCKET_TABLE: "ConnectionsWebSockettest"

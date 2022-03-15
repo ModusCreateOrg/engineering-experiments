@@ -11,8 +11,8 @@ class Uploader {
   }
 
   async handle(event) {
-    console.log('Size');
-    console.log(JSON.stringify(event.body.length));
+    console.log('functional handle event:', event);
+    // console.log(JSON.stringify(event.body.length));
     try {
       const { filename, data } = this.extractFile(event)
 
@@ -39,6 +39,7 @@ class Uploader {
   }
 
   extractFile(event) {
+  	console.log('functional extractFile event:', event);
     const boundary = parseMultipart.getBoundary(event.headers['content-type'])
     const parts = parseMultipart.Parse(Buffer.from(event.body, 'base64'), boundary);
     const [{ filename, data }] = parts

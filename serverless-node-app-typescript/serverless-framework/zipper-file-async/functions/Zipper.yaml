@@ -16,6 +16,7 @@ events:
 package:
   patterns:
     - src/zipper/*.js
+    - src/repositories/*.js
 
 iamRoleStatements:
   - Effect: Allow
