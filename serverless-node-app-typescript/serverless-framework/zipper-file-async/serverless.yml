@@ -1,0 +1,43 @@
+service: zipper-file-async
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  region: us-east-1
+  runtime: nodejs14.x
+  lambdaHashingVersion: 20201221
+  stage: ${opt:stage, "dev"}
+  environment:
+    ${file(./config/${opt:stage, 'dev'}.yaml)}
+  apiGateway:
+    binaryMediaTypes:
+      - 'multipart/form-data'
+
+functions:
+  upload: ${file('./functions/Upload.yaml')}
+  zipper: ${file('./functions/Zipper.yaml')}
+  listZipped: ${file('./functions/ListZipped.yaml')}
+  websocketConnect: ${file('./functions/WebSocketConnect.yaml')}
+  websocketDisconnect: ${file('./functions/WebSocketDisconnect.yaml')}
+  websocketOnMessage: ${file('./functions/WebSocketOnMessage.yaml')}
+
+package:
+  individually: true
+  patterns:
+    - '!functions/**'
+    - '!config/**'
+    - '!resources/**'
+    - '!mocks/**'
+    - '!src/**'
+  
+plugins:
+  - serverless-iam-roles-per-function
+  - serverless-offline
+  - serverless-plugin-typescript
+resources:
+  Resources:
+    UploadRole: ${file(./resources/UploadRole.yaml)}
+    ModuslandBucket: ${file(./resources/ModuslandBucket.yaml)}
+    ZipFileQueue: ${file(./resources/ZipfileSQS.yaml)}
+    FilesTable: ${file(./resources/FilesDynamoDb.yaml)}
+    ConnectionsWebsocketTable: ${file(./resources/ConnectionsWsDynamoDb.yaml)}

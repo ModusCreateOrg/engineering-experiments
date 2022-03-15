@@ -1,4 +1,4 @@
-# js-coe-experiments
+# Engineering Experiments
 
 Modus Create is investing a lot of energy in JavaScript. We're working to learn more about this ecosystem to help the community and our clients to build better web applications and Node APIs.
 
