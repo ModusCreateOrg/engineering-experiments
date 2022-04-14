@@ -1,7 +1,9 @@
 *Slack Bot PoC*
 ==
 
-![project-target](./assets/exercise-serverless.png)
+<img width="1330" alt="Screenshot 2022-04-15 at 3 08 03 AM" src="https://user-images.githubusercontent.com/10258138/163484184-5053513a-b50a-4506-aaa2-969619fd74f4.png">
+
+
 
 `In this experiment, was used Slack api services: https://api.slack.com/`
 
