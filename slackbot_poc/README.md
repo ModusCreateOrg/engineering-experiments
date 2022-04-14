@@ -18,5 +18,7 @@
 ** 3- start ngrok on http 5000 port
 ** 4- add custom fields in the users profiles and add dob values 
 ** 5- for demo purpose just type "users" in the Slack app, bot will send the messages
+** 6- for deployment of this script, we can follow 2 options get public domain and host the script on the server.
+** secondly we can use AWS serverless architecture to deploy this script
 
 
