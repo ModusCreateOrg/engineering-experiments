@@ -22,6 +22,8 @@ load_dotenv(dotenv_path=env_path)
 client = slack.WebClient(token=os.environ['SLACK_TOKEN'])
 client.chat_postMessage(channel='#birthdays', text='Happy Birthday Muhammad!')
 BOT_ID = client.api_call('auth.test')['user_id']
+welcome_messages = dict()
+
 
 def get_users_birthdays_list():
     try:
@@ -50,6 +52,7 @@ def save_users(users):
             if u_birthday is not None:
                 if u_birthday == current_date:
                     print(f'{clean_birthday(data)} HBD!')
+                    send_welcome_message(f'@{user["id"]}', user["id"])
                 else:
                     print(f'Not HBD today :(')
 
@@ -148,7 +151,6 @@ def message(payload):
 
         if text.lower() == 'users':
             get_users_birthdays_list()
-
 
 if __name__ == "__main__":
 
