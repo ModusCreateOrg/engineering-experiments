@@ -45,21 +45,17 @@ def save_users(users):
                 }
         users_res.append(data)
 
-        # print(f'user profile: {data}')
-
         try:
             current_date = get_current_date_str()
             u_birthday = clean_birthday(data)
             if u_birthday is not None:
                 if u_birthday == current_date:
-                    print(f'{clean_birthday(data)} HBD!')
                     send_welcome_message(f'@{user["id"]}', user["id"])
                 else:
-                    print(f'Not HBD today :(')
+                    ...
 
         except Exception as e:
-            # print(f'error details: {e}')
-            pass
+            ...
 
     return users_res
 
@@ -142,7 +138,6 @@ def send_welcome_message(channel, user):
 
 @slack_event_adapter.on('message')
 def message(payload):
-    # print(f'payload: {payload}')
     event = payload.get('event', {})
     channel_id = event.get('channel', None)
     user_id = event.get('user', None)
