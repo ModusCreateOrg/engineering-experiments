@@ -1,7 +1,12 @@
 # Engineering Experiments
 
-Modus Create is investing a lot of energy in JavaScript. We're working to learn more about this ecosystem to help the community and our clients to build better web applications and Node APIs.
+This repository holds examples of different practices and patterns. Most (but not all) of them use the JavaScript ecosystem, where we have invested a lot of energy. We are working to learn more about pratices and patterns to help the community and our clients to build better applications and APIs. 
 
-This repository holds examples of different practices using JavaScript ecosystem. We are constatly publishing content in our [Blog](https://moduscreate.com/blog) and [Youtube Channel](https://www.youtube.com/moduscreate) about the experiments we've built here.
+We are constatly publishing content on our [Blog](https://moduscreate.com/blog) and [Youtube Channel](https://www.youtube.com/moduscreate) about the experiments we have built here.
 
-If you are a Modus Create employee and you want to contribute, feel free to join our #coe-js channel and start a discussion there.
+If you are a Modus Create consultant and you want to contribute, feel free to join our `#engineering` Slack channel and start a discussion there.
+
+## Legal
+
+This project is [MIT licensed](./LICENSE).
+
