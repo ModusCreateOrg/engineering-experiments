@@ -4,7 +4,7 @@ This repository holds examples of different practices and patterns. Most (but no
 
 We are constatly publishing content on our [Blog](https://moduscreate.com/blog) and [Youtube Channel](https://www.youtube.com/moduscreate) about the experiments we have built here.
 
-If you are a Modus Create employee and you want to contribute, feel free to join our `#engineering` Slack channel and start a discussion there.
+If you are a Modus Create consultant and you want to contribute, feel free to join our `#engineering` Slack channel and start a discussion there.
 
 ## Legal
 
