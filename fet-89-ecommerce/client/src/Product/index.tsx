@@ -11,13 +11,13 @@ import { SECTIONS_MOCK } from '../Home/MOCK';
 import styles from './Product.module.scss';
 
 interface ProductDto {
-  id: number;
-  title: string;
-  price: number;
-  imageUri: string;
-  description: string;
-  availableStock: number;
-  tags: string[];
+  id?: number;
+  title?: string;
+  price?: number;
+  imageUri?: string;
+  description?: string;
+  availableStock?: number;
+  tags?: string[];
 }
 
 export const ProductScreen = ({ 

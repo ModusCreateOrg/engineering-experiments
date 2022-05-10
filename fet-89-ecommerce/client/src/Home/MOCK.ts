@@ -6,7 +6,7 @@ export const SECTIONS_MOCK: SectionProps[] = [
     data: [
       {
         id: '1',
-        imageUri: 'images/2.jpeg',
+        imageUri: '../images/2.jpeg',
         title: 'Test 1',
         price: 123
       },
@@ -30,7 +30,7 @@ export const SECTIONS_MOCK: SectionProps[] = [
       },
       {
         id: '5',
-        imageUri: 'images/2.jpeg',
+        imageUri: '../images/2.jpeg',
         title: 'Test 5',
         price: 123
       },
@@ -94,4 +94,10 @@ export const SECTIONS_MOCK: SectionProps[] = [
       }
     ]
   }
+]
+
+export const CATEGORIES_MOCK = [
+  'Fruits and Vegetables',
+  'Supplements',
+  'Hot Offers',
 ]
