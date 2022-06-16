@@ -43,7 +43,7 @@
   "homepage": "https://github.com/ModusCreateOrg/js-coe-experiments#readme",
   "devDependencies": {
     "cross-env": "^7.0.3",
-    "electron": "^16.0.7",
+    "electron": "^16.2.6",
     "electron-builder": "^22.14.5"
   },
   "dependencies": {
