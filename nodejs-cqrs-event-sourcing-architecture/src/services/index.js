@@ -1,0 +1,1 @@
+module.exports.transactionService = require('./transaction.service');

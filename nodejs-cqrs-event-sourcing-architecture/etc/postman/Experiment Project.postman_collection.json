@@ -1,0 +1,76 @@
+{
+	"id": "f074858c-3336-f43d-33a8-15d50a04eb64",
+	"name": "Experiment Project",
+	"description": "",
+	"order": [
+		"2d545f56-fe65-3d5f-c67b-632f7564e353",
+		"2b1a3883-9a0e-4de0-f6a1-e915b0152c08"
+	],
+	"folders": [],
+	"folders_order": [],
+	"timestamp": 1658826402902,
+	"owner": 0,
+	"public": false,
+	"requests": [
+		{
+			"id": "2b1a3883-9a0e-4de0-f6a1-e915b0152c08",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:4000/v1/balances/627d0561159f031e9526666e",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1658984386557,
+			"name": "/v1/balances",
+			"description": "",
+			"collectionId": "f074858c-3336-f43d-33a8-15d50a04eb64",
+			"responses": [],
+			"rawModeData": "{\r\n    \"accountId\":\"627d0561159f031e9526666e\",\r\n    \"value\":435894.334,\r\n    \"type\":\"INCOME\"\r\n}"
+		},
+		{
+			"id": "2d545f56-fe65-3d5f-c67b-632f7564e353",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:4000/v1/transactions",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "f074858c-3336-f43d-33a8-15d50a04eb64",
+			"data": [],
+			"dataMode": "raw",
+			"name": "/v1/transactions",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1658983889672,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"rawModeData": "{\r\n    \"accountId\":\"627d0561159f031e9526666e\",\r\n    \"value\":435894.334,\r\n    \"type\":\"INCOME\"\r\n}"
+		}
+	]
+}
