@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "pm2 start ecosystem.config.json --no-daemon",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/index.js"
+    "start:dev": "node src/index.js"
   },
   "author": "",
   "license": "ISC",
@@ -20,6 +21,7 @@
     "joi": "^17.6.0",
     "mongoose": "^6.4.7",
     "morgan": "^1.10.0",
+    "prettier": "^2.7.1",
     "winston": "^3.8.1",
     "winston-daily-rotate-file": "^4.7.1",
     "xss-clean": "^0.1.1"

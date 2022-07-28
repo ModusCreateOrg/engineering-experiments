@@ -1,5 +1,6 @@
 const express = require('express');
 const transactionRoute = require('./transaction.route');
+const balanceRoute = require('./balance.route');
 
 const router = express.Router();
 
@@ -7,6 +8,10 @@ const defaultRoutes = [
   {
     path: '/transactions',
     route: transactionRoute,
+  },
+  {
+    path: '/balances',
+    route: balanceRoute,
   },
 ];
 
