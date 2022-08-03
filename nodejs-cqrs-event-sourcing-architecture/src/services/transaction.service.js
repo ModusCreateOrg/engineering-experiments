@@ -1,6 +1,4 @@
 const { Transaction } = require('../models');
-const logger = require('../config/logger');
-
 /**
  * Create a Transaction objects in the database.
  */
