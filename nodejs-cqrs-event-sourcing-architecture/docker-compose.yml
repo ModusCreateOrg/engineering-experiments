@@ -1,0 +1,60 @@
+services:
+  db:
+    # use MongoDB from Docker Hub
+    image: mongo:5.0
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: admin
+    networks:
+      - modusexperiment-net
+    expose:
+      - "27018"
+    # optionally expose MongoDB default port on 27017 to use Mongo shell
+    ports:
+      - "27018:27018"
+    restart: unless-stopped
+    volumes:
+      # persistent MongoDB data volumes
+      - modusexperiment-data-db:/data/db
+      - ./etc/docker/mongo/init:/docker-entrypoint-initdb.d:ro
+
+  rabbitmq:
+    image: rabbitmq:3.8-management-alpine
+    container_name: 'rabbitmq'
+    ports:
+        - 5672:5672
+        - 15672:15672
+    volumes:
+        - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+        - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+    networks:
+        - modusexperiment-net
+  app:
+    # build or use latest image
+    image: modusexperiment/finance-api
+    # when image not present or '--build' option used, build a new image
+    build:
+      context: .
+    # container dependencies
+    depends_on:
+      - db
+      - rabbitmq
+    # override application configuration
+    environment:
+      MONGODB_URL: mongodb://modusexperimentapi:Modus10Ns3cure!@db:27018/modusexperiment
+      AMQP_URL: amqp://guest:guest@rabbitmq:5672
+    networks:
+      - modusexperiment-net
+    # map ports
+    ports:
+    - "4000:4000"
+    restart: unless-stopped
+
+volumes:
+  # persistend Docker volume for MongoDB data
+  modusexperiment-data-db:
+
+networks:
+  # Docker network for the application
+  modusexperiment-net:
+  
