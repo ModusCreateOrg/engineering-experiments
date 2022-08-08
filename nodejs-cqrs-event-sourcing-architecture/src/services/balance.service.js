@@ -1,6 +1,7 @@
 const { Balance } = require('../models');
-const EXPENSE = "EXPENSE";
-const INCOME = "INCOME";
+const { transactionTypes } = require('../constants/constant');
+// const EXPENSE = "EXPENSE";
+// const INCOME = "INCOME";
 /**
  * Get balance by accountId
  * @param {String} accountId
@@ -28,10 +29,10 @@ const INCOME = "INCOME";
   const balanceCalculation = (transaction) =>{
     let value =0;
     switch (transaction.type) {
-      case EXPENSE:
+      case transactionTypes.EXPENSE:
         value = -Math.abs(transaction.value);
         break;
-      case INCOME:
+      case transactionTypes.INCOME:
         value = transaction.value;
         break;
       default:
@@ -43,10 +44,10 @@ const INCOME = "INCOME";
   const accountBalanceCalculation = (balance, transaction) =>{
     let value =0;
     switch (transaction.type) {
-      case EXPENSE:
+      case transactionTypes.EXPENSE:
         value = balance.value - Math.abs(transaction.value);
         break;
-      case INCOME:
+      case transactionTypes.INCOME:
         value = balance.value + Math.abs(transaction.value);
         break;
       default:

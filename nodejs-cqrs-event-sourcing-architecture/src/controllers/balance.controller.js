@@ -3,6 +3,7 @@ const catchAsync = require('../utils/catchAsync');
 const logger = require('../config/logger');
 const { balanceService } = require('../services');
 const { ApiError } = require('../utils/ApiError');
+const { environmentValues } = require('../constants/constant');
 const amqp = require("amqplib/callback_api");
 
 const getBalance = catchAsync(async (req, res) => {
@@ -14,7 +15,7 @@ const getBalance = catchAsync(async (req, res) => {
     res.send(balance);
   });
 
-  amqp.connect(process.env.AMQP_URL, (error, connection) => {
+  amqp.connect(environmentValues.AMQP_URL, (error, connection) => {
     if (error) {
       throw new Error(error.message);
     }
@@ -24,15 +25,15 @@ const getBalance = catchAsync(async (req, res) => {
         throw new Error(channelConnectionError.message);
       }
 
-      amqpChannel.assertQueue(process.env.ITEM_CREATED, { durable: false });
+      amqpChannel.assertQueue(environmentValues.ITEM_CREATED, { durable: false });
 
       amqpChannel.consume(
-        process.env.ITEM_CREATED,
+        environmentValues.ITEM_CREATED,
         async (msg) => {
           const createTransactionEvent = JSON.parse(msg.content.toString());
           const accountId = createTransactionEvent.accountId;
           const balance = await balanceService.getBalanceByAccountId(accountId);
-          
+
           if(!balance ){
             await balanceService.createBalance(createTransactionEvent);
           }

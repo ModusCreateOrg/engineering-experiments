@@ -1,6 +1,4 @@
 const express = require('express');
-const helmet = require('helmet');
-const xss = require('xss-clean');
 const mongoSanitize = require('express-mongo-sanitize');
 const cors = require('cors');
 const httpStatus = require('http-status');
@@ -18,17 +16,6 @@ if (config.env !== 'test') {
   app.use(morgan.errorHandler);
 }
 
-// set security HTTP headers
-//app.use(helmet());
-const cspDefaults = helmet.contentSecurityPolicy.getDefaultDirectives();
-delete cspDefaults['upgrade-insecure-requests'];
-
-app.use(
-  helmet({
-    contentSecurityPolicy: { directives: cspDefaults },
-  })
-);
-
 // parse json request body
 app.use(
   express.json({
@@ -40,7 +27,7 @@ app.use(
 app.use(express.urlencoded({ extended: true }));
 
 // sanitize request data
-app.use(xss());
+//app.use(xss());
 app.use(mongoSanitize());
 
 
